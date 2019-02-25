@@ -1,0 +1,43 @@
+#pragma once
+
+#include <sleepy/common.hpp>
+#include <sleepy/registers.hpp>
+#include <sleepy/memory.hpp>
+
+namespace sleepy
+{
+	class instruction_impl
+	{
+	private:
+		memory* _mem;
+		registers* _regs;
+
+	public:
+		instruction_impl() = delete;
+		instruction_impl(memory* mem_ptr, registers* reg_ptr);
+		instruction_impl(const instruction_impl& copy_src) = delete;
+		instruction_impl(instruction_impl&& move_src) = default;
+
+		void opcode_add_a_v8(byte_t v8);
+		void opcode_add_hl_v16(word_t v16);
+		void opcode_sub_a_v8(byte_t v8);
+		void opcode_adc_a_v8(byte_t v8);
+		void opcode_sbc_a_v8(byte_t v8);
+
+		void opcode_and_a_v8(byte_t v8);
+		void opcode_or_a_v8(byte_t v8);
+		void opcode_xor_a_v8(byte_t v8);
+		void opcode_inc_r8(reg8_t& reg);
+		void opcode_dec_r8(reg8_t & reg);
+		void opcode_cp_r8(byte_t reg);
+
+		void opcode_rrca();
+		void opcode_rra();
+		void opcode_rlca();
+		void opcode_rla();
+		void opcode_cpl();
+		void opcode_ccf();
+		void opcode_daa();
+	};
+
+}

@@ -1,0 +1,71 @@
+#pragma once
+
+#include <sleepy/common.hpp>
+#include <sleepy/vcpu_instruction.hpp>
+#include <sleepy/instruction_impl.hpp>
+
+#include <string>
+#include <map>
+
+namespace sleepy
+{
+	class vcpu_firmware
+	{
+	public:
+		vcpu_firmware() = delete;
+		vcpu_firmware(memory* mem_ptr, registers* regs_ptr);
+
+		std::map<opcode, vcpu_instruction> inst_map;
+
+		void enable_interrupts() { _interrupts_enabled = true; }
+		void disable_interrupts() { _interrupts_enabled = false; }
+		bool interrupts_enabled() { return _interrupts_enabled; }
+	private:
+		registers* _regs;
+		memory* _mem;
+		std::unique_ptr<instruction_impl> _instImpl;
+		bool _interrupts_enabled = false;		
+
+		void init_inst_map();
+
+		void initmap_misc();
+
+		void initmap_ld_a_x8();
+		void initmap_ld_b_x8();
+		void initmap_ld_c_x8();
+		void initmap_ld_d_x8();
+		void initmap_ld_e_x8();
+		void initmap_ld_h_x8();
+		void initmap_ld_l_x8();
+		void initmap_ld_phl_x8();
+		void initmap_ld_r8_d8();
+		void initmap_ld_ptr_a();
+		void initmap_ld_a_ptr();
+		void initmap_ld_r16_d16();
+		void initmap_ld_misc();
+
+		void initmap_add_a_x8();
+		void initmap_add_hl_r16();
+		void initmap_sub_a_x8();
+		void initmap_adc_a_x8();
+		void initmap_sbc_a_x8();
+
+		void initmap_and_a_x8();
+		void initmap_or_a_x8();
+
+		void initmap_xor_a_x8();
+
+		void initmap_inc_r8();
+		void initmap_inc_r16();
+		void initmap_dec_r8();
+		void initmap_dec_r16();
+
+		void initmap_cp_r8();
+
+		void initmap_bitrotations();
+
+		void initmap_rst();
+
+		void add_instruction(opcode opc, const std::string& mnem, byte_t cycc, byte_t argl, const vcpu_instruction::op_call_t& call);
+	};
+}

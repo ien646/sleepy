@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.inl": "cpp",
+        "memory": "cpp",
+        "utility": "cpp"
+    }
+}
