@@ -2,7 +2,7 @@
   - <u>**Extended (prefix 0xCB) opcodes**</u>
   - <u>**Non-Extended opcodes**</u>:
     - <s>[**0x18**] JR r8</s>
-    - [**0x28**] JR Z, r8
+    - <s>[**0x28**] JR Z, r8</s>
     - [**0x38**] JR C, r8
     - [**0xC0**] RET NZ
     - [**0xC1**] POP BC

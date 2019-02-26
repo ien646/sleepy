@@ -1497,6 +1497,16 @@ namespace sleepy
 			int8_t i8 = static_cast<int8_t>(args[0]);
 			_regs->pc += i8;
 		});
+
+		add_instruction(opcode(0x28), "JR Z,i8", 8, 1, [&](const byte_t* args)
+		{
+			if(_regs->read_flag(registers::flag::ZERO))
+			{
+				delay_cycles(4); // aditional cycles for flag path
+				int8_t i8 = static_cast<int8_t>(args[0]);
+				_regs->pc += i8;
+			}
+		});
 	}
 
 	void vcpu_firmware::add_instruction(
