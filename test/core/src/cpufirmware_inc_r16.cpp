@@ -1,9 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include <sleepy/vcpu_firmware.hpp>
-#include "test_macros.hpp"
-
-using namespace sleepy;
+#include "cpufw_test_init.hpp"
 
 namespace sleepy
 {

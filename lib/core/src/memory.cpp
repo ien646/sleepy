@@ -2,6 +2,11 @@
 
 namespace sleepy
 {
+	memory::memory()		
+	{
+		_memory = std::make_unique<std::array<byte_t, TOTAL_MEM_SZ>>();
+	}
+
 	byte_t memory::read_byte(addr_t address)
 	{
 		return (*_memory)[address];
@@ -27,5 +32,10 @@ namespace sleepy
 	{
 		word_t* ptr = reinterpret_cast<word_t*>(&(*_memory)[address]);
 		*ptr = value;
+	}
+
+	void memory::zero_memory()
+	{
+		_memory->fill(0x00);
 	}
 }

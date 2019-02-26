@@ -10,7 +10,7 @@ namespace sleepy
 	class memory
 	{
 	public:
-		memory() = default;
+		memory();
 		memory(const memory& copy_src) = delete;
 		memory(memory&& move_src) = delete;
 
@@ -22,6 +22,7 @@ namespace sleepy
 		/* Return raw pointer to memory address 0x0000 */
 		byte_t* data();
 
+		void zero_memory();
 	private:
 		static constexpr size_t TOTAL_MEM_SZ = 0x10000;
 		std::unique_ptr<std::array<byte_t, TOTAL_MEM_SZ>> _memory;

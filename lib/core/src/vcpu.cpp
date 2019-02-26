@@ -11,13 +11,13 @@ namespace sleepy
         _vfw.inst_map[op].call(args);
     }
 
-    const vcpu::memory& memory() const noexcept
+    const memory& vcpu::memory() const noexcept
     {
         return _mem;
     }
 
-    const vcpu::registers& registers() const noexcept
+    const registers& vcpu::registers() const noexcept
     {
-        return _regs
+        return _regs;
     }
 }

@@ -10,7 +10,10 @@ namespace sleepy
 	vcpu_firmware::vcpu_firmware(memory* mem_ptr, registers* regs_ptr)
 		: _mem(mem_ptr)
 		, _regs(regs_ptr)
-	{ }
+	{
+		_instImpl = std::make_unique<instruction_impl>(mem_ptr, regs_ptr);
+		init_inst_map();
+	}
 
 	void vcpu_firmware::init_inst_map()
 	{

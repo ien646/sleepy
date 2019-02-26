@@ -1,11 +1,10 @@
 #include <catch2/catch.hpp>
 
-#include <sleepy/vcpu_firmware.hpp>
-#include "test_macros.hpp"
+#include "cpufw_test_init.hpp"
 
 namespace sleepy
 {
-	TEST_CASE("CpuFirmware_LD_R8_D8")
+	TEST_CASE("CpuFirmware_Misc")
 	{
 		SECTION("EI_EnablesInterrupts")
 		{
