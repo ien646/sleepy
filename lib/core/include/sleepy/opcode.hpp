@@ -9,42 +9,14 @@ namespace sleepy
 		byte_t prefix;
 		byte_t value;
 
-		opcode(byte_t val)
-		{
-			prefix = static_cast<byte_t>(0x00);
-			value = val;
-		}
+		opcode(byte_t val);
+		opcode(byte_t prefix, byte_t val);
+		opcode(const opcode& copy);
 
-		opcode(byte_t prefix, byte_t val)
-		{
-			prefix = prefix;
-			value = val;
-		}
+		word_t get();
 
-		opcode(const opcode& copy)
-		{
-			this->prefix = copy.prefix;
-			this->value = copy.value;
-		}
-
-		word_t get()
-		{
-			return (prefix << 8) | (value);
-		}
-
-		bool operator ==(const opcode& o) const
-		{
-			return compose_word(o.prefix, o.value) == compose_word(prefix, value);
-		}
-
-		bool operator <(const opcode& o) const
-		{
-			return compose_word(o.prefix, o.value) < compose_word(prefix, value);
-		}
-
-		bool operator >(const opcode& o) const
-		{
-			return compose_word(o.prefix, o.value) > compose_word(prefix, value);
-		}
+		bool operator ==(const opcode&) const;
+		bool operator <(const opcode&) const;
+		bool operator >(const opcode&) const;
 	};
 }
