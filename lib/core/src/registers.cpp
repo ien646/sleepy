@@ -26,22 +26,22 @@ namespace sleepy
 		l = lobyte(value);
 	}
 
-	word_t registers::af()
+	word_t registers::af() const noexcept
 	{
 		return compose_word(a, f);
 	}
 
-	word_t registers::bc()
+	word_t registers::bc() const noexcept
 	{
 		return compose_word(b, c);
 	}
 
-	word_t registers::de()
+	word_t registers::de() const noexcept
 	{
 		return compose_word(d, e);
 	}
 
-	word_t registers::hl()
+	word_t registers::hl() const noexcept
 	{
 		return compose_word(h, l);
 	}

@@ -16,4 +16,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE 	${PROJECT_BINARY_DIR}/output/bin/no-
 
 add_subdirectory(third-party)
 add_subdirectory(lib)
+add_subdirectory(bin)
 add_subdirectory(test)

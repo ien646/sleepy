@@ -11,7 +11,7 @@ namespace sleepy
 
 		opcode(byte_t val)
 		{
-			prefix = 0x00;
+			prefix = static_cast<byte_t>(0x00);
 			value = val;
 		}
 

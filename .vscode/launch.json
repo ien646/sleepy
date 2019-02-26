@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug sleepy.console",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build_debug/output/bin/sleepy.console/sleepy.console.exe",
+            "args": ["09-op r,r.gb"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build_debug/output/bin/sleepy.console/",
+            "environment": [],
+            "externalConsole": true
+        },
+        {
             "name": "Debug Tests-Core",
             "type": "cppvsdbg",
             "request": "launch",

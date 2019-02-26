@@ -40,10 +40,10 @@ namespace sleepy
 		void de(word_t value);
 		void hl(word_t value);
 
-		word_t af();
-		word_t bc();
-		word_t de();
-		word_t hl();
+		word_t af() const noexcept;
+		word_t bc() const noexcept;
+		word_t de() const noexcept;
+		word_t hl() const noexcept;
 
 		void set_flag(flag flagMask);
 		void set_flag(byte_t flagMask);

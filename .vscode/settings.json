@@ -2,6 +2,8 @@
     "files.associations": {
         "*.inl": "cpp",
         "memory": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "ostream": "cpp",
+        "chrono": "cpp"
     }
 }
