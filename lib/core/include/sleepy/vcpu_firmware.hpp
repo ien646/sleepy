@@ -55,19 +55,16 @@ namespace sleepy
 
 		void initmap_and_a_x8();
 		void initmap_or_a_x8();
-
 		void initmap_xor_a_x8();
-
 		void initmap_inc_r8();
 		void initmap_inc_r16();
 		void initmap_dec_r8();
 		void initmap_dec_r16();
 
 		void initmap_cp_r8();
-
 		void initmap_bitrotations();
-
 		void initmap_rst();
+		void initmap_jumps();
 
 		void add_instruction(opcode opc, const std::string& mnem, byte_t cycc, byte_t argl, const vcpu_instruction::op_call_t& call);
 	};

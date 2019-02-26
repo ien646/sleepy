@@ -49,10 +49,10 @@ namespace sleepy
 		initmap_dec_r16();
 
 		initmap_cp_r8();
-
 		initmap_bitrotations();
-
 		initmap_rst();
+
+		initmap_jumps();
 	}
 
 	void vcpu_firmware::initmap_misc()
@@ -1441,52 +1441,61 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_rst()
 	{
-		add_instruction(0xC7, "RST 00H", 16, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xC7), "RST 00H", 16, 0, [&](const byte_t* args)
 		{
 			_regs->pc = 0x0000;
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xCF, "RST 08H", 16, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xCF), "RST 08H", 16, 0, [&](const byte_t* args)
 		{
 			_regs->pc = 0x0008;
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xD7, "RST 10H", 16, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xD7), "RST 10H", 16, 0, [&](const byte_t* args)
 		{
 			_regs->pc = 0x0010;
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xDF, "RST 18H", 16, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xDF), "RST 18H", 16, 0, [&](const byte_t* args)
 		{
 			_regs->pc = 0x0018;
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xE7, "RST 20H", 16, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xE7), "RST 20H", 16, 0, [&](const byte_t* args)
 		{
 			_regs->pc = 0x0020;
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xEF, "RST 28H", 16, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xEF), "RST 28H", 16, 0, [&](const byte_t* args)
 		{
 			_regs->pc = 0x0028;
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xF7, "RST 30H", 16, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xF7), "RST 30H", 16, 0, [&](const byte_t* args)
 		{
 			_regs->pc = 0x0030;
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xFF, "RST 38H", 16, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xFF), "RST 38H", 16, 0, [&](const byte_t* args)
 		{
 			_regs->pc = 0x0038;
 			RET_NO_ARGS_REF;
+		});
+	}
+
+	void vcpu_firmware::initmap_jumps()
+	{
+		add_instruction(opcode(0x18), "JR i8", 12, 1, [&](const byte_t* args)
+		{
+			int8_t i8 = static_cast<int8_t>(args[0]);
+			_regs->pc += i8;
 		});
 	}
 
