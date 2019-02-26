@@ -9,6 +9,9 @@
 
 namespace sleepy
 {
+	class memory;
+	class registers;
+
 	class vcpu_firmware
 	{
 	public:

@@ -1,11 +1,12 @@
 #pragma once
 
 #include <sleepy/common.hpp>
-#include <sleepy/registers.hpp>
-#include <sleepy/memory.hpp>
 
 namespace sleepy
 {
+	class memory;
+	class registers;
+
 	class instruction_impl
 	{
 	private:

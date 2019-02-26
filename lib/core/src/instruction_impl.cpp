@@ -1,5 +1,8 @@
 #include <sleepy/instruction_impl.hpp>
 
+#include <sleepy/registers.hpp>
+#include <sleepy/memory.hpp>
+
 namespace sleepy
 {
 	instruction_impl::instruction_impl(memory* mem_ptr, registers* reg_ptr)

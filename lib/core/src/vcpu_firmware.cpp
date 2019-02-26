@@ -1,5 +1,8 @@
 #include <sleepy/vcpu_firmware.hpp>
 
+#include <sleepy/memory.hpp>
+#include <sleepy/registers.hpp>
+
 #define RET_NO_ARGS_REF UNREFERENCED_PARAMETER(args);return
 
 namespace sleepy
