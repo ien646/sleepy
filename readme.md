@@ -3,11 +3,11 @@
   - <u>**Non-Extended opcodes**</u>:
     - <s>[**0x18**] JR r8</s>
     - <s>[**0x28**] JR Z, r8</s>
-    - [**0x38**] JR C, r8
+    - <s>[**0x38**] JR C, r8</s>
     - [**0xC0**] RET NZ
     - [**0xC1**] POP BC
-    - [**0xC2**] JP NZ, a16
-    - [**0xC3**] JP a16
+    - <s>[**0xC2**] JP NZ, a16</s>
+    - <s>[**0xC3**] JP a16</s>
     - [**0xC4**] CALL NZ, a16
     - [**0xC5**] PUSH BC
     - [**0xD0**] RET NC 
@@ -30,5 +30,3 @@
     - [**0xDA**] JP C, a16
     - [**0xDC**] CALL C, a16
     - [**0xE9**] JP (HL)
-
-

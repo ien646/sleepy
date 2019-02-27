@@ -1502,9 +1502,35 @@ namespace sleepy
 		{
 			if(_regs->read_flag(registers::flag::ZERO))
 			{
-				delay_cycles(4); // aditional cycles for flag path
+				delay_cycles(4); //16
 				int8_t i8 = static_cast<int8_t>(args[0]);
 				_regs->pc += i8;
+			}
+		});
+
+		add_instruction(opcode(0x38), "JR C,i8", 8, 1, [&](const byte_t* args)
+		{
+			if(_regs->read_flag(registers::flag::CARRY))
+			{
+				delay_cycles(4); //16
+				int8_t i8 = static_cast<int8_t>(args[0]);
+				_regs->pc += i8;
+			}
+		});
+
+		add_instruction(opcode(0xC3), "JP a16", 16, 0, [&](const byte_t* args)
+		{
+			addr_t a16 = read_word(args);
+			_regs->pc = a16;
+		});
+
+		add_instruction(opcode(0xC2), "JP NZ,a16", 12, 0, [&](const byte_t* args)
+		{
+			if(!_regs->read_flag(registers::flag::ZERO))
+			{
+				delay_cycles(4); 
+				addr_t a16 = read_word(args);
+				_regs->pc = a16;
 			}
 		});
 	}

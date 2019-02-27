@@ -31,32 +31,32 @@ namespace sleepy
 	const byte_t FLAG_HCARRY = 0x20;
 	const byte_t FLAG_CARRY	 = 0x10;
 
-	constexpr inline byte_t hibyte(word_t val) 	
+	constexpr byte_t hibyte(word_t val) 	
 	{ 
 		return (byte_t)(val >> 8); 
 	}
 
-	constexpr inline byte_t lobyte(word_t val)
+	constexpr byte_t lobyte(word_t val)
 	{
 		return (byte_t)val;
 	}
 
-	constexpr inline word_t compose_word(byte_t hibyte, byte_t lobyte)
+	constexpr word_t compose_word(byte_t hibyte, byte_t lobyte)
 	{
 		return (hibyte << 8) | lobyte;
 	}
 
-	constexpr inline word_t read_word(const byte_t* addr)
+	constexpr word_t read_word(const byte_t* ptr)
 	{
-		return *((word_t*)(addr));
+		return *((word_t*)(ptr));
 	}
 
-	constexpr inline bool get_bit(byte_t value, byte_t index)
+	constexpr bool get_bit(byte_t value, byte_t index)
 	{
 		return (value | (1 << index)) == value;
 	}
 
-	constexpr inline bool get_bit(word_t value, byte_t index)
+	constexpr bool get_bit(word_t value, byte_t index)
 	{
 		return (value | (1 << index)) == value;
 	}
