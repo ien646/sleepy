@@ -761,55 +761,55 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_add_a_x8()
 	{
-		add_instruction(0x87, "ADD A,A", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x87), "ADD A,A", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_add_a_v8(_regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x80, "ADD A,B", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x80), "ADD A,B", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_add_a_v8(_regs->b);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x81, "ADD A,C", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x81), "ADD A,C", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_add_a_v8(_regs->c);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x82, "ADD A,D", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x82), "ADD A,D", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_add_a_v8(_regs->d);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x83, "ADD A,E", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x83), "ADD A,E", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_add_a_v8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x84, "ADD A,H", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x84), "ADD A,H", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_add_a_v8(_regs->h);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x85, "ADD A,L", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x85), "ADD A,L", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_add_a_v8(_regs->l);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x86, "ADD A,(HL)", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x86), "ADD A,(HL)", 8, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_add_a_v8(_mem->read_byte(_regs->hl()));
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xC6, "ADD A,d8", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0xC6), "ADD A,d8", 8, 1, [&](const byte_t* args)
 		{
 			byte_t d8 = args[0];
 			_instImpl->opcode_add_a_v8(d8);
@@ -846,55 +846,55 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_sub_a_x8()
 	{
-		add_instruction(0x97, "SUB A,A", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x97), "SUB A,A", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sub_a_v8(_regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x90, "SUB A,B", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x90), "SUB A,B", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sub_a_v8(_regs->b);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x91, "SUB A,C", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x91), "SUB A,C", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sub_a_v8(_regs->c);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x92, "SUB A,D", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x92), "SUB A,D", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sub_a_v8(_regs->d);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x93, "SUB A,E", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x93), "SUB A,E", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sub_a_v8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x94, "SUB A,H", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x94), "SUB A,H", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sub_a_v8(_regs->h);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x95, "SUB A,L", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x95), "SUB A,L", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sub_a_v8(_regs->l);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x96, "SUB A,(HL)", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x96), "SUB A,(HL)", 8, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sub_a_v8(_mem->read_byte(_regs->hl()));
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xD6, "SUB A,d8", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0xD6), "SUB A,d8", 8, 1, [&](const byte_t* args)
 		{
 			byte_t d8 = args[0];
 			_instImpl->opcode_sub_a_v8(d8);
@@ -904,55 +904,55 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_adc_a_x8()
 	{
-		add_instruction(0x8F, "ADC A,A", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x8F), "ADC A,A", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_adc_a_v8(_regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x88, "ADC A,B", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x88), "ADC A,B", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_adc_a_v8(_regs->b);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x89, "ADC A,C", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x89), "ADC A,C", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_adc_a_v8(_regs->c);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x8A, "ADC A,D", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x8A), "ADC A,D", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_adc_a_v8(_regs->d);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x8B, "ADC A,E", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x8B), "ADC A,E", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_adc_a_v8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x8C, "ADC A,H", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x8C), "ADC A,H", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_adc_a_v8(_regs->h);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x8D, "ADC A,L", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x8D), "ADC A,L", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_adc_a_v8(_regs->l);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x8E, "ADC A,(HL)", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x8E), "ADC A,(HL)", 8, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_adc_a_v8(_mem->read_byte(_regs->hl()));
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xCE, "ADC A,d8", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0xCE), "ADC A,d8", 8, 1, [&](const byte_t* args)
 		{
 			byte_t d8 = args[0];
 			_instImpl->opcode_adc_a_v8(d8);
@@ -961,55 +961,55 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_sbc_a_x8()
 	{
-		add_instruction(0x9F, "SBC A,A", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x9F), "SBC A,A", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sbc_a_v8(_regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x98, "SBC A,B", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x98), "SBC A,B", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sbc_a_v8(_regs->b);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x99, "SBC A,C", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x99), "SBC A,C", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sbc_a_v8(_regs->c);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x9A, "SBC A,D", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x9A), "SBC A,D", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sbc_a_v8(_regs->d);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x9B, "SBC A,E", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x9B), "SBC A,E", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sbc_a_v8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x9C, "SBC A,H", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x9C), "SBC A,H", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sbc_a_v8(_regs->h);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x9D, "SBC A,L", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x9D), "SBC A,L", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sbc_a_v8(_regs->l);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x9E, "SBC A,(HL)", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x9E), "SBC A,(HL)", 8, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_sbc_a_v8(_mem->read_byte(_regs->hl()));
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xDE, "SBC A,d8", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0xDE), "SBC A,d8", 8, 1, [&](const byte_t* args)
 		{
 			byte_t d8 = args[0];
 			_instImpl->opcode_sbc_a_v8(d8);
@@ -1018,55 +1018,55 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_and_a_x8()
 	{
-		add_instruction(0xA7, "AND A,A", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xA7), "AND A,A", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_and_a_v8(_regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xA0, "AND A,B", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xA0), "AND A,B", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_and_a_v8(_regs->b);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xA1, "AND A,C", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xA1), "AND A,C", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_and_a_v8(_regs->c);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xA2, "AND A,D", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xA2), "AND A,D", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_and_a_v8(_regs->d);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xA3, "AND A,E", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xA3), "AND A,E", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_and_a_v8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xA4, "AND A,H", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xA4), "AND A,H", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_and_a_v8(_regs->h);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xA5, "AND A,L", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xA5), "AND A,L", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_and_a_v8(_regs->l);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xA6, "AND A,(HL)", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xA6), "AND A,(HL)", 8, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_and_a_v8(_mem->read_byte(_regs->hl()));
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xE6, "AND A,d8", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0xE6), "AND A,d8", 8, 1, [&](const byte_t* args)
 		{
 			byte_t d8 = args[0];
 			_instImpl->opcode_and_a_v8(d8);
@@ -1075,55 +1075,55 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_or_a_x8()
 	{
-		add_instruction(0xB7, "OR A,A", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xB7), "OR A,A", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_or_a_v8(_regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xB0, "OR A,B", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xB0), "OR A,B", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_or_a_v8(_regs->b);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xB1, "OR A,C", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xB1), "OR A,C", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_or_a_v8(_regs->c);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xB2, "OR A,D", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xB2), "OR A,D", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_or_a_v8(_regs->d);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xB3, "OR A,E", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xB3), "OR A,E", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_or_a_v8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xB4, "OR A,H", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xB4), "OR A,H", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_or_a_v8(_regs->h);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xB5, "OR A,L", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xB5), "OR A,L", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_or_a_v8(_regs->l);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xB6, "OR A,(HL)", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xB6), "OR A,(HL)", 8, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_or_a_v8(_mem->read_byte(_regs->hl()));
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xF6, "OR A,d8", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0xF6), "OR A,d8", 8, 1, [&](const byte_t* args)
 		{
 			byte_t d8 = args[0];
 			_instImpl->opcode_or_a_v8(d8);
@@ -1132,55 +1132,55 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_xor_a_x8()
 	{
-		add_instruction(0xAF, "XOR A,A", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xAF), "XOR A,A", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_xor_a_v8(_regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xA8, "XOR A,B", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xA8), "XOR A,B", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_xor_a_v8(_regs->b);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xA9, "XOR A,C", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xA9), "XOR A,C", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_xor_a_v8(_regs->c);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xAA, "XOR A,D", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xAA), "XOR A,D", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_xor_a_v8(_regs->d);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xAB, "XOR A,E", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xAB), "XOR A,E", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_xor_a_v8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xAC, "XOR A,H", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xAC), "XOR A,H", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_xor_a_v8(_regs->h);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xAD, "XOR A,L", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xAD), "XOR A,L", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_xor_a_v8(_regs->l);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xAE, "XOR A,(HL)", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xAE), "XOR A,(HL)", 8, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_xor_a_v8(_mem->read_byte(_regs->hl()));
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xEE, "XOR A,d8", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0xEE), "XOR A,d8", 8, 1, [&](const byte_t* args)
 		{
 			byte_t d8 = args[0];
 			_instImpl->opcode_xor_a_v8(d8);
@@ -1189,49 +1189,49 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_inc_r8()
 	{
-		add_instruction(0x3C, "INC A", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x3C), "INC A", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_inc_r8(_regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x04, "INC B", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x04), "INC B", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_inc_r8(_regs->b);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x0C, "INC C", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x0C), "INC C", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_inc_r8(_regs->c);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x14, "INC D", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x14), "INC D", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_inc_r8(_regs->d);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x1C, "INC E", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x1C), "INC E", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_inc_r8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x24, "INC H", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x24), "INC H", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_inc_r8(_regs->h);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x2C, "INC L", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x2C), "INC L", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_inc_r8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x34, "INC (HL)", 12, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x34), "INC (HL)", 12, 0, [&](const byte_t* args)
 		{
 			addr_t addr = _regs->hl();
 			byte_t val = _mem->read_byte(addr);
@@ -1243,28 +1243,28 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_inc_r16()
 	{
-		add_instruction(0x03, "INC BC", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x03), "INC BC", 8, 0, [&](const byte_t* args)
 		{
 			word_t val = (word_t)(_regs->bc() + 1);
 			_regs->bc(val);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x13, "INC DE", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x13), "INC DE", 8, 0, [&](const byte_t* args)
 		{
 			word_t val = (word_t)(_regs->de() + 1);
 			_regs->de(val);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x23, "INC HL", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x23), "INC HL", 8, 0, [&](const byte_t* args)
 		{
 			word_t val = (word_t)(_regs->hl() + 1);
 			_regs->hl(val);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x33, "INC SP", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x33), "INC SP", 8, 0, [&](const byte_t* args)
 		{
 			_regs->sp += 1;
 			RET_NO_ARGS_REF;
@@ -1273,49 +1273,49 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_dec_r8()
 	{
-		add_instruction(0x3D, "DEC A", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x3D), "DEC A", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_dec_r8(_regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x05, "DEC B", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x05), "DEC B", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_dec_r8(_regs->b);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x0D, "DEC C", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x0D), "DEC C", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_dec_r8(_regs->c);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x15, "DEC D", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x15), "DEC D", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_dec_r8(_regs->d);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x1D, "DEC E", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x1D), "DEC E", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_dec_r8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x25, "DEC H", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x25), "DEC H", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_dec_r8(_regs->h);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x2D, "DEC L", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x2D), "DEC L", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_dec_r8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x35, "DEC (HL)", 12, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x35), "DEC (HL)", 12, 0, [&](const byte_t* args)
 		{
 			addr_t addr = _regs->hl();
 			byte_t val = _mem->read_byte(addr);
@@ -1327,28 +1327,28 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_dec_r16()
 	{
-		add_instruction(0x0B, "DEC BC", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x0B), "DEC BC", 8, 0, [&](const byte_t* args)
 		{
 			word_t val = (word_t)(_regs->bc() - 1);
 			_regs->bc(val);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x1B, "DEC DE", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x1B), "DEC DE", 8, 0, [&](const byte_t* args)
 		{
 			word_t val = (word_t)(_regs->de() - 1);
 			_regs->de(val);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x2B, "DEC HL", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x2B), "DEC HL", 8, 0, [&](const byte_t* args)
 		{
 			word_t val = (word_t)(_regs->hl() - 1);
 			_regs->hl(val);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0x3B, "DEC SP", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0x3B), "DEC SP", 8, 0, [&](const byte_t* args)
 		{
 			_regs->sp -= 1;
 			RET_NO_ARGS_REF;
@@ -1357,55 +1357,55 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_cp_r8()
 	{
-		add_instruction(0xBF, "CP A", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xBF), "CP A", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_cp_r8(_regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xB8, "CP B", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xB8), "CP B", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_cp_r8(_regs->b);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xB9, "CP C", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xB9), "CP C", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_cp_r8(_regs->c);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xBA, "CP D", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xBA), "CP D", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_cp_r8(_regs->d);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xBB, "CP E", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xBB), "CP E", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_cp_r8(_regs->e);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xBC, "CP H", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xBC), "CP H", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_cp_r8(_regs->h);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xBD, "CP L", 4, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xBD), "CP L", 4, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_cp_r8(_regs->l);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xBE, "CP (HL)", 8, 0, [&](const byte_t* args)
+		add_instruction(opcode(0xBE), "CP (HL)", 8, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_cp_r8(_regs->l);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(0xFE, "CP d8", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0xFE), "CP d8", 8, 1, [&](const byte_t* args)
 		{
 			byte_t d8 = args[0];
 			_instImpl->opcode_cp_r8(d8);

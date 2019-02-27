@@ -10,7 +10,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& rrca = inst_map[0x0F];
+			vcpu_instruction& rrca = inst_map[opcode(0x0F)];
 
 			regs.a = 0x00;
 			rrca.call(nullptr);
@@ -41,7 +41,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& rra = inst_map[0x1F];
+			vcpu_instruction& rra = inst_map[opcode(0x1F)];
 
 			regs.a = 0x00;
 			rra.call(nullptr);
@@ -72,7 +72,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& rlca = inst_map[0x07];
+			vcpu_instruction& rlca = inst_map[opcode(0x07)];
 
 			regs.a = 0x80;
 			rlca.call(nullptr);
@@ -103,7 +103,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& rla = inst_map[0x17];
+			vcpu_instruction& rla = inst_map[opcode(0x17)];
 
 			regs.a = 0x80;
 			rla.call(nullptr);

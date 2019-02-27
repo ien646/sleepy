@@ -9,7 +9,7 @@ namespace sleepy
 		byte_t prefix;
 		byte_t value;
 
-		opcode(byte_t val);
+		explicit opcode(byte_t val);
 		opcode(byte_t prefix, byte_t val);
 		opcode(const opcode& copy);
 

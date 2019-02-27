@@ -175,7 +175,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& add_sp_d8 = inst_map[0xE8];
+			vcpu_instruction& add_sp_d8 = inst_map[opcode(0xE8)];
 
 			byte_t d8 = 0x00;
 

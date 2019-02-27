@@ -78,7 +78,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& ld_hl_spd8 = inst_map[0xF8];
+			vcpu_instruction& ld_hl_spd8 = inst_map[opcode(0xF8)];
 			byte_t d8 = 0x00;
 
 			regs.sp = 0xAAAA;
@@ -136,7 +136,7 @@ namespace sleepy
 		SECTION("LD_a16_A")
 		{
 			CPUFW_SLEEPY_TESTINIT();
-			vcpu_instruction& ld_a16_a = inst_map[0xEA];
+			vcpu_instruction& ld_a16_a = inst_map[opcode(0xEA)];
 			addr_t a16 = 0x0000;
 
 			regs.a = 0x00;
@@ -153,7 +153,7 @@ namespace sleepy
 		SECTION("LD_A_a16")
 		{
 			CPUFW_SLEEPY_TESTINIT();
-			vcpu_instruction& ld_a_a16 = inst_map[0xFA];
+			vcpu_instruction& ld_a_a16 = inst_map[opcode(0xFA)];
 
 			addr_t a16 = 0x0000;
 			byte_t val = 0x00;
@@ -180,7 +180,7 @@ namespace sleepy
 		SECTION("LD_SP_HL")
 		{
 			CPUFW_SLEEPY_TESTINIT();
-			vcpu_instruction& ld_sp_hl = inst_map[0xF9];
+			vcpu_instruction& ld_sp_hl = inst_map[opcode(0xF9)];
 
 			regs.sp = 0xA0AB;
 			regs.hl(0xFEFE);
@@ -196,7 +196,7 @@ namespace sleepy
 		SECTION("LD_pFF00a8_A")
 		{
 			CPUFW_SLEEPY_TESTINIT();
-			vcpu_instruction& ld_pff00a8_a = inst_map[0xE0];
+			vcpu_instruction& ld_pff00a8_a = inst_map[opcode(0xE0)];
 
 			byte_t a8 = 0x00;
 			addr_t addr = 0x0000;
@@ -217,7 +217,7 @@ namespace sleepy
 		SECTION("LD_A_pFF00a8")
 		{
 			CPUFW_SLEEPY_TESTINIT();
-			vcpu_instruction& ld_pff00a8_a = inst_map[0xF0];
+			vcpu_instruction& ld_pff00a8_a = inst_map[opcode(0xF0)];
 
 			byte_t a8 = 0x00;
 			addr_t addr = 0x0000;
