@@ -9,7 +9,7 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build_debug/output/bin/sleepy.console/sleepy.console.exe",
-            "args": ["09-op r,r.gb"],
+            "args": ["pkrd.agb"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build_debug/output/bin/sleepy.console/",
             "environment": [],

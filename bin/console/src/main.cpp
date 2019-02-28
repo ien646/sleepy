@@ -34,52 +34,16 @@ static void print_registers(const sleepy::registers* regs)
 int main(int argc, char** argv)
 {
     sleepy::vcpu vcpu;
-    if (argc < 2)
-    {
-        return -1;
-    }
 
-    std::ifstream fs(std::string(argv[1]), std::ios::binary);
-    if(!fs) { return -2; }
-    char ch = 0;
-    bool prefix_flag = false;
-    char prefix;
-    while(fs.get(ch))
-    {
-        if(ch == 0x00) {continue;}
-        if(ch == 0xCB)
-        {
-            prefix = true;
-        }
-        else
-        {
-            if(prefix)
-            {
-                
-            }
-            else
-            {
-                sleepy::opcode opc(static_cast<sleepy::byte_t>(ch));
-                auto& inst_data = vcpu.get_inst_data(opc);
-                if(inst_data.cycles == 0xFF) { continue; }
-                system("cls");
-                print_registers(&vcpu.registers());
-                std::cout 
-                        << "Incoming instruction: "
-                        << "[ " << inst_data.mnemonic << " ]"
-                        << std::endl;
+    if (argc < 2) { return -1; }
 
-                using namespace std::chrono_literals;
-                std::this_thread::sleep_for(0.015s);
+    std::string fpath(argv[1]);
+    std::ifstream ifs(fpath, std::ios::binary);
 
-                std::vector<sleepy::byte_t> argvec;
-                for(size_t i = 0; i < inst_data.arg_count; i++) 
-                { 
-                    argvec.push_back(static_cast<sleepy::byte_t>(fs.get()));
-                }
-                vcpu.exec_op(opc, argvec.data());
-            }
-            prefix = false;
-        }
-    }
+    if(!ifs) { return -2; }
+
+    vcpu.setup_memory(ifs);
+    vcpu.start();
+
+    return 0;
 }
