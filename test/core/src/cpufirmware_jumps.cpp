@@ -304,7 +304,7 @@ namespace sleepy
         {
             CPUFW_SLEEPY_TESTINIT();
 
-            auto& jp_nc_a16 = inst_map[opcode(0xD2)];
+            auto& jp_nc_a16 = inst_map[opcode(0xCA)];
 
             regs.reset_flags(); // Z = true
             regs.set_flag(registers::flag::ZERO);

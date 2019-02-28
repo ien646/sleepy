@@ -10,15 +10,15 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& or_a_a = inst_map[opcode(0xB7)];
-			vcpu_instruction& or_a_b = inst_map[opcode(0xB0)];
-			vcpu_instruction& or_a_c = inst_map[opcode(0xB1)];
-			vcpu_instruction& or_a_d = inst_map[opcode(0xB2)];
-			vcpu_instruction& or_a_e = inst_map[opcode(0xB3)];
-			vcpu_instruction& or_a_h = inst_map[opcode(0xB4)];
-			vcpu_instruction& or_a_l = inst_map[opcode(0xB5)];
-			vcpu_instruction& or_a_phl = inst_map[opcode(0xB6)];
-			vcpu_instruction& or_a_d8 = inst_map[opcode(0xF6)];
+			const vcpu_instruction& or_a_a = inst_map[opcode(0xB7)];
+			const vcpu_instruction& or_a_b = inst_map[opcode(0xB0)];
+			const vcpu_instruction& or_a_c = inst_map[opcode(0xB1)];
+			const vcpu_instruction& or_a_d = inst_map[opcode(0xB2)];
+			const vcpu_instruction& or_a_e = inst_map[opcode(0xB3)];
+			const vcpu_instruction& or_a_h = inst_map[opcode(0xB4)];
+			const vcpu_instruction& or_a_l = inst_map[opcode(0xB5)];
+			const vcpu_instruction& or_a_phl = inst_map[opcode(0xB6)];
+			const vcpu_instruction& or_a_d8 = inst_map[opcode(0xF6)];
 
 			regs.a = 0xFF;
 			or_a_a.call(nullptr);
@@ -75,14 +75,14 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& or_a_a = inst_map[opcode(0xB7)];
-			vcpu_instruction& or_a_b = inst_map[opcode(0xB0)];
-			vcpu_instruction& or_a_c = inst_map[opcode(0xB1)];
-			vcpu_instruction& or_a_d = inst_map[opcode(0xB2)];
-			vcpu_instruction& or_a_e = inst_map[opcode(0xB3)];
-			vcpu_instruction& or_a_h = inst_map[opcode(0xB4)];
-			vcpu_instruction& or_a_l = inst_map[opcode(0xB5)];
-			vcpu_instruction& or_a_phl = inst_map[opcode(0xB6)];
+			const vcpu_instruction& or_a_a = inst_map[opcode(0xB7)];
+			const vcpu_instruction& or_a_b = inst_map[opcode(0xB0)];
+			const vcpu_instruction& or_a_c = inst_map[opcode(0xB1)];
+			const vcpu_instruction& or_a_d = inst_map[opcode(0xB2)];
+			const vcpu_instruction& or_a_e = inst_map[opcode(0xB3)];
+			const vcpu_instruction& or_a_h = inst_map[opcode(0xB4)];
+			const vcpu_instruction& or_a_l = inst_map[opcode(0xB5)];
+			const vcpu_instruction& or_a_phl = inst_map[opcode(0xB6)];
 
 			regs.a = 0xFF;
 			or_a_a.call(nullptr);

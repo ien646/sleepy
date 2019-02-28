@@ -10,15 +10,15 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& xor_a_a = inst_map[opcode(0xAF)];
-			vcpu_instruction& xor_a_b = inst_map[opcode(0xA8)];
-			vcpu_instruction& xor_a_c = inst_map[opcode(0xA9)];
-			vcpu_instruction& xor_a_d = inst_map[opcode(0xAA)];
-			vcpu_instruction& xor_a_e = inst_map[opcode(0xAB)];
-			vcpu_instruction& xor_a_h = inst_map[opcode(0xAC)];
-			vcpu_instruction& xor_a_l = inst_map[opcode(0xAD)];
-			vcpu_instruction& xor_a_phl = inst_map[opcode(0xAE)];
-			vcpu_instruction& xor_a_d8 = inst_map[opcode(0xEE)];
+			const vcpu_instruction& xor_a_a = inst_map[opcode(0xAF)];
+			const vcpu_instruction& xor_a_b = inst_map[opcode(0xA8)];
+			const vcpu_instruction& xor_a_c = inst_map[opcode(0xA9)];
+			const vcpu_instruction& xor_a_d = inst_map[opcode(0xAA)];
+			const vcpu_instruction& xor_a_e = inst_map[opcode(0xAB)];
+			const vcpu_instruction& xor_a_h = inst_map[opcode(0xAC)];
+			const vcpu_instruction& xor_a_l = inst_map[opcode(0xAD)];
+			const vcpu_instruction& xor_a_phl = inst_map[opcode(0xAE)];
+			const vcpu_instruction& xor_a_d8 = inst_map[opcode(0xEE)];
 
 			regs.a = 0xFF;
 			xor_a_a.call(nullptr);
@@ -75,14 +75,14 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& xor_a_a = inst_map[opcode(0xAF)];
-			vcpu_instruction& xor_a_b = inst_map[opcode(0xA8)];
-			vcpu_instruction& xor_a_c = inst_map[opcode(0xA9)];
-			vcpu_instruction& xor_a_d = inst_map[opcode(0xAA)];
-			vcpu_instruction& xor_a_e = inst_map[opcode(0xAB)];
-			vcpu_instruction& xor_a_h = inst_map[opcode(0xAC)];
-			vcpu_instruction& xor_a_l = inst_map[opcode(0xAD)];
-			vcpu_instruction& xor_a_phl = inst_map[opcode(0xAE)];
+			const vcpu_instruction& xor_a_a = inst_map[opcode(0xAF)];
+			const vcpu_instruction& xor_a_b = inst_map[opcode(0xA8)];
+			const vcpu_instruction& xor_a_c = inst_map[opcode(0xA9)];
+			const vcpu_instruction& xor_a_d = inst_map[opcode(0xAA)];
+			const vcpu_instruction& xor_a_e = inst_map[opcode(0xAB)];
+			const vcpu_instruction& xor_a_h = inst_map[opcode(0xAC)];
+			const vcpu_instruction& xor_a_l = inst_map[opcode(0xAD)];
+			const vcpu_instruction& xor_a_phl = inst_map[opcode(0xAE)];
 
 			regs.a = 0x00;
 			xor_a_a.call(nullptr);

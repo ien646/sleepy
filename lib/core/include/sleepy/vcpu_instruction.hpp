@@ -39,7 +39,16 @@ namespace sleepy
         { }
 
         vcpu_instruction(const vcpu_instruction& copy_src) = delete;
-
         vcpu_instruction(vcpu_instruction&& move_src) = default;
+
+        void operator=(const vcpu_instruction& copy_src) = delete;
+        void operator=(vcpu_instruction&& move_src)
+        {
+            op = move_src.op;
+            mnemonic = std::move(move_src.mnemonic);
+            cycles = move_src.cycles;
+            pc_offset = move_src.pc_offset;
+            call = std::move(move_src.call);
+        }
     };
 }

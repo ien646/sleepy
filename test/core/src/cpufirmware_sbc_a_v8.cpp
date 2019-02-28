@@ -10,15 +10,15 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& sbc_a_a = inst_map[opcode(0x9F)];
-			vcpu_instruction& sbc_a_b = inst_map[opcode(0x98)];
-			vcpu_instruction& sbc_a_c = inst_map[opcode(0x99)];
-			vcpu_instruction& sbc_a_d = inst_map[opcode(0x9A)];
-			vcpu_instruction& sbc_a_e = inst_map[opcode(0x9B)];
-			vcpu_instruction& sbc_a_h = inst_map[opcode(0x9C)];
-			vcpu_instruction& sbc_a_l = inst_map[opcode(0x9D)];
-			vcpu_instruction& sbc_a_phl = inst_map[opcode(0x9E)];
-			vcpu_instruction& sbc_a_d8 = inst_map[opcode(0xDE)];
+			const vcpu_instruction& sbc_a_a = inst_map[opcode(0x9F)];
+			const vcpu_instruction& sbc_a_b = inst_map[opcode(0x98)];
+			const vcpu_instruction& sbc_a_c = inst_map[opcode(0x99)];
+			const vcpu_instruction& sbc_a_d = inst_map[opcode(0x9A)];
+			const vcpu_instruction& sbc_a_e = inst_map[opcode(0x9B)];
+			const vcpu_instruction& sbc_a_h = inst_map[opcode(0x9C)];
+			const vcpu_instruction& sbc_a_l = inst_map[opcode(0x9D)];
+			const vcpu_instruction& sbc_a_phl = inst_map[opcode(0x9E)];
+			const vcpu_instruction& sbc_a_d8 = inst_map[opcode(0xDE)];
 
 			regs.reset_flags();
 			regs.a = 0xA0;
@@ -80,14 +80,14 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& sbc_a_a = inst_map[opcode(0x9F)];
-			vcpu_instruction& sbc_a_b = inst_map[opcode(0x98)];
-			vcpu_instruction& sbc_a_c = inst_map[opcode(0x99)];
-			vcpu_instruction& sbc_a_d = inst_map[opcode(0x9A)];
-			vcpu_instruction& sbc_a_e = inst_map[opcode(0x9B)];
-			vcpu_instruction& sbc_a_h = inst_map[opcode(0x9C)];
-			vcpu_instruction& sbc_a_l = inst_map[opcode(0x9D)];
-			vcpu_instruction& sbc_a_phl = inst_map[opcode(0x9E)];
+			const vcpu_instruction& sbc_a_a = inst_map[opcode(0x9F)];
+			const vcpu_instruction& sbc_a_b = inst_map[opcode(0x98)];
+			const vcpu_instruction& sbc_a_c = inst_map[opcode(0x99)];
+			const vcpu_instruction& sbc_a_d = inst_map[opcode(0x9A)];
+			const vcpu_instruction& sbc_a_e = inst_map[opcode(0x9B)];
+			const vcpu_instruction& sbc_a_h = inst_map[opcode(0x9C)];
+			const vcpu_instruction& sbc_a_l = inst_map[opcode(0x9D)];
+			const vcpu_instruction& sbc_a_phl = inst_map[opcode(0x9E)];
 
 			regs.reset_flags();
 			regs.set_flag(FLAG_CARRY);
@@ -151,14 +151,14 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& sbc_a_a = inst_map[opcode(0x9F)];
-			vcpu_instruction& sbc_a_b = inst_map[opcode(0x98)];
-			vcpu_instruction& sbc_a_c = inst_map[opcode(0x99)];
-			vcpu_instruction& sbc_a_d = inst_map[opcode(0x9A)];
-			vcpu_instruction& sbc_a_e = inst_map[opcode(0x9B)];
-			vcpu_instruction& sbc_a_h = inst_map[opcode(0x9C)];
-			vcpu_instruction& sbc_a_l = inst_map[opcode(0x9D)];
-			vcpu_instruction& sbc_a_phl = inst_map[opcode(0x9E)];
+			const vcpu_instruction& sbc_a_a = inst_map[opcode(0x9F)];
+			const vcpu_instruction& sbc_a_b = inst_map[opcode(0x98)];
+			const vcpu_instruction& sbc_a_c = inst_map[opcode(0x99)];
+			const vcpu_instruction& sbc_a_d = inst_map[opcode(0x9A)];
+			const vcpu_instruction& sbc_a_e = inst_map[opcode(0x9B)];
+			const vcpu_instruction& sbc_a_h = inst_map[opcode(0x9C)];
+			const vcpu_instruction& sbc_a_l = inst_map[opcode(0x9D)];
+			const vcpu_instruction& sbc_a_phl = inst_map[opcode(0x9E)];
 
 			regs.reset_flags();
 

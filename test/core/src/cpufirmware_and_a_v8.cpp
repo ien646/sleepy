@@ -10,15 +10,15 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& and_a_a = inst_map[opcode(0xA7)];
-			vcpu_instruction& and_a_b = inst_map[opcode(0xA0)];
-			vcpu_instruction& and_a_c = inst_map[opcode(0xA1)];
-			vcpu_instruction& and_a_d = inst_map[opcode(0xA2)];
-			vcpu_instruction& and_a_e = inst_map[opcode(0xA3)];
-			vcpu_instruction& and_a_h = inst_map[opcode(0xA4)];
-			vcpu_instruction& and_a_l = inst_map[opcode(0xA5)];
-			vcpu_instruction& and_a_phl = inst_map[opcode(0xA6)];
-			vcpu_instruction& and_a_d8 = inst_map[opcode(0xE6)];
+			const vcpu_instruction& and_a_a = inst_map[opcode(0xA7)];
+			const vcpu_instruction& and_a_b = inst_map[opcode(0xA0)];
+			const vcpu_instruction& and_a_c = inst_map[opcode(0xA1)];
+			const vcpu_instruction& and_a_d = inst_map[opcode(0xA2)];
+			const vcpu_instruction& and_a_e = inst_map[opcode(0xA3)];
+			const vcpu_instruction& and_a_h = inst_map[opcode(0xA4)];
+			const vcpu_instruction& and_a_l = inst_map[opcode(0xA5)];
+			const vcpu_instruction& and_a_phl = inst_map[opcode(0xA6)];
+			const vcpu_instruction& and_a_d8 = inst_map[opcode(0xE6)];
 
 			regs.a = 0xFF;
 			and_a_a.call(nullptr);
@@ -75,14 +75,14 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& and_a_a = inst_map[opcode(0xA7)];
-			vcpu_instruction& and_a_b = inst_map[opcode(0xA0)];
-			vcpu_instruction& and_a_c = inst_map[opcode(0xA1)];
-			vcpu_instruction& and_a_d = inst_map[opcode(0xA2)];
-			vcpu_instruction& and_a_e = inst_map[opcode(0xA3)];
-			vcpu_instruction& and_a_h = inst_map[opcode(0xA4)];
-			vcpu_instruction& and_a_l = inst_map[opcode(0xA5)];
-			vcpu_instruction& and_a_phl = inst_map[opcode(0xA6)];
+			const vcpu_instruction& and_a_a = inst_map[opcode(0xA7)];
+			const vcpu_instruction& and_a_b = inst_map[opcode(0xA0)];
+			const vcpu_instruction& and_a_c = inst_map[opcode(0xA1)];
+			const vcpu_instruction& and_a_d = inst_map[opcode(0xA2)];
+			const vcpu_instruction& and_a_e = inst_map[opcode(0xA3)];
+			const vcpu_instruction& and_a_h = inst_map[opcode(0xA4)];
+			const vcpu_instruction& and_a_l = inst_map[opcode(0xA5)];
+			const vcpu_instruction& and_a_phl = inst_map[opcode(0xA6)];
 
 			regs.a = 0xFF;
 			and_a_a.call(nullptr);

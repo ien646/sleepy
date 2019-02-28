@@ -1561,7 +1561,6 @@ namespace sleepy
 		const vcpu_instruction::op_call_t& call)
 	{
 		vcpu_instruction inst(opc, mnem, cycc, pc_offset, call);
-		auto pair = std::make_pair(opc, std::move(inst));
-		auto trash = inst_map.insert(std::move(pair));
+		inst_map.emplace(opc, std::move(inst));
 	}
 }

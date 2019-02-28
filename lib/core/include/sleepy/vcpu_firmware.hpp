@@ -3,6 +3,7 @@
 #include <sleepy/common.hpp>
 #include <sleepy/vcpu_instruction.hpp>
 #include <sleepy/instruction_impl.hpp>
+#include <sleepy/instruction_map.hpp>
 
 #include <string>
 #include <map>
@@ -18,7 +19,7 @@ namespace sleepy
 		vcpu_firmware() = delete;
 		vcpu_firmware(memory* mem_ptr, registers* regs_ptr);
 
-		std::map<opcode, vcpu_instruction> inst_map;
+		instruction_map inst_map;
 
 		void enable_interrupts() { _interrupts_enabled = true; }
 		void disable_interrupts() { _interrupts_enabled = false; }
@@ -68,6 +69,10 @@ namespace sleepy
 		void initmap_rst();
 		void initmap_jumps();
 
-		void add_instruction(opcode opc, const std::string& mnem, byte_t cycc, byte_t argl, const vcpu_instruction::op_call_t& call);
+		void add_instruction(
+			opcode opc, 
+			const std::string& mnem, 
+			byte_t cycc, byte_t argl, 
+			const vcpu_instruction::op_call_t& call);
 	};
 }

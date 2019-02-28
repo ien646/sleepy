@@ -10,7 +10,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& ei = inst_map[opcode(0xFB)];
+			const vcpu_instruction& ei = inst_map[opcode(0xFB)];
 
 			vfw.disable_interrupts();
 			ei.call(nullptr);
@@ -25,7 +25,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& di = inst_map[opcode(0xF3)];
+			const vcpu_instruction& di = inst_map[opcode(0xF3)];
 
 			vfw.disable_interrupts();
 			di.call(nullptr);
@@ -40,7 +40,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& cpl = inst_map[opcode(0x2F)];
+			const vcpu_instruction& cpl = inst_map[opcode(0x2F)];
 
 			regs.a = 0x00;
 			cpl.call(nullptr);
@@ -59,7 +59,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& ccf = inst_map[opcode(0x3F)];			
+			const vcpu_instruction& ccf = inst_map[opcode(0x3F)];			
 
 			regs.set_flag(FLAG_CARRY);
 			ccf.call(nullptr);
@@ -72,7 +72,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& daa = inst_map[opcode(0x27)];
+			const vcpu_instruction& daa = inst_map[opcode(0x27)];
 
 			regs.reset_flags();
 			regs.a = 0x00;
@@ -160,7 +160,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& scf = inst_map[opcode(0x37)];
+			const vcpu_instruction& scf = inst_map[opcode(0x37)];
 
 			regs.reset_flags();
 			scf.call(nullptr);
@@ -175,7 +175,7 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& add_sp_d8 = inst_map[opcode(0xE8)];
+			const vcpu_instruction& add_sp_d8 = inst_map[opcode(0xE8)];
 
 			byte_t d8 = 0x00;
 

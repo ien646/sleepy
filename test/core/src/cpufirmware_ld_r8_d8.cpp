@@ -10,14 +10,14 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& ld_a_d8 = inst_map[opcode(0x3E)];
-			vcpu_instruction& ld_b_d8 = inst_map[opcode(0x06)];
-			vcpu_instruction& ld_c_d8 = inst_map[opcode(0x0E)];
-			vcpu_instruction& ld_d_d8 = inst_map[opcode(0x16)];
-			vcpu_instruction& ld_e_d8 = inst_map[opcode(0x1E)];
-			vcpu_instruction& ld_h_d8 = inst_map[opcode(0x26)];
-			vcpu_instruction& ld_l_d8 = inst_map[opcode(0x2E)];
-			vcpu_instruction& ld_phl_d8 = inst_map[opcode(0x36)];
+			const vcpu_instruction& ld_a_d8 = inst_map[opcode(0x3E)];
+			const vcpu_instruction& ld_b_d8 = inst_map[opcode(0x06)];
+			const vcpu_instruction& ld_c_d8 = inst_map[opcode(0x0E)];
+			const vcpu_instruction& ld_d_d8 = inst_map[opcode(0x16)];
+			const vcpu_instruction& ld_e_d8 = inst_map[opcode(0x1E)];
+			const vcpu_instruction& ld_h_d8 = inst_map[opcode(0x26)];
+			const vcpu_instruction& ld_l_d8 = inst_map[opcode(0x2E)];
+			const vcpu_instruction& ld_phl_d8 = inst_map[opcode(0x36)];
 
 			byte_t d8 = 0xAF;
 

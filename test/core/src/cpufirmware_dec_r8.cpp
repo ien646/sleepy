@@ -10,14 +10,14 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& dec_a = inst_map[opcode(0x3D)];
-			vcpu_instruction& dec_b = inst_map[opcode(0x05)];
-			vcpu_instruction& dec_c = inst_map[opcode(0x0D)];
-			vcpu_instruction& dec_d = inst_map[opcode(0x15)];
-			vcpu_instruction& dec_e = inst_map[opcode(0x1D)];
-			vcpu_instruction& dec_h = inst_map[opcode(0x25)];
-			vcpu_instruction& dec_l = inst_map[opcode(0x2D)];
-			vcpu_instruction& dec_phl = inst_map[opcode(0x35)];
+			const vcpu_instruction& dec_a = inst_map[opcode(0x3D)];
+			const vcpu_instruction& dec_b = inst_map[opcode(0x05)];
+			const vcpu_instruction& dec_c = inst_map[opcode(0x0D)];
+			const vcpu_instruction& dec_d = inst_map[opcode(0x15)];
+			const vcpu_instruction& dec_e = inst_map[opcode(0x1D)];
+			const vcpu_instruction& dec_h = inst_map[opcode(0x25)];
+			const vcpu_instruction& dec_l = inst_map[opcode(0x2D)];
+			const vcpu_instruction& dec_phl = inst_map[opcode(0x35)];
 
 			regs.a = 0x01;
 			dec_a.call(nullptr);
@@ -32,14 +32,14 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& dec_a = inst_map[opcode(0x3D)];
-			vcpu_instruction& dec_b = inst_map[opcode(0x05)];
-			vcpu_instruction& dec_c = inst_map[opcode(0x0D)];
-			vcpu_instruction& dec_d = inst_map[opcode(0x15)];
-			vcpu_instruction& dec_e = inst_map[opcode(0x1D)];
-			vcpu_instruction& dec_h = inst_map[opcode(0x25)];
-			vcpu_instruction& dec_l = inst_map[opcode(0x2D)];
-			vcpu_instruction& dec_phl = inst_map[opcode(0x35)];
+			const vcpu_instruction& dec_a = inst_map[opcode(0x3D)];
+			const vcpu_instruction& dec_b = inst_map[opcode(0x05)];
+			const vcpu_instruction& dec_c = inst_map[opcode(0x0D)];
+			const vcpu_instruction& dec_d = inst_map[opcode(0x15)];
+			const vcpu_instruction& dec_e = inst_map[opcode(0x1D)];
+			const vcpu_instruction& dec_h = inst_map[opcode(0x25)];
+			const vcpu_instruction& dec_l = inst_map[opcode(0x2D)];
+			const vcpu_instruction& dec_phl = inst_map[opcode(0x35)];
 
 			regs.a = 0x00;
 			dec_a.call(nullptr);

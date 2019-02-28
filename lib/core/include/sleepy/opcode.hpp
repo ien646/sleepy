@@ -18,5 +18,10 @@ namespace sleepy
 		bool operator ==(const opcode&) const;
 		bool operator <(const opcode&) const;
 		bool operator >(const opcode&) const;
+
+		constexpr bool is_extended() const noexcept 
+		{ 
+			return prefix == 0xCBu; 
+		}
 	};
 }

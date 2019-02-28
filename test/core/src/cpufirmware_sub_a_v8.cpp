@@ -10,15 +10,15 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& sub_a_a = inst_map[opcode(0x97)];
-			vcpu_instruction& sub_a_b = inst_map[opcode(0x90)];
-			vcpu_instruction& sub_a_c = inst_map[opcode(0x91)];
-			vcpu_instruction& sub_a_d = inst_map[opcode(0x92)];
-			vcpu_instruction& sub_a_e = inst_map[opcode(0x93)];
-			vcpu_instruction& sub_a_h = inst_map[opcode(0x94)];
-			vcpu_instruction& sub_a_l = inst_map[opcode(0x95)];
-			vcpu_instruction& sub_a_phl = inst_map[opcode(0x96)];
-			vcpu_instruction& sub_a_d8 = inst_map[opcode(0xD6)];
+			const vcpu_instruction& sub_a_a = inst_map[opcode(0x97)];
+			const vcpu_instruction& sub_a_b = inst_map[opcode(0x90)];
+			const vcpu_instruction& sub_a_c = inst_map[opcode(0x91)];
+			const vcpu_instruction& sub_a_d = inst_map[opcode(0x92)];
+			const vcpu_instruction& sub_a_e = inst_map[opcode(0x93)];
+			const vcpu_instruction& sub_a_h = inst_map[opcode(0x94)];
+			const vcpu_instruction& sub_a_l = inst_map[opcode(0x95)];
+			const vcpu_instruction& sub_a_phl = inst_map[opcode(0x96)];
+			const vcpu_instruction& sub_a_d8 = inst_map[opcode(0xD6)];
 
 			byte_t expectedValue = 0x00;
 
@@ -82,15 +82,15 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& sub_a_a = inst_map[opcode(0x97)];
-			vcpu_instruction& sub_a_b = inst_map[opcode(0x90)];
-			vcpu_instruction& sub_a_c = inst_map[opcode(0x91)];
-			vcpu_instruction& sub_a_d = inst_map[opcode(0x92)];
-			vcpu_instruction& sub_a_e = inst_map[opcode(0x93)];
-			vcpu_instruction& sub_a_h = inst_map[opcode(0x94)];
-			vcpu_instruction& sub_a_l = inst_map[opcode(0x95)];
-			vcpu_instruction& sub_a_phl = inst_map[opcode(0x96)];
-			vcpu_instruction& sub_a_d8 = inst_map[opcode(0xD6)];
+			const vcpu_instruction& sub_a_a = inst_map[opcode(0x97)];
+			const vcpu_instruction& sub_a_b = inst_map[opcode(0x90)];
+			const vcpu_instruction& sub_a_c = inst_map[opcode(0x91)];
+			const vcpu_instruction& sub_a_d = inst_map[opcode(0x92)];
+			const vcpu_instruction& sub_a_e = inst_map[opcode(0x93)];
+			const vcpu_instruction& sub_a_h = inst_map[opcode(0x94)];
+			const vcpu_instruction& sub_a_l = inst_map[opcode(0x95)];
+			const vcpu_instruction& sub_a_phl = inst_map[opcode(0x96)];
+			const vcpu_instruction& sub_a_d8 = inst_map[opcode(0xD6)];
 
 			byte_t expectedValue = 0x00;
 
@@ -154,14 +154,14 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& sub_a_a = inst_map[opcode(0x97)];
-			vcpu_instruction& sub_a_b = inst_map[opcode(0x90)];
-			vcpu_instruction& sub_a_c = inst_map[opcode(0x91)];
-			vcpu_instruction& sub_a_d = inst_map[opcode(0x92)];
-			vcpu_instruction& sub_a_e = inst_map[opcode(0x93)];
-			vcpu_instruction& sub_a_h = inst_map[opcode(0x94)];
-			vcpu_instruction& sub_a_l = inst_map[opcode(0x95)];
-			vcpu_instruction& sub_a_phl = inst_map[opcode(0x96)];
+			const vcpu_instruction& sub_a_a = inst_map[opcode(0x97)];
+			const vcpu_instruction& sub_a_b = inst_map[opcode(0x90)];
+			const vcpu_instruction& sub_a_c = inst_map[opcode(0x91)];
+			const vcpu_instruction& sub_a_d = inst_map[opcode(0x92)];
+			const vcpu_instruction& sub_a_e = inst_map[opcode(0x93)];
+			const vcpu_instruction& sub_a_h = inst_map[opcode(0x94)];
+			const vcpu_instruction& sub_a_l = inst_map[opcode(0x95)];
+			const vcpu_instruction& sub_a_phl = inst_map[opcode(0x96)];
 
 			regs.a = 0x00;
 			sub_a_a.call(nullptr);

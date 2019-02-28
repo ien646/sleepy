@@ -10,13 +10,13 @@ namespace sleepy
 		{			
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& ld_phl_a = inst_map[opcode(0x77)];
-			vcpu_instruction& ld_phl_b = inst_map[opcode(0x70)];
-			vcpu_instruction& ld_phl_c = inst_map[opcode(0x71)];
-			vcpu_instruction& ld_phl_d = inst_map[opcode(0x72)];
-			vcpu_instruction& ld_phl_e = inst_map[opcode(0x73)];
-			vcpu_instruction& ld_phl_h = inst_map[opcode(0x74)];
-			vcpu_instruction& ld_phl_l = inst_map[opcode(0x75)];
+			const vcpu_instruction& ld_phl_a = inst_map[opcode(0x77)];
+			const vcpu_instruction& ld_phl_b = inst_map[opcode(0x70)];
+			const vcpu_instruction& ld_phl_c = inst_map[opcode(0x71)];
+			const vcpu_instruction& ld_phl_d = inst_map[opcode(0x72)];
+			const vcpu_instruction& ld_phl_e = inst_map[opcode(0x73)];
+			const vcpu_instruction& ld_phl_h = inst_map[opcode(0x74)];
+			const vcpu_instruction& ld_phl_l = inst_map[opcode(0x75)];
 
 			addr_t phlAddr = 0xDA0F;
 

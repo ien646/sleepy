@@ -10,10 +10,10 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& ld_pbc_a = inst_map[opcode(0x02)];
-			vcpu_instruction& ld_pde_a = inst_map[opcode(0x12)];
-			vcpu_instruction& ld_phli_a = inst_map[opcode(0x22)];
-			vcpu_instruction& ld_phld_a = inst_map[opcode(0x32)];
+			const vcpu_instruction& ld_pbc_a = inst_map[opcode(0x02)];
+			const vcpu_instruction& ld_pde_a = inst_map[opcode(0x12)];
+			const vcpu_instruction& ld_phli_a = inst_map[opcode(0x22)];
+			const vcpu_instruction& ld_phld_a = inst_map[opcode(0x32)];
 
 			byte_t val = 0x00;
 

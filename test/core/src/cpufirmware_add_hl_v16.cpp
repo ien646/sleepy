@@ -10,10 +10,10 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& add_hl_bc = inst_map[opcode(0x09)];
-			vcpu_instruction& add_hl_de = inst_map[opcode(0x19)];
-			vcpu_instruction& add_hl_hl = inst_map[opcode(0x29)];
-			vcpu_instruction& add_hl_sp = inst_map[opcode(0x39)];
+			const vcpu_instruction& add_hl_bc = inst_map[opcode(0x09)];
+			const vcpu_instruction& add_hl_de = inst_map[opcode(0x19)];
+			const vcpu_instruction& add_hl_hl = inst_map[opcode(0x29)];
+			const vcpu_instruction& add_hl_sp = inst_map[opcode(0x39)];
 
 			regs.hl(0x1100);
 			regs.bc(0x00BC);
@@ -39,10 +39,10 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& add_hl_bc = inst_map[opcode(0x09)];
-			vcpu_instruction& add_hl_de = inst_map[opcode(0x19)];
-			vcpu_instruction& add_hl_hl = inst_map[opcode(0x29)];
-			vcpu_instruction& add_hl_sp = inst_map[opcode(0x39)];
+			const vcpu_instruction& add_hl_bc = inst_map[opcode(0x09)];
+			const vcpu_instruction& add_hl_de = inst_map[opcode(0x19)];
+			const vcpu_instruction& add_hl_hl = inst_map[opcode(0x29)];
+			const vcpu_instruction& add_hl_sp = inst_map[opcode(0x39)];
 
 			regs.hl(0xFF00);
 			regs.bc(0x1111);
@@ -68,10 +68,10 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 
-			vcpu_instruction& add_hl_bc = inst_map[opcode(0x09)];
-			vcpu_instruction& add_hl_de = inst_map[opcode(0x19)];
-			vcpu_instruction& add_hl_hl = inst_map[opcode(0x29)];
-			vcpu_instruction& add_hl_sp = inst_map[opcode(0x39)];
+			const vcpu_instruction& add_hl_bc = inst_map[opcode(0x09)];
+			const vcpu_instruction& add_hl_de = inst_map[opcode(0x19)];
+			const vcpu_instruction& add_hl_hl = inst_map[opcode(0x29)];
+			const vcpu_instruction& add_hl_sp = inst_map[opcode(0x39)];
 
 			regs.reset_flags();
 			regs.hl(0x0000);
