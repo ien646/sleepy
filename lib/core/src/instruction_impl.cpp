@@ -14,7 +14,7 @@ namespace sleepy
 	{
 		_regs->reset_flags();
 
-		word_t result = _regs->a + v8;
+		word_t result = static_cast<word_t>(_regs->a) + v8;
 
 		if ((byte_t)result == 0x00)
 		{
@@ -57,7 +57,7 @@ namespace sleepy
 		_regs->reset_flags();
 		_regs->set_flag(FLAG_SUB);
 
-		word_t result = _regs->a - v8;
+		word_t result = static_cast<word_t>(_regs->a) - v8;
 
 		if ((byte_t)result == 0x00)
 		{
@@ -78,7 +78,9 @@ namespace sleepy
 
 	void instruction_impl::opcode_adc_a_v8(byte_t v8)
 	{
-		word_t result = _regs->a + v8 + (_regs->read_flag(FLAG_CARRY) ? 1 : 0);
+		word_t result = static_cast<word_t>(_regs->a) 
+			+ v8 
+			+ (_regs->read_flag(FLAG_CARRY) ? 1 : 0);
 
 		_regs->reset_flags();
 
@@ -102,7 +104,8 @@ namespace sleepy
 
 	void instruction_impl::opcode_sbc_a_v8(byte_t v8)
 	{
-		word_t result = _regs->a - (v8 + (_regs->read_flag(FLAG_CARRY) ? 1 : 0));
+		word_t result = static_cast<word_t>(_regs->a) 
+			- (v8 + (_regs->read_flag(FLAG_CARRY) ? 1 : 0));
 
 		_regs->reset_flags();
 		_regs->set_flag(FLAG_SUB);
@@ -211,7 +214,7 @@ namespace sleepy
 		_regs->reset_flags();
 		_regs->set_flag(FLAG_SUB);
 
-		word_t result = _regs->a - reg;
+		word_t result = static_cast<word_t>(_regs->a) - reg;
 
 		if ((byte_t)result == 0x00)
 		{
