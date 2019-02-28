@@ -12,7 +12,7 @@
     - [**0xC5**] PUSH BC
     - [**0xD0**] RET NC 
     - [**0xD1**] POP DE
-    - [**0xD2**] JP NC, a16
+    - <s>[**0xD2**] JP NC, a16</s>
     - [**0xD4**] CALL NC, a16
     - [**0xD5**] PUSH DE
     - [**0xE1**] POP HL
