@@ -12,6 +12,8 @@ namespace sleepy
     {
         auto& inst = _vfw.inst_map[op];
         inst.call(args);
+        _last_executed_inst = &inst;
+        _regs.pc += inst.pc_offset;
     }
 
     const memory& vcpu::memory() const noexcept
@@ -41,18 +43,13 @@ namespace sleepy
             byte_t op = _mem.read_byte(_regs.pc);
             if(op == 0xCBu)
             {
-                byte_t op2 = _mem.read_byte(_regs.pc + 1);
-                byte_t* args = &_mem.data()[_regs.pc + 1];
-                opcode opc(op, op2);
-                exec_op(opc, args);
-                _regs.pc += 2;
+                /*...*/
             }
             else
             {
                 opcode opc(op);
                 byte_t* args = &_mem.data()[_regs.pc];
                 exec_op(opc, args);
-                ++_regs.pc;
             }
         }
     }
@@ -66,5 +63,10 @@ namespace sleepy
 
         std::copy(cdata.begin(), cdata.begin() + 0xFFFF, _mem.data());
         _memory_set = true;
+    }
+
+    const vcpu_instruction* vcpu::last_executed_instruction() const noexcept
+    {
+        return _last_executed_inst;
     }
 }

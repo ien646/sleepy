@@ -22,19 +22,19 @@ namespace sleepy
         // Execution time in cycles
         byte_t cycles = 0xFF;
 
-        // Arguments length in bytes
-        byte_t arg_count = 0;
+        // Offset applied to PC after execution
+        byte_t pc_offset = 0;
 
         // Instruction call
         op_call_t call = nullptr;
 
         vcpu_instruction() noexcept {};
 
-        vcpu_instruction(opcode opc, const std::string& mnem, byte_t cc, byte_t argc, op_call_t ocall)
+        vcpu_instruction(opcode opc, const std::string& mnem, byte_t cc, byte_t pc_off, op_call_t ocall)
             : op(opc)
             , mnemonic(mnem)
             , cycles(cc)
-            , arg_count(argc)
+            , pc_offset(pc_off)
             , call(ocall)
         { }
 
