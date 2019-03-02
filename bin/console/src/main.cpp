@@ -69,7 +69,7 @@ int main(int argc, char** argv)
     if (argc < 2) { return -1; }
 
     std::string fpath(argv[1]);
-    std::ifstream ifs(fpath, std::ios::binary);
+    std::ifstream ifs(fpath, std::ios::in | std::ios::binary);
 
     if(!ifs) { return -2; }
 

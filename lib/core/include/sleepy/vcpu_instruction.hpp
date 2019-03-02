@@ -37,12 +37,14 @@ namespace sleepy
             opcode opc, 
             const std::string& mnem,
             byte_t cc, 
-            byte_t pc_off, 
+            byte_t pc_off,
+            byte_t argc,
             op_call_t ocall)
                 : op(opc)
                 , mnemonic(mnem)
                 , cycles(cc)
                 , pc_offset(pc_off)
+                , arg_count(argc)
                 , call(ocall)
         { }
 

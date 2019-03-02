@@ -12,6 +12,11 @@ namespace sleepy
     {
         auto& inst = _vfw.inst_map[op];
 
+        if(inst.cycles == 0xFF) 
+        {
+            throw std::logic_error("Unimplemented opcode (dec): " + inst.op.value);
+        }
+
         _pre_exec_debug_fun(*this, &inst);
         inst.call(args);
         _post_exec_debug_fun(*this, &inst);
@@ -42,9 +47,12 @@ namespace sleepy
             throw std::logic_error("Unable to start vcpu without setting memory data!");
         }
         _regs.zero_registers(true);
+        _regs.pc = 0x0100;
+        _regs.sp = 0xFFFE;
         while(true)
         {
             byte_t op = _mem.read_byte(_regs.pc);
+            if(op == 0x00) { _regs.pc++; continue;}
             if(op == 0xCBu)
             {
                 ++(_regs.pc);
@@ -64,12 +72,12 @@ namespace sleepy
 
     void vcpu::setup_memory(std::istream& data)
     {
-        std::istream_iterator<sleepy::byte_t> beg(data);
-        std::istream_iterator<sleepy::byte_t> end;
+        std::istreambuf_iterator<char> beg(data);
+        std::istreambuf_iterator<char> end;
 
         std::vector<byte_t> cdata(beg, end);
 
-        std::copy(cdata.begin(), cdata.begin() + 0xFFFF, _mem.data());
+        std::copy(cdata.begin(), cdata.end(), _mem.data() + 0x0100);
         _memory_set = true;
     }
 

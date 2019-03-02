@@ -9,7 +9,7 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build_debug/output/bin/sleepy.console/sleepy.console.exe",
-            "args": ["pkr.agb"],
+            "args": ["Tetris.gb"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build_debug/output/bin/sleepy.console/",
             "environment": [],

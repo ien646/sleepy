@@ -1561,7 +1561,7 @@ namespace sleepy
 		byte_t arg_count,
 		const vcpu_instruction::op_call_t& call)
 	{
-		vcpu_instruction inst(opc, mnem, cycc, pc_offset, call);
+		vcpu_instruction inst(opc, mnem, cycc, pc_offset, arg_count, call);
 		inst_map.emplace(opc, std::move(inst));
 	}
 }
