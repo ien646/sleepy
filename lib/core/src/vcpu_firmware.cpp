@@ -591,21 +591,21 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_ld_ptr_a()
 	{
-		add_instruction(opcode(0x02), "LD (BC),A", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0x02), "LD (BC),A", 8, 1, 0, [&](const byte_t* args)
 		{
 			addr_t addr = (addr_t)(_regs->bc());
 			_mem->write_byte(addr, _regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(opcode(0x12), "LD (DE),A", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0x12), "LD (DE),A", 8, 1, 0, [&](const byte_t* args)
 		{
 			addr_t addr = (addr_t)(_regs->de());
 			_mem->write_byte(addr, _regs->a);
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(opcode(0x22), "LD (HL+),A", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0x22), "LD (HL+),A", 8, 1, 0, [&](const byte_t* args)
 		{
 			addr_t addr = (addr_t)(_regs->hl());
 			_mem->write_byte(addr, _regs->a);
@@ -613,7 +613,7 @@ namespace sleepy
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(opcode(0x32), "LD (HL-),A", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0x32), "LD (HL-),A", 8, 1, 0, [&](const byte_t* args)
 		{
 			addr_t addr = (addr_t)(_regs->hl());
 			_mem->write_byte(addr, _regs->a);
@@ -624,19 +624,19 @@ namespace sleepy
 
 	void vcpu_firmware::initmap_ld_a_ptr()
 	{
-		add_instruction(opcode(0x0A), "LD A,(BC)", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0x0A), "LD A,(BC)", 8, 1, 0, [&](const byte_t* args)
 		{
 			_regs->a = _mem->read_byte(_regs->bc());
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(opcode(0x1A), "LD A,(DE)", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0x1A), "LD A,(DE)", 8, 1, 0, [&](const byte_t* args)
 		{
 			_regs->a = _mem->read_byte(_regs->de());
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(opcode(0x2A), "LD A,(HL+)", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0x2A), "LD A,(HL+)", 8, 1, 0, [&](const byte_t* args)
 		{
 			word_t vhl = _regs->hl();
 			_regs->a = _mem->read_byte(vhl);
@@ -644,7 +644,7 @@ namespace sleepy
 			RET_NO_ARGS_REF;
 		});
 
-		add_instruction(opcode(0x3A), "LD A,(HL-)", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0x3A), "LD A,(HL-)", 8, 1, 0, [&](const byte_t* args)
 		{
 			word_t vhl = _regs->hl();
 			_regs->a = _mem->read_byte(vhl);
@@ -734,7 +734,7 @@ namespace sleepy
 			_regs->a = val;
 		});
 
-		add_instruction(opcode(0xF9), "LD SP,HL", 8, 1, [&](const byte_t* args)
+		add_instruction(opcode(0xF9), "LD SP,HL", 8, 1, 0, [&](const byte_t* args)
 		{
 			word_t hl = _regs->hl();
 			_regs->sp = hl;
@@ -1555,9 +1555,10 @@ namespace sleepy
 
 	void vcpu_firmware::add_instruction(
 		opcode opc, 
-		const std::string& mnem,
+		const std::string& mnem, 
 		byte_t cycc, 
 		byte_t pc_offset, 
+		byte_t arg_count,
 		const vcpu_instruction::op_call_t& call)
 	{
 		vcpu_instruction inst(opc, mnem, cycc, pc_offset, call);

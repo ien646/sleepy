@@ -19,7 +19,7 @@ namespace sleepy
         bool _memory_set = false;
         const vcpu_instruction* _last_executed_inst = nullptr;
 
-        typedef std::function<void(const vcpu&, const vcpu_instruction*)> debug_func_t;
+        typedef std::function<void(vcpu&, const vcpu_instruction*)> debug_func_t;
         debug_func_t _pre_exec_debug_fun;
         debug_func_t _post_exec_debug_fun;
         bool _debug_enabled = false;

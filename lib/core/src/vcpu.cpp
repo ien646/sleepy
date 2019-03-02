@@ -37,7 +37,7 @@ namespace sleepy
 
     void vcpu::start()
     {
-        if(!_memory_set) 
+        if(!_memory_set)
         { 
             throw std::logic_error("Unable to start vcpu without setting memory data!");
         }

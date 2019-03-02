@@ -16,8 +16,8 @@ namespace sleepy
 
 		void write_byte(addr_t address, byte_t value);
 		void write_word(addr_t address, word_t value);
-		byte_t read_byte(addr_t address);
-		word_t read_word(addr_t address);
+		byte_t read_byte(addr_t address) const;
+		word_t read_word(addr_t address) const;
 
 		/* Return raw pointer to memory address 0x0000 */
 		byte_t* data();
