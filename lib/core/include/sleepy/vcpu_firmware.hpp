@@ -72,7 +72,9 @@ namespace sleepy
 		void add_instruction(
 			opcode opc, 
 			const std::string& mnem, 
-			byte_t cycc, byte_t argl, 
+			byte_t cycc, 
+			byte_t pc_offset, 
+			byte_t arg_count,
 			const vcpu_instruction::op_call_t& call);
 	};
 }
