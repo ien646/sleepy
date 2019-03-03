@@ -304,7 +304,7 @@ namespace sleepy
         {
             CPUFW_SLEEPY_TESTINIT();
 
-            auto& jp_nc_a16 = inst_map[opcode(0xCA)];
+            auto& jp_z_a16 = inst_map[opcode(0xCA)];
 
             regs.reset_flags(); // Z = true
             regs.set_flag(registers::flag::ZERO);
@@ -314,44 +314,99 @@ namespace sleepy
 
             regs.pc = 0x0000u;
             args = 0x0000u;
-            jp_nc_a16.call(args_ptr);
+            jp_z_a16.call(args_ptr);
             REQUIRE(regs.pc == args);
 
             regs.pc = 0x0000u;
             args = 0x00FFu;
-            jp_nc_a16.call(args_ptr);
+            jp_z_a16.call(args_ptr);
             REQUIRE(regs.pc == args);
 
             regs.pc = 0x00FFu;
             args = 0x0000u;
-            jp_nc_a16.call(args_ptr);
+            jp_z_a16.call(args_ptr);
             REQUIRE(regs.pc == args);
 
             regs.pc = 0xFF00u;
             args = 0x00FFu;
-            jp_nc_a16.call(args_ptr);
+            jp_z_a16.call(args_ptr);
             REQUIRE(regs.pc == args);
 
             regs.reset_flags(); // Z = false
 
             regs.pc = 0x0000u;
             args = 0x0000u;
-            jp_nc_a16.call(args_ptr);
+            jp_z_a16.call(args_ptr);
             REQUIRE(regs.pc == 0x0000u);
 
             regs.pc = 0x0000u;
             args = 0x00FFu;
-            jp_nc_a16.call(args_ptr);
+            jp_z_a16.call(args_ptr);
             REQUIRE(regs.pc == 0x0000u);
 
             regs.pc = 0x00FFu;
             args = 0x0000u;
-            jp_nc_a16.call(args_ptr);
+            jp_z_a16.call(args_ptr);
             REQUIRE(regs.pc == 0x00FFu);
 
             regs.pc = 0xFF00u;
             args = 0x00FFu;
-            jp_nc_a16.call(args_ptr);
+            jp_z_a16.call(args_ptr);
+            REQUIRE(regs.pc == 0xFF00u);
+        }
+
+        SECTION("JP C,a16")
+        {
+            CPUFW_SLEEPY_TESTINIT();
+
+            auto& jp_c_a16 = inst_map[opcode(0xDA)];
+
+            regs.reset_flags(); // C = true
+            regs.set_flag(registers::flag::CARRY);
+           
+            word_t args;
+            byte_t* args_ptr = reinterpret_cast<byte_t*>(&args);
+
+            regs.pc = 0x0000u;
+            args = 0x0000u;
+            jp_c_a16.call(args_ptr);
+            REQUIRE(regs.pc == args);
+
+            regs.pc = 0x0000u;
+            args = 0x00FFu;
+            jp_c_a16.call(args_ptr);
+            REQUIRE(regs.pc == args);
+
+            regs.pc = 0x00FFu;
+            args = 0x0000u;
+            jp_c_a16.call(args_ptr);
+            REQUIRE(regs.pc == args);
+
+            regs.pc = 0xFF00u;
+            args = 0x00FFu;
+            jp_c_a16.call(args_ptr);
+            REQUIRE(regs.pc == args);
+
+            regs.reset_flags(); // Z = false
+
+            regs.pc = 0x0000u;
+            args = 0x0000u;
+            jp_c_a16.call(args_ptr);
+            REQUIRE(regs.pc == 0x0000u);
+
+            regs.pc = 0x0000u;
+            args = 0x00FFu;
+            jp_c_a16.call(args_ptr);
+            REQUIRE(regs.pc == 0x0000u);
+
+            regs.pc = 0x00FFu;
+            args = 0x0000u;
+            jp_c_a16.call(args_ptr);
+            REQUIRE(regs.pc == 0x00FFu);
+
+            regs.pc = 0xFF00u;
+            args = 0x00FFu;
+            jp_c_a16.call(args_ptr);
             REQUIRE(regs.pc == 0xFF00u);
         }
     }

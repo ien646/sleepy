@@ -21,7 +21,7 @@
     - [**0xF5**] PUSH AF
     - [**0xC8**] RET Z
     - [**0xC9**] RET
-    - [**0xCA**] JP Z, a16
+    - <u>[**0xCA**] JP Z, a16</u>
     - [**0xCB**] **PREFIX CB**
     - [**0xCC**] CALL Z, a16
     - [**0xCD**] CALL a16

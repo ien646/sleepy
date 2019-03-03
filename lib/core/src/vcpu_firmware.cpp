@@ -1551,6 +1551,16 @@ namespace sleepy
 				_regs->pc = a16;
 			}
 		});
+		 
+		add_instruction(opcode(0xDA), "JP C,a16", 12, 0, 2, [&](const byte_t* args)
+		{
+			if(_regs->read_flag(registers::flag::CARRY))
+			{
+				delay_cycles(4); 
+				addr_t a16 = read_word(args);
+				_regs->pc = a16;
+			}
+		});
 	}
 
 	void vcpu_firmware::add_instruction(
