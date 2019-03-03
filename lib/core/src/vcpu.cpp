@@ -1,6 +1,7 @@
 #include <sleepy/vcpu.hpp>
 
 #include <iostream>
+#include <iterator>
 
 namespace sleepy
 {

@@ -14,12 +14,6 @@ namespace sleepy
         value = val;
     }
 
-    opcode::opcode(const opcode& copy)
-    {
-        this->prefix = copy.prefix;
-        this->value = copy.value;
-    }
-
     word_t opcode::get()
     {
         return (prefix << 8) | (value);

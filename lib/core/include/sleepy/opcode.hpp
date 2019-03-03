@@ -11,7 +11,6 @@ namespace sleepy
 
 		explicit opcode(byte_t val);
 		opcode(byte_t prefix, byte_t val);
-		opcode(const opcode& copy);
 
 		word_t get();
 
