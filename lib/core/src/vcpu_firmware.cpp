@@ -385,7 +385,7 @@ namespace sleepy
 			addr_t addr = (addr_t)_regs->hl();
 			_regs->e = _mem->read_byte(addr);
 			RET_NO_ARGS_REF;
-		});
+		});		
 	}
 
 	void vcpu_firmware::initmap_ld_h_x8()
@@ -1560,6 +1560,12 @@ namespace sleepy
 				addr_t a16 = read_word(args);
 				_regs->pc = a16;
 			}
+		});
+
+		add_instruction(opcode(0xE9), "JP (HL)", 4, 0, 0, [&](const byte_t* args)
+		{
+			addr_t phl = _mem->read_word(_regs->hl());
+			_regs->pc = phl;
 		});
 	}
 

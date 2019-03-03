@@ -409,5 +409,48 @@ namespace sleepy
             jp_c_a16.call(args_ptr);
             REQUIRE(regs.pc == 0xFF00u);
         }
+
+        SECTION("JP (HL)")
+        {
+            CPUFW_SLEEPY_TESTINIT();
+
+            auto& jp_phl = inst_map[opcode(0xE9)];
+            regs.pc = 0x0000u;
+
+            addr_t addr = 0x0000u;
+            word_t val = 0x0000u;
+            mem.write_word(addr, val);
+            regs.hl(addr);
+            jp_phl.call(nullptr);
+            REQUIRE(regs.pc == val);
+
+            addr = 0x00FFu;
+            val = 0x0000u;
+            mem.write_word(addr, val);
+            regs.hl(addr);
+            jp_phl.call(nullptr);
+            REQUIRE(regs.pc == val);
+
+            addr = 0x00FFu;
+            val = 0x0001u;
+            mem.write_word(addr, val);
+            regs.hl(addr);
+            jp_phl.call(nullptr);
+            REQUIRE(regs.pc == val);
+
+            addr = 0x00FFu;
+            val = 0x00FFu;
+            mem.write_word(addr, val);
+            regs.hl(addr);
+            jp_phl.call(nullptr);
+            REQUIRE(regs.pc == val);
+
+            addr = 0xFFFEu;
+            val = 0xFFFFu;
+            mem.write_word(addr, val);
+            regs.hl(addr);
+            jp_phl.call(nullptr);
+            REQUIRE(regs.pc == val);
+        }
     }
 }
