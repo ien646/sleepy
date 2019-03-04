@@ -10,7 +10,7 @@ namespace sleepy
 
     opcode::opcode(byte_t prefix, byte_t val)
     {
-        prefix = prefix;
+        this->prefix = prefix;
         value = val;
     }
 

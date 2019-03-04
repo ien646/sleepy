@@ -1580,21 +1580,25 @@ namespace sleepy
 		add_instruction(opcode(0xF5), "PUSH AF", 16, 1, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_push_r16(_regs->af());
+            RET_NO_ARGS_REF;
 		});
 
 		add_instruction(opcode(0xC5), "PUSH BC", 16, 1, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_push_r16(_regs->bc());
+            RET_NO_ARGS_REF;
 		});
 
 		add_instruction(opcode(0xD5), "PUSH DE", 16, 1, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_push_r16(_regs->de());
+            RET_NO_ARGS_REF;
 		});
 
 		add_instruction(opcode(0xE5), "PUSH HL", 16, 1, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_push_r16(_regs->hl());
+            RET_NO_ARGS_REF;
 		});
 	}
 
@@ -1605,6 +1609,7 @@ namespace sleepy
 			word_t val = _mem->read_word(_regs->sp);
 			_regs->af(val);
 			_regs->sp += 2;
+            RET_NO_ARGS_REF;
 		});
 
 		add_instruction(opcode(0xC1), "POP BC", 12, 1, 0, [&](const byte_t* args)
@@ -1612,6 +1617,7 @@ namespace sleepy
 			word_t val = _mem->read_word(_regs->sp);
 			_regs->bc(val);
 			_regs->sp += 2;
+            RET_NO_ARGS_REF;
 		});
 
 		add_instruction(opcode(0xD1), "POP DE", 12, 1, 0, [&](const byte_t* args)
@@ -1619,6 +1625,7 @@ namespace sleepy
 			word_t val = _mem->read_word(_regs->sp);
 			_regs->de(val);
 			_regs->sp += 2;
+            RET_NO_ARGS_REF;
 		});
 
 		add_instruction(opcode(0xE1), "POP HL", 12, 1, 0, [&](const byte_t* args)
@@ -1626,6 +1633,7 @@ namespace sleepy
 			word_t val = _mem->read_word(_regs->sp);
 			_regs->hl(val);
 			_regs->sp += 2;
+            RET_NO_ARGS_REF;
 		});
 	}
 

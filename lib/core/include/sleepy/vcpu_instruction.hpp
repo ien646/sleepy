@@ -52,7 +52,8 @@ namespace sleepy
         vcpu_instruction(vcpu_instruction&& move_src) = default;
 
         void operator=(const vcpu_instruction& copy_src) = delete;
-        void operator=(vcpu_instruction&& move_src)
+
+        void operator=(vcpu_instruction&& move_src) noexcept
         {
             op = move_src.op;
             mnemonic = std::move(move_src.mnemonic);
