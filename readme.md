@@ -13,15 +13,15 @@
     - <s>[**0xC5**] PUSH BC</s>
     - <s>[**0xF5**] PUSH AF</s>
     - <s>[**0xE5**] PUSH HL</s>
-    - <s>[**0xD5**] PUSH DE</s>
+    - <s>[**0xD5**] PUSH DE</s>.
+    - <s>[**0xC1**] POP BC</s>
+    - <s>[**0xD1**] POP DE</s>
+    - <s>[**0xE1**] POP HL</s>
+    - <s>[**0xF1**] POP AF</s>
     - [**0xC0**] RET NZ
-    - [**0xC1**] POP BC
     - [**0xC4**] CALL NZ, a16
     - [**0xD0**] RET NC 
-    - [**0xD1**] POP DE
     - [**0xD4**] CALL NC, a16
-    - [**0xE1**] POP HL
-    - [**0xF1**] POP AF **{Z,N,H,C}**
     - [**0xC8**] RET Z
     - [**0xC9**] RET
     - [**0xCB**] **PREFIX CB**
