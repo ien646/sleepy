@@ -44,9 +44,9 @@ static void debug_pre(
     }
     else
     {
-        for(sleepy::byte_t i = 0; i < inst->arg_count; i++)
+        for(sleepy::u8 i = 0; i < inst->arg_count; i++)
         {
-            sleepy::byte_t arg = vcpu.memory().read_byte(vcpu.registers().pc + 1 + i);
+            sleepy::u8 arg = vcpu.memory().read_byte(vcpu.registers().pc + 1 + i);
             std::cout << "[" << static_cast<int>(i) << "]=" << static_cast<int>(arg);
         }
         std::cout << std::endl;

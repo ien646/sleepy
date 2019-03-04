@@ -11,7 +11,7 @@ namespace sleepy
             CPUFW_SLEEPY_TESTINIT();
 
             auto& pop_af = inst_map[opcode(0xF1)];
-            addr_t addr = 0xF122;
+            u16 addr = 0xF122;
             regs.sp = 0xF122;
             regs.af(0x0000u);
             mem.write_word(addr, 0x11FF);
@@ -25,7 +25,7 @@ namespace sleepy
             CPUFW_SLEEPY_TESTINIT();
             
             auto& pop_bc = inst_map[opcode(0xC1)];
-            addr_t addr = 0xF122;
+            u16 addr = 0xF122;
             regs.sp = 0xF122;
             regs.bc(0x0000u);
             mem.write_word(addr, 0x11FF);
@@ -39,7 +39,7 @@ namespace sleepy
             CPUFW_SLEEPY_TESTINIT();
             
             auto& pop_de = inst_map[opcode(0xD1)];
-            addr_t addr = 0xF122;
+            u16 addr = 0xF122;
             regs.sp = 0xF122;
             regs.de(0x0000u);
             mem.write_word(addr, 0x11FF);
@@ -53,7 +53,7 @@ namespace sleepy
             CPUFW_SLEEPY_TESTINIT();
             
             auto& pop_hl = inst_map[opcode(0xE1)];
-            addr_t addr = 0xF122;
+            u16 addr = 0xF122;
             regs.sp = 0xF122;
             regs.hl(0x0000u);
             mem.write_word(addr, 0x11FF);

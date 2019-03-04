@@ -13,27 +13,27 @@ namespace sleepy
             auto& jr_i8 = inst_map[opcode(0x18)];
 
             regs.pc = 0x0000u;
-            byte_t arg = static_cast<byte_t>(0x00);
+            u8 arg = U8(0x00);
             jr_i8.call(&arg);
             REQUIRE(regs.pc == 0x0000u);
 
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x01);
+            arg = U8(0x01);
             jr_i8.call(&arg);
             REQUIRE(regs.pc == 0x0001u);
 
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x79);
+            arg = U8(0x79);
             jr_i8.call(&arg);
             REQUIRE(regs.pc == 0x0079u);
 
             regs.pc = 0x00FFu;
-            arg = static_cast<byte_t>(0x88);
+            arg = U8(0x88);
             jr_i8.call(&arg);
             REQUIRE(regs.pc == 0x00FFu + static_cast<int8_t>(arg));
 
             regs.pc = 0x00FFu;
-            arg = static_cast<byte_t>(0x01);
+            arg = U8(0x01);
             jr_i8.call(&arg);
             REQUIRE(regs.pc == 0x0100u);
         }
@@ -48,54 +48,54 @@ namespace sleepy
             regs.set_flag(registers::flag::ZERO);
 
             regs.pc = 0x0000u;
-            byte_t arg = static_cast<byte_t>(0x00);
+            u8 arg = U8(0x00);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0000u);
 
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x01);
+            arg = U8(0x01);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0001u);
 
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x79);
+            arg = U8(0x79);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0079u);
 
             regs.pc = 0x00FFu;
-            arg = static_cast<byte_t>(0x88);
+            arg = U8(0x88);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x00FFu + static_cast<int8_t>(arg));
 
             regs.pc = 0x00FFu;
-            arg = static_cast<byte_t>(0x01);
+            arg = U8(0x01);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0100u);
 
             // -- On zero-flag unset, do nothing --
             regs.reset_flag(registers::flag::ZERO);
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x00);
+            arg = U8(0x00);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0000u);
 
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x01);
+            arg = U8(0x01);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0000u); 
 
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x79);
+            arg = U8(0x79);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0000u);
 
             regs.pc = 0x00FFu;
-            arg = static_cast<byte_t>(0x88);
+            arg = U8(0x88);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x00FFu);
 
             regs.pc = 0x00FFu;
-            arg = static_cast<byte_t>(0x01);
+            arg = U8(0x01);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x00FFu);
         }
@@ -110,54 +110,54 @@ namespace sleepy
             regs.set_flag(registers::flag::CARRY);
 
             regs.pc = 0x0000u;
-            byte_t arg = static_cast<byte_t>(0x00);
+            u8 arg = U8(0x00);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0000u);
 
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x01);
+            arg = U8(0x01);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0001u);
 
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x79);
+            arg = U8(0x79);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0079u);
 
             regs.pc = 0x00FFu;
-            arg = static_cast<byte_t>(0x88);
+            arg = U8(0x88);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x00FFu + static_cast<int8_t>(arg));
 
             regs.pc = 0x00FFu;
-            arg = static_cast<byte_t>(0x01);
+            arg = U8(0x01);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0100u);
 
             // -- On carry-flag unset, do nothing --
             regs.reset_flag(registers::flag::CARRY);
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x00);
+            arg = U8(0x00);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0000u);
 
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x01);
+            arg = U8(0x01);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0000u); 
 
             regs.pc = 0x0000u;
-            arg = static_cast<byte_t>(0x79);
+            arg = U8(0x79);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x0000u);
 
             regs.pc = 0x00FFu;
-            arg = static_cast<byte_t>(0x88);
+            arg = U8(0x88);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x00FFu);
 
             regs.pc = 0x00FFu;
-            arg = static_cast<byte_t>(0x01);
+            arg = U8(0x01);
             jr_z_i8.call(&arg);
             REQUIRE(regs.pc == 0x00FFu);
         }
@@ -168,8 +168,8 @@ namespace sleepy
 
             auto& jp_a16 = inst_map[opcode(0xC3)];
 
-            word_t args;
-            byte_t* args_ptr = reinterpret_cast<byte_t*>(&args);
+            u16 args;
+            u8* args_ptr = reinterpret_cast<u8*>(&args);
 
             regs.pc = 0x0000u;
             args = 0x0000u;
@@ -200,8 +200,8 @@ namespace sleepy
 
             regs.reset_flags(); // NZ = true
            
-            word_t args;
-            byte_t* args_ptr = reinterpret_cast<byte_t*>(&args);
+            u16 args;
+            u8* args_ptr = reinterpret_cast<u8*>(&args);
 
             regs.pc = 0x0000u;
             args = 0x0000u;
@@ -254,8 +254,8 @@ namespace sleepy
 
             regs.reset_flags(); // NC = true
            
-            word_t args;
-            byte_t* args_ptr = reinterpret_cast<byte_t*>(&args);
+            u16 args;
+            u8* args_ptr = reinterpret_cast<u8*>(&args);
 
             regs.pc = 0x0000u;
             args = 0x0000u;
@@ -309,8 +309,8 @@ namespace sleepy
             regs.reset_flags(); // Z = true
             regs.set_flag(registers::flag::ZERO);
            
-            word_t args;
-            byte_t* args_ptr = reinterpret_cast<byte_t*>(&args);
+            u16 args;
+            u8* args_ptr = reinterpret_cast<u8*>(&args);
 
             regs.pc = 0x0000u;
             args = 0x0000u;
@@ -364,8 +364,8 @@ namespace sleepy
             regs.reset_flags(); // C = true
             regs.set_flag(registers::flag::CARRY);
            
-            word_t args;
-            byte_t* args_ptr = reinterpret_cast<byte_t*>(&args);
+            u16 args;
+            u8* args_ptr = reinterpret_cast<u8*>(&args);
 
             regs.pc = 0x0000u;
             args = 0x0000u;
@@ -417,8 +417,8 @@ namespace sleepy
             auto& jp_phl = inst_map[opcode(0xE9)];
             regs.pc = 0x0000u;
 
-            addr_t addr = 0x0000u;
-            word_t val = 0x0000u;
+            u16 addr = 0x0000u;
+            u16 val = 0x0000u;
             mem.write_word(addr, val);
             regs.hl(addr);
             jp_phl.call(nullptr);

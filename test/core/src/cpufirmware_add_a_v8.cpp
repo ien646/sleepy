@@ -54,14 +54,14 @@ namespace sleepy
 			add_a_l.call(nullptr);
 			REQUIRE((0x0A + 0xAF) == regs.a);
 
-			addr_t addrHL = 0xF0F0;
+			u16 addrHL = 0xF0F0;
 			mem.write_byte(addrHL, 0xAA);
 			regs.hl(addrHL);
 			regs.a = 0x0A;
 			add_a_phl.call(nullptr);
 			REQUIRE((0x0A + 0xAA) == regs.a);
 
-			byte_t v8 = 0xAF;
+			u8 v8 = 0xAF;
 			regs.a = 0x10;
 			add_a_d8.call(&v8);
 			REQUIRE((0xAF + 0x10) == regs.a);
@@ -81,62 +81,62 @@ namespace sleepy
 			const vcpu_instruction& add_a_phl = inst_map[opcode(0x86)];
 			const vcpu_instruction& add_a_d8 = inst_map[opcode(0xC6)];
 
-            word_t expectedValue = 0x00;
+            u16 expectedValue = 0x00;
 
 			regs.a = 0xF0;
 			add_a_a.call(nullptr);
 			expectedValue = 0xF0 + 0xF0;
-			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
+			REQUIRE(U8(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.b = 0x0B;
 			add_a_b.call(nullptr);
 			expectedValue = 0xF0 + 0x0B;
-			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
+			REQUIRE(U8(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.c = 0x0C;
 			add_a_c.call(nullptr);
 			expectedValue = 0xF0 + 0x0C;
-			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
+			REQUIRE(U8(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.d = 0x0D;
 			add_a_d.call(nullptr);
 			expectedValue = 0xF0 + 0x0D;
-			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
+			REQUIRE(U8(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.e = 0x0E;
 			add_a_e.call(nullptr);
 			expectedValue = 0xF0 + 0x0E;
-			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
+			REQUIRE(U8(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.h = 0x0F;
 			add_a_h.call(nullptr);
 			expectedValue = 0xF0 + 0x0F;
-			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
+			REQUIRE(U8(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.l = 0xFF;
 			add_a_l.call(nullptr);
 			expectedValue = 0xF0 + 0xFF;
-			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
+			REQUIRE(U8(expectedValue) == regs.a);
 
-			addr_t addrHL = 0xF0F0;
+			u16 addrHL = 0xF0F0;
 			mem.write_byte(addrHL, 0xFA);
 			regs.hl(addrHL);
 			regs.a = 0xF0;
 			add_a_phl.call(nullptr);
 			expectedValue = 0xF0 + 0xFA;
-			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
+			REQUIRE(U8(expectedValue) == regs.a);
 
-			byte_t v8 = 0xFF;
+			u8 v8 = 0xFF;
 			regs.a = 0x10;
 			add_a_d8.call(&v8);
             expectedValue = 0xFF + 0x10;
-			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
+			REQUIRE(U8(expectedValue) == regs.a);
 		}
 
 		SECTION("ADD_A_V8_FlagsAreCorrect")

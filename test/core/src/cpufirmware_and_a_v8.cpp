@@ -59,14 +59,14 @@ namespace sleepy
 			REQUIRE((0xFF & 0xDD) == regs.a);
 
 			regs.a = 0xFF;
-			addr_t phl = 0xFAFA;
+			u16 phl = 0xFAFA;
 			mem.write_byte(phl, 0xDD);
 			regs.hl(phl);
 			and_a_phl.call(nullptr);
 			REQUIRE((0xFF & 0xDD) == regs.a);
 
 			regs.a = 0xFF;
-			byte_t d8 = 0xDD;
+			u8 d8 = 0xDD;
 			and_a_d8.call(&d8);
 			REQUIRE((0xFF & 0xDD) == regs.a);
 		}

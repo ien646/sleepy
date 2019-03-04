@@ -11,7 +11,7 @@ namespace sleepy
 		registers(const registers& copy_src) = default;
 		registers(registers&& move_src) = default;
 
-		enum class flag : byte_t
+		enum class flag : u8
 		{
 			ZERO	= 1 << 7,
 			SUB		= 1 << 6,
@@ -23,36 +23,36 @@ namespace sleepy
 			NULL_0	= 1 << 0,
 		};
 
-		reg8_t a = 0x00;
-		reg8_t f = 0x00;
-		reg8_t b = 0x00;
-		reg8_t c = 0x00;
-		reg8_t d = 0x00;
-		reg8_t e = 0x00;
-		reg8_t h = 0x00;
-		reg8_t l = 0x00;
+		u8 a = 0x00;
+		u8 f = 0x00;
+		u8 b = 0x00;
+		u8 c = 0x00;
+		u8 d = 0x00;
+		u8 e = 0x00;
+		u8 h = 0x00;
+		u8 l = 0x00;
 
-		reg16_t pc = 0x0000;
-		reg16_t sp = 0x0000;
+		u16 pc = 0x0000;
+		u16 sp = 0x0000;
 
-		void af(word_t value);
-		void bc(word_t value);
-		void de(word_t value);
-		void hl(word_t value);
+		void af(u16 value);
+		void bc(u16 value);
+		void de(u16 value);
+		void hl(u16 value);
 
-		word_t af() const noexcept;
-		word_t bc() const noexcept;
-		word_t de() const noexcept;
-		word_t hl() const noexcept;
+		u16 af() const noexcept;
+		u16 bc() const noexcept;
+		u16 de() const noexcept;
+		u16 hl() const noexcept;
 
 		void set_flag(flag flagMask);
-		void set_flag(byte_t flagMask);
+		void set_flag(u8 flagMask);
 		void reset_flag(flag flagMask);
-		void reset_flag(byte_t flagMask);
+		void reset_flag(u8 flagMask);
 		void invert_flag(flag flagMask);
-		void invert_flag(byte_t flagMask);
+		void invert_flag(u8 flagMask);
 		bool read_flag(flag flagMask);
-		bool read_flag(byte_t flagMask);
+		bool read_flag(u8 flagMask);
 		
 		void reset_flags();
 

@@ -47,16 +47,16 @@ namespace sleepy
 			r.l = 0x33;
 
 			// Run
-			word_t AF = r.af();
-			word_t BC = r.bc();
-			word_t DE = r.de();
-			word_t HL = r.hl();
+			u16 AF = r.af();
+			u16 BC = r.bc();
+			u16 DE = r.de();
+			u16 HL = r.hl();
 
 			// Assert
-			REQUIRE((word_t)0xFF00 == AF);
-			REQUIRE((word_t)0xEE11 == BC);
-			REQUIRE((word_t)0xDD22 == DE);
-			REQUIRE((word_t)0xCC33 == HL);
+			REQUIRE((u16)0xFF00 == AF);
+			REQUIRE((u16)0xEE11 == BC);
+			REQUIRE((u16)0xDD22 == DE);
+			REQUIRE((u16)0xCC33 == HL);
 		};
 
 		SECTION("Set_Flags_CorrectBit")

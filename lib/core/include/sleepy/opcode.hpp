@@ -6,13 +6,13 @@ namespace sleepy
 {
 	struct opcode
 	{
-		byte_t prefix;
-		byte_t value;
+		u8 prefix;
+		u8 value;
 
-		explicit opcode(byte_t val);
-		opcode(byte_t prefix, byte_t val);
+		explicit opcode(u8 val);
+		opcode(u8 prefix, u8 val);
 
-		word_t get();
+		u16 get();
 
 		bool operator ==(const opcode&) const;
 		bool operator <(const opcode&) const;

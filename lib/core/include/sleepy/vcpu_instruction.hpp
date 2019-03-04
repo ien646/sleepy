@@ -11,7 +11,7 @@ namespace sleepy
     class vcpu_instruction
     {
     public:
-        typedef std::function<void(const byte_t*)> op_call_t;
+        typedef std::function<void(const u8*)> op_call_t;
 
         // Cpu instruction memory-ordered opcode
         opcode op = opcode(0xFF, 0x00);
@@ -20,13 +20,13 @@ namespace sleepy
         std::string mnemonic = "uninitialized_mnemonic";
 
         // Execution time in cycles
-        byte_t cycles = 0xFF;
+        u8 cycles = 0xFF;
 
         // Offset applied to PC after execution
-        byte_t pc_offset = 0;
+        u8 pc_offset = 0;
 
         // Argument count
-        byte_t arg_count = 0;
+        u8 arg_count = 0;
 
         // Instruction call
         op_call_t call = nullptr;
@@ -36,9 +36,9 @@ namespace sleepy
         vcpu_instruction(
             opcode opc, 
             const std::string& mnem,
-            byte_t cc, 
-            byte_t pc_off,
-            byte_t argc,
+            u8 cc, 
+            u8 pc_off,
+            u8 argc,
             op_call_t ocall)
                 : op(opc)
                 , mnemonic(mnem)

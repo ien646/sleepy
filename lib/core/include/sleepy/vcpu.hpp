@@ -40,6 +40,6 @@ namespace sleepy
         const vcpu_instruction* last_executed_instruction() const noexcept;
 
     private:
-        void exec_op(opcode op, byte_t* args);
+        void exec_op(opcode op, u8* args);
     };
 }

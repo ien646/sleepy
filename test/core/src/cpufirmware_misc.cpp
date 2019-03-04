@@ -177,7 +177,7 @@ namespace sleepy
 
 			const vcpu_instruction& add_sp_d8 = inst_map[opcode(0xE8)];
 
-			byte_t d8 = 0x00;
+			u8 d8 = 0x00;
 
 			regs.sp = 0xAAAA;
 			d8 = 0xBB;

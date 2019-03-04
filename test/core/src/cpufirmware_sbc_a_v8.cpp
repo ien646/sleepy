@@ -62,7 +62,7 @@ namespace sleepy
 			REQUIRE((0xA0 - 0x1F) == regs.a);
 
 			regs.reset_flags();
-			addr_t addrHL = 0xF0F0;
+			u16 addrHL = 0xF0F0;
 			mem.write_byte(addrHL, 0x22);
 			regs.hl(addrHL);
 			regs.a = 0xA0;
@@ -71,7 +71,7 @@ namespace sleepy
 
 			regs.reset_flags();
 			regs.a = 0xA0;
-			byte_t d8 = 0x1F;
+			u8 d8 = 0x1F;
 			sbc_a_d8.call(&d8);
 			REQUIRE((0xA0 - 0x1F) == regs.a);
 		}
@@ -93,58 +93,58 @@ namespace sleepy
 			regs.set_flag(FLAG_CARRY);
 			regs.a = 0x0A;
 			sbc_a_a.call(nullptr);
-			REQUIRE((byte_t)(0x0A - 0x0A - 1) == regs.a);
+			REQUIRE(U8(0x0A - 0x0A - 1) == regs.a);
 
 			regs.reset_flags();
 			regs.set_flag(FLAG_CARRY);
 			regs.a = 0x0A;
 			regs.b = 0x0B;
 			sbc_a_b.call(nullptr);
-			REQUIRE((byte_t)(0x0A - 0x0B - 1) == regs.a);
+			REQUIRE(U8(0x0A - 0x0B - 1) == regs.a);
 
 			regs.reset_flags();
 			regs.set_flag(FLAG_CARRY);
 			regs.a = 0x0A;
 			regs.c = 0x0C;
 			sbc_a_c.call(nullptr);
-			REQUIRE((byte_t)(0x0A - 0x0C - 1) == regs.a);
+			REQUIRE(U8(0x0A - 0x0C - 1) == regs.a);
 
 			regs.reset_flags();
 			regs.set_flag(FLAG_CARRY);
 			regs.a = 0x0A;
 			regs.d = 0x0D;
 			sbc_a_d.call(nullptr);
-			REQUIRE((byte_t)(0x0A - 0x0D - 1) == regs.a);
+			REQUIRE(U8(0x0A - 0x0D - 1) == regs.a);
 
 			regs.reset_flags();
 			regs.set_flag(FLAG_CARRY);
 			regs.a = 0x0A;
 			regs.e = 0x0E;
 			sbc_a_e.call(nullptr);
-			REQUIRE((byte_t)(0x0A - 0x0E - 1) == regs.a);
+			REQUIRE(U8(0x0A - 0x0E - 1) == regs.a);
 
 			regs.reset_flags();
 			regs.set_flag(FLAG_CARRY);
 			regs.a = 0x0A;
 			regs.h = 0xA0;
 			sbc_a_h.call(nullptr);
-			REQUIRE((byte_t)(0x0A - 0xA0 - 1) == regs.a);
+			REQUIRE(U8(0x0A - 0xA0 - 1) == regs.a);
 
 			regs.reset_flags();
 			regs.set_flag(FLAG_CARRY);
 			regs.a = 0x0A;
 			regs.l = 0xAF;
 			sbc_a_l.call(nullptr);
-			REQUIRE((byte_t)(0x0A - 0xAF - 1) == regs.a);
+			REQUIRE(U8(0x0A - 0xAF - 1) == regs.a);
 
 			regs.reset_flags();
 			regs.set_flag(FLAG_CARRY);
-			addr_t addrHL = 0xF0F0;
+			u16 addrHL = 0xF0F0;
 			mem.write_byte(addrHL, 0xAA);
 			regs.hl(addrHL);
 			regs.a = 0x0A;
 			sbc_a_phl.call(nullptr);
-			REQUIRE((byte_t)(0x0A - 0xAA - 1) == regs.a);
+			REQUIRE(U8(0x0A - 0xAA - 1) == regs.a);
 		}
 
 		SECTION("SBC_A_V8_FlagsAreCorrect")

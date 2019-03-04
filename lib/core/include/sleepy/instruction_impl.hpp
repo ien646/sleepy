@@ -19,18 +19,18 @@ namespace sleepy
 		instruction_impl(const instruction_impl& copy_src) = delete;
 		instruction_impl(instruction_impl&& move_src) = default;
 
-		void opcode_add_a_v8(byte_t v8);
-		void opcode_add_hl_v16(word_t v16);
-		void opcode_sub_a_v8(byte_t v8);
-		void opcode_adc_a_v8(byte_t v8);
-		void opcode_sbc_a_v8(byte_t v8);
+		void opcode_add_a_v8(u8 v8);
+		void opcode_add_hl_v16(u16 v16);
+		void opcode_sub_a_v8(u8 v8);
+		void opcode_adc_a_v8(u8 v8);
+		void opcode_sbc_a_v8(u8 v8);
 
-		void opcode_and_a_v8(byte_t v8);
-		void opcode_or_a_v8(byte_t v8);
-		void opcode_xor_a_v8(byte_t v8);
-		void opcode_inc_r8(reg8_t& reg);
-		void opcode_dec_r8(reg8_t & reg);
-		void opcode_cp_r8(byte_t reg);
+		void opcode_and_a_v8(u8 v8);
+		void opcode_or_a_v8(u8 v8);
+		void opcode_xor_a_v8(u8 v8);
+		void opcode_inc_r8(u8& reg);
+		void opcode_dec_r8(u8 & reg);
+		void opcode_cp_r8(u8 reg);
 
 		void opcode_rrca();
 		void opcode_rra();
@@ -40,8 +40,8 @@ namespace sleepy
 		void opcode_ccf();
 		void opcode_daa();
 
-		void opcode_push_r16(reg16_t r16);
+		void opcode_push_r16(u16 r16);
 
-		void opcode_call_a16(const byte_t* args);
+		void opcode_call_a16(const u8* args);
 	};
 }

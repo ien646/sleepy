@@ -15,7 +15,7 @@ namespace sleepy
 			const vcpu_instruction& ld_a_phli = inst_map[opcode(0x2A)];
 			const vcpu_instruction& ld_a_phld = inst_map[opcode(0x3A)];
 
-			addr_t addr = 0x0000;
+			u16 addr = 0x0000;
 
 			regs.a = 0x00;
 			addr = 0x01BC;

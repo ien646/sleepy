@@ -66,11 +66,11 @@ namespace sleepy
 
 			const vcpu_instruction& ld_d16_sp = inst_map[opcode(0x08)];
 
-			word_t val = 0xFAA7;
-			word_t args = 0xADD3;
+			u16 val = 0xFAA7;
+			u16 args = 0xADD3;
 
 			regs.sp = val;
-			ld_d16_sp.call((byte_t*)&args);
+			ld_d16_sp.call((u8*)&args);
 			REQUIRE(mem.read_word(args) == val);
 		}
 
@@ -79,12 +79,12 @@ namespace sleepy
 			CPUFW_SLEEPY_TESTINIT();
 
 			const vcpu_instruction& ld_hl_spd8 = inst_map[opcode(0xF8)];
-			byte_t d8 = 0x00;
+			u8 d8 = 0x00;
 
 			regs.sp = 0xAAAA;
 			d8 = 0xBB;
 			ld_hl_spd8.call(&d8);
-			REQUIRE(regs.hl() == (word_t)(0xAAAA + 0xBB));
+			REQUIRE(regs.hl() == (u16)(0xAAAA + 0xBB));
 
 			regs.reset_flags();
 			regs.sp = 0x0000;
@@ -137,16 +137,16 @@ namespace sleepy
 		{
 			CPUFW_SLEEPY_TESTINIT();
 			const vcpu_instruction& ld_a16_a = inst_map[opcode(0xEA)];
-			addr_t a16 = 0x0000;
+			u16 a16 = 0x0000;
 
 			regs.a = 0x00;
 			a16 = 0xBEBA;
-			ld_a16_a.call((byte_t*)&a16);
+			ld_a16_a.call((u8*)&a16);
 			REQUIRE(mem.read_byte(a16) == 0x00);
 
 			regs.a = 0xCC;
 			a16 = 0xACAC;
-			ld_a16_a.call((byte_t*)&a16);
+			ld_a16_a.call((u8*)&a16);
 			REQUIRE(mem.read_byte(a16) == 0xCC);
 		}
 
@@ -155,25 +155,25 @@ namespace sleepy
 			CPUFW_SLEEPY_TESTINIT();
 			const vcpu_instruction& ld_a_a16 = inst_map[opcode(0xFA)];
 
-			addr_t a16 = 0x0000;
-			byte_t val = 0x00;
+			u16 a16 = 0x0000;
+			u8 val = 0x00;
 
 			a16 = 0x0000;
 			val = 0x00;
 			mem.write_byte(a16, val);
-			ld_a_a16.call((byte_t*)&a16);
+			ld_a_a16.call((u8*)&a16);
 			REQUIRE(regs.a == val);
 
 			a16 = 0x1111;
 			val = 0x21;
 			mem.write_byte(a16, val);
-			ld_a_a16.call((byte_t*)&a16);
+			ld_a_a16.call((u8*)&a16);
 			REQUIRE(regs.a == val);
 
 			a16 = 0xFFFF;
 			val = 0xAF;
 			mem.write_byte(a16, val);
-			ld_a_a16.call((byte_t*)&a16);
+			ld_a_a16.call((u8*)&a16);
 			REQUIRE(regs.a == val);
 		}
 
@@ -198,8 +198,8 @@ namespace sleepy
 			CPUFW_SLEEPY_TESTINIT();
 			const vcpu_instruction& ld_pff00a8_a = inst_map[opcode(0xE0)];
 
-			byte_t a8 = 0x00;
-			addr_t addr = 0x0000;
+			u8 a8 = 0x00;
+			u16 addr = 0x0000;
 
 			a8 = 0x33;
 			addr = 0xFF00 + a8;
@@ -219,8 +219,8 @@ namespace sleepy
 			CPUFW_SLEEPY_TESTINIT();
 			const vcpu_instruction& ld_pff00a8_a = inst_map[opcode(0xF0)];
 
-			byte_t a8 = 0x00;
-			addr_t addr = 0x0000;
+			u8 a8 = 0x00;
+			u16 addr = 0x0000;
 
 			a8 = 0x33;
 			addr = 0xFF00 + a8;

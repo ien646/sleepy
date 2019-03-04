@@ -9,7 +9,7 @@ namespace sleepy
         : _vfw(vcpu_firmware(&_mem, &_regs))
     { }
 
-    void vcpu::exec_op(opcode op, byte_t* args)
+    void vcpu::exec_op(opcode op, u8* args)
     {
         auto& inst = _vfw.inst_map[op];
 
@@ -52,20 +52,20 @@ namespace sleepy
         _regs.sp = 0xFFFE;
         while(true)
         {
-            byte_t op = _mem.read_byte(_regs.pc);
+            u8 op = _mem.read_byte(_regs.pc);
             if(op == 0x00) { _regs.pc++; continue;}
             if(op == 0xCBu)
             {
                 ++(_regs.pc);
-                byte_t opv = _mem.read_byte(_regs.pc);
+                u8 opv = _mem.read_byte(_regs.pc);
                 opcode opc(op, opv);
-                byte_t* args = &_mem.data()[_regs.pc + 1];
+                u8* args = &_mem.data()[_regs.pc + 1];
                 exec_op(opc, args);
             }
             else
             {
                 opcode opc(op);
-                byte_t* args = &_mem.data()[_regs.pc + 1];
+                u8* args = &_mem.data()[_regs.pc + 1];
                 exec_op(opc, args);
             }
         }
@@ -76,7 +76,7 @@ namespace sleepy
         std::istreambuf_iterator<char> beg(data);
         std::istreambuf_iterator<char> end;
 
-        std::vector<byte_t> cdata(beg, end);
+        std::vector<u8> cdata(beg, end);
 
         std::copy(cdata.begin(), cdata.end(), _mem.data() + 0x0100);
         _memory_set = true;

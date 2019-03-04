@@ -10,13 +10,13 @@ namespace sleepy
 		, _regs(reg_ptr)
 	{	}
 
-	void instruction_impl::opcode_add_a_v8(byte_t v8)
+	void instruction_impl::opcode_add_a_v8(u8 v8)
 	{
 		_regs->reset_flags();
 
-		word_t result = static_cast<word_t>(_regs->a) + v8;
+		u16 result = U16(_regs->a) + U16(v8);
 
-		if ((byte_t)result == 0x00)
+		if (U8(result) == 0x00)
 		{
 			_regs->set_flag(registers::flag::ZERO);
 		}
@@ -31,14 +31,14 @@ namespace sleepy
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
 
-		_regs->a = (byte_t)result;
+		_regs->a = U8(result);
 	}
 
-	void instruction_impl::opcode_add_hl_v16(word_t v16)
+	void instruction_impl::opcode_add_hl_v16(u16 v16)
 	{
 		_regs->reset_flag(registers::flag::SUB);
 
-		dword_t result = _regs->hl() + v16;
+		u32 result = U32(_regs->hl()) + U32(v16);
 		if (result > 0x0000FFFF)
 		{
 			_regs->set_flag(registers::flag::CARRY);
@@ -49,17 +49,17 @@ namespace sleepy
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
 
-		_regs->hl((word_t)result);
+		_regs->hl(U16(result));
 	}
 
-	void instruction_impl::opcode_sub_a_v8(byte_t v8)
+	void instruction_impl::opcode_sub_a_v8(u8 v8)
 	{
 		_regs->reset_flags();
 		_regs->set_flag(registers::flag::SUB);
 
-		word_t result = static_cast<word_t>(_regs->a) - v8;
+		u16 result = U16(_regs->a) - v8;
 
-		if ((byte_t)result == 0x00)
+		if (U8(result) == 0x00)
 		{
 			_regs->set_flag(registers::flag::ZERO);
 		}
@@ -73,18 +73,17 @@ namespace sleepy
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
 
-		_regs->a = (byte_t)result;
+		_regs->a = U8(result);
 	}
 
-	void instruction_impl::opcode_adc_a_v8(byte_t v8)
+	void instruction_impl::opcode_adc_a_v8(u8 v8)
 	{
-		word_t result = static_cast<word_t>(_regs->a) 
-			+ v8 
+		u16 result = U16(_regs->a) + U16(v8)
 			+ (_regs->read_flag(registers::flag::CARRY) ? 1 : 0);
 
 		_regs->reset_flags();
 
-		if ((byte_t)result == 0x00)
+		if (U8(result) == 0x00)
 		{
 			_regs->set_flag(registers::flag::ZERO);
 		}
@@ -99,18 +98,18 @@ namespace sleepy
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
 
-		_regs->a = (byte_t)result;
+		_regs->a = U8(result);
 	}
 
-	void instruction_impl::opcode_sbc_a_v8(byte_t v8)
+	void instruction_impl::opcode_sbc_a_v8(u8 v8)
 	{
-		word_t result = static_cast<word_t>(_regs->a) 
+		u16 result = U16(_regs->a) 
 			- (v8 + (_regs->read_flag(registers::flag::CARRY) ? 1 : 0));
 
 		_regs->reset_flags();
 		_regs->set_flag(registers::flag::SUB);
 
-		if ((byte_t)result == 0x00)
+		if (U8(result) == 0x00)
 		{
 			_regs->set_flag(registers::flag::ZERO);
 		}
@@ -125,15 +124,15 @@ namespace sleepy
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
 
-		_regs->a = (byte_t)result;
+		_regs->a = U8(result);
 	}
 
-	void instruction_impl::opcode_and_a_v8(byte_t v8)
+	void instruction_impl::opcode_and_a_v8(u8 v8)
 	{
 		_regs->reset_flags();
 		_regs->set_flag(registers::flag::SUB);
 
-		byte_t result = (_regs->a & v8);
+		u8 result = (_regs->a & v8);
 
 		if (result == 0x00)
 		{
@@ -143,11 +142,11 @@ namespace sleepy
 		_regs->a = result;
 	}
 
-	void instruction_impl::opcode_or_a_v8(byte_t v8)
+	void instruction_impl::opcode_or_a_v8(u8 v8)
 	{
 		_regs->reset_flags();
 
-		byte_t result = (_regs->a | v8);
+		u8 result = (_regs->a | v8);
 
 		if (result == 0x00)
 		{
@@ -157,11 +156,11 @@ namespace sleepy
 		_regs->a = result;
 	}
 
-	void instruction_impl::opcode_xor_a_v8(byte_t v8)
+	void instruction_impl::opcode_xor_a_v8(u8 v8)
 	{
 		_regs->reset_flags();
 
-		byte_t result = (_regs->a ^ v8);
+		u8 result = (_regs->a ^ v8);
 
 		if (result == 0x00)
 		{
@@ -171,7 +170,7 @@ namespace sleepy
 		_regs->a = result;
 	}
 
-	void instruction_impl::opcode_inc_r8(reg8_t& reg)
+	void instruction_impl::opcode_inc_r8(u8& reg)
 	{
 		_regs->reset_flag(registers::flag::ZERO);
 		_regs->reset_flag(registers::flag::HALF_CARRY);
@@ -190,7 +189,7 @@ namespace sleepy
 		}
 	}
 
-	void instruction_impl::opcode_dec_r8(reg8_t& reg)
+	void instruction_impl::opcode_dec_r8(u8& reg)
 	{
 		_regs->reset_flag(registers::flag::ZERO);
 		_regs->reset_flag(registers::flag::HALF_CARRY);
@@ -209,14 +208,14 @@ namespace sleepy
 		}
 	}
 
-	void instruction_impl::opcode_cp_r8(byte_t reg)
+	void instruction_impl::opcode_cp_r8(u8 reg)
 	{
 		_regs->reset_flags();
 		_regs->set_flag(registers::flag::SUB);
 
-		word_t result = static_cast<word_t>(_regs->a) - reg;
+		u16 result = U16(_regs->a) - U16(reg);
 
-		if ((byte_t)result == 0x00)
+		if (U8(result) == 0x00)
 		{
 			_regs->set_flag(registers::flag::ZERO);
 		}
@@ -238,7 +237,7 @@ namespace sleepy
 
 		_regs->reset_flags();
 
-		byte_t result = (_regs->a >> 1);
+		u8 result = (_regs->a >> 1);
 		if (bit_0)
 		{
 			_regs->set_flag(registers::flag::CARRY);
@@ -254,7 +253,7 @@ namespace sleepy
 
 		_regs->reset_flags();
 
-		byte_t result = (_regs->a >> 1);
+		u8 result = (_regs->a >> 1);
 		if (bit_0)
 		{
 			_regs->set_flag(registers::flag::CARRY);
@@ -269,7 +268,7 @@ namespace sleepy
 
 		_regs->reset_flags();
 
-		byte_t result = (_regs->a << 1);
+		u8 result = (_regs->a << 1);
 		if (bit_7)
 		{
 			_regs->set_flag(registers::flag::CARRY);
@@ -285,7 +284,7 @@ namespace sleepy
 
 		_regs->reset_flags();
 
-		byte_t result = (_regs->a << 1);
+		u8 result = (_regs->a << 1);
 		if (bit_7)
 		{
 			_regs->set_flag(registers::flag::CARRY);
@@ -310,8 +309,8 @@ namespace sleepy
 
 	void instruction_impl::opcode_daa()
 	{
-		byte_t lowNibble = 0x0F & _regs->a;
-		byte_t hiNibble = (0xF0 & _regs->a) >> 4;
+		u8 lowNibble = 0x0F & _regs->a;
+		u8 hiNibble = (0xF0 & _regs->a) >> 4;
 		if ((lowNibble > 9) || (_regs->read_flag(registers::flag::HALF_CARRY)))
 		{
 			_regs->a += 0x06;
@@ -328,18 +327,18 @@ namespace sleepy
 		_regs->reset_flag(registers::flag::HALF_CARRY);
 	}
 
-	void instruction_impl::opcode_push_r16(reg16_t r16)
+	void instruction_impl::opcode_push_r16(u16 r16)
 	{
 		_regs->sp -= 2;
 		_mem->write_word(_regs->sp, r16);
 	}
 
-	void instruction_impl::opcode_call_a16(const byte_t* args)
+	void instruction_impl::opcode_call_a16(const u8* args)
 	{
 		// jump address
-		addr_t a16 = read_word(args); 
+		u16 a16 = read_word(args); 
 		// return address
-		addr_t save_addr = read_word(args + 2); 
+		u16 save_addr = read_word(args + 2); 
 
 		// push operation
 		_regs->sp -= 2;

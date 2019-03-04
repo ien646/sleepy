@@ -62,7 +62,7 @@ namespace sleepy
 			REQUIRE((0x0A + 0xAF) == regs.a);
 
 			regs.reset_flags();
-			addr_t addrHL = 0xF0F0;
+			u16 addrHL = 0xF0F0;
 			mem.write_byte(addrHL, 0xAA);
 			regs.hl(addrHL);
 			regs.a = 0x0A;
@@ -71,7 +71,7 @@ namespace sleepy
 
 			regs.reset_flags();
 			regs.a = 0x0A;
-			byte_t d8 = 0x0B;
+			u8 d8 = 0x0B;
 			adc_a_d8.call(&d8);
 			REQUIRE(regs.a == (d8 + 0x0A));
 		}
@@ -139,7 +139,7 @@ namespace sleepy
 
 			regs.reset_flags();
 			regs.set_flag(FLAG_CARRY);
-			addr_t addrHL = 0xF0F0;
+			u16 addrHL = 0xF0F0;
 			mem.write_byte(addrHL, 0xAA);
 			regs.hl(addrHL);
 			regs.a = 0x0A;

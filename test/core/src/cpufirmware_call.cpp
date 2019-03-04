@@ -12,8 +12,8 @@ namespace sleepy
 
             auto& call_a16 = inst_map[opcode(0xCD)];
 
-            word_t a16[2] = {0x1FF2u, 0x22E2u};
-            byte_t* args = reinterpret_cast<byte_t*>(a16);
+            u16 a16[2] = {0x1FF2u, 0x22E2u};
+            u8* args = reinterpret_cast<u8*>(a16);
             regs.pc = 0x0000u;
             regs.sp = 0xFFFEu;
             call_a16.call(args);
@@ -28,8 +28,8 @@ namespace sleepy
 
             auto& call_z_a16 = inst_map[opcode(0xCC)];
 
-            word_t a16[2] = {0x1FF2u, 0x22E2u};
-            byte_t* args = reinterpret_cast<byte_t*>(a16);
+            u16 a16[2] = {0x1FF2u, 0x22E2u};
+            u8* args = reinterpret_cast<u8*>(a16);
             regs.pc = 0x0000u;
             regs.sp = 0xFFFEu;
 
@@ -51,8 +51,8 @@ namespace sleepy
 
             auto& call_c_a16 = inst_map[opcode(0xDC)];
 
-            word_t a16[2] = {0x1FF2u, 0x22E2u};
-            byte_t* args = reinterpret_cast<byte_t*>(a16);
+            u16 a16[2] = {0x1FF2u, 0x22E2u};
+            u8* args = reinterpret_cast<u8*>(a16);
             regs.pc = 0x0000u;
             regs.sp = 0xFFFEu;
 
@@ -74,8 +74,8 @@ namespace sleepy
 
             auto& call_nz_a16 = inst_map[opcode(0xC4)];
 
-            word_t a16[2] = {0x1FF2u, 0x22E2u};
-            byte_t* args = reinterpret_cast<byte_t*>(a16);
+            u16 a16[2] = {0x1FF2u, 0x22E2u};
+            u8* args = reinterpret_cast<u8*>(a16);
             regs.pc = 0x0000u;
             regs.sp = 0xFFFEu;
 
@@ -97,8 +97,8 @@ namespace sleepy
 
             auto& call_nc_a16 = inst_map[opcode(0xD4)];
 
-            word_t a16[2] = {0x1FF2u, 0x22E2u};
-            byte_t* args = reinterpret_cast<byte_t*>(a16);
+            u16 a16[2] = {0x1FF2u, 0x22E2u};
+            u8* args = reinterpret_cast<u8*>(a16);
             regs.pc = 0x0000u;
             regs.sp = 0xFFFEu;
 

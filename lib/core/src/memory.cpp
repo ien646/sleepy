@@ -4,33 +4,33 @@ namespace sleepy
 {
 	memory::memory()		
 	{
-		_memory = std::make_unique<std::array<byte_t, TOTAL_MEM_SZ>>();
+		_memory = std::make_unique<std::array<u8, TOTAL_MEM_SZ>>();
 	}
 
-	byte_t memory::read_byte(addr_t address) const
+	u8 memory::read_byte(u16 address) const
 	{
 		return (*_memory)[address];
 	}
 
-	word_t memory::read_word(addr_t address) const
+	u16 memory::read_word(u16 address) const
 	{
-		byte_t* ptr = &(*_memory)[address];
-		return *reinterpret_cast<word_t*>(ptr);
+		u8* ptr = &(*_memory)[address];
+		return *reinterpret_cast<u16*>(ptr);
 	}
 
-	byte_t* memory::data()
+	u8* memory::data()
 	{
 		return _memory->data();
 	}
 
-	void memory::write_byte(addr_t address, byte_t value)
+	void memory::write_byte(u16 address, u8 value)
 	{
 		(*_memory)[address] = value;
 	}
 
-	void memory::write_word(addr_t address, word_t value)
+	void memory::write_word(u16 address, u16 value)
 	{
-		word_t* ptr = reinterpret_cast<word_t*>(&(*_memory)[address]);
+		u16* ptr = reinterpret_cast<u16*>(&(*_memory)[address]);
 		*ptr = value;
 	}
 

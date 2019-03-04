@@ -18,7 +18,7 @@ namespace sleepy
 			const vcpu_instruction& ld_phl_h = inst_map[opcode(0x74)];
 			const vcpu_instruction& ld_phl_l = inst_map[opcode(0x75)];
 
-			addr_t phlAddr = 0xDA0F;
+			u16 phlAddr = 0xDA0F;
 
 			// A
 			regs.hl(phlAddr);
@@ -53,14 +53,14 @@ namespace sleepy
 			// H
 			regs.hl(phlAddr);
 			ld_phl_h.call(nullptr);
-			byte_t datah = mem.read_byte(phlAddr);
+			u8 datah = mem.read_byte(phlAddr);
 			REQUIRE(datah == regs.h);
 
 			// L
 			regs.hl(phlAddr);
 			regs.l = 0xFF;
 			ld_phl_l.call(nullptr);
-			byte_t datal = mem.read_byte(phlAddr);
+			u8 datal = mem.read_byte(phlAddr);
 			REQUIRE(datal == regs.h);
 		}
 	};

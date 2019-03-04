@@ -59,11 +59,11 @@ namespace sleepy
 			REQUIRE((0xDA ^ 0xAD) == regs.a);
 
 			regs.a = 0xDA;
-			byte_t d8 = 0xAD;
+			u8 d8 = 0xAD;
 			xor_a_d8.call(&d8);
 			REQUIRE((0xDA ^ 0xAD) == regs.a);
 
-			addr_t phl = 0xFAFA;
+			u16 phl = 0xFAFA;
 			regs.hl(phl);
 			mem.write_byte(regs.hl(), 0xAD);
 			regs.a = 0xDA;

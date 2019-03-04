@@ -11,10 +11,10 @@ namespace sleepy
 		{
 			// Setup
 			memory memory;
-			byte_t* data = memory.data();
+			u8* data = memory.data();
 
 			// Run
-			memory.write_word((addr_t)0x0000, (word_t)0xF0AE);
+			memory.write_word((u16)0x0000, (u16)0xF0AE);
 			
 			// Assert
 			REQUIRE(0xAE == data[0]);
@@ -25,11 +25,11 @@ namespace sleepy
 		{
 			// Setup
 			memory memory;
-			byte_t* data = memory.data();
-			((word_t*)memory.data())[0] = 0xF0AE;
+			u8* data = memory.data();
+			((u16*)memory.data())[0] = 0xF0AE;
 
 			// Run
-			word_t res = memory.read_word((addr_t)0x0000);
+			u16 res = memory.read_word((u16)0x0000);
 
 			// Assert
 			REQUIRE(0xAE == data[0]);

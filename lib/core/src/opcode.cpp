@@ -2,19 +2,19 @@
 
 namespace sleepy
 {
-    opcode::opcode(byte_t val)
+    opcode::opcode(u8 val)
     {
         prefix = 0x00u;
         value = val;
     }
 
-    opcode::opcode(byte_t prefix, byte_t val)
+    opcode::opcode(u8 prefix, u8 val)
     {
         this->prefix = prefix;
         value = val;
     }
 
-    word_t opcode::get()
+    u16 opcode::get()
     {
         return (prefix << 8) | (value);
     }
