@@ -18,16 +18,17 @@
     - <s>[**0xD1**] POP DE</s>
     - <s>[**0xE1**] POP HL</s>
     - <s>[**0xF1**] POP AF</s>
+    - <s>[**0xCD**] CALL a16</s>
+    - <s>[**0xDC**] CALL C, a16</s>
+    - <s>[**0xCC**] CALL Z, a16</s>
+    - <s>[**0xD4**] CALL NC, a16</s>
+    - <s>[**0xC4**] CALL NZ, a16</s>
     - [**0xC0**] RET NZ
-    - [**0xC4**] CALL NZ, a16
     - [**0xD0**] RET NC 
-    - [**0xD4**] CALL NC, a16
     - [**0xC8**] RET Z
     - [**0xC9**] RET
     - [**0xCB**] **PREFIX CB**
-    - [**0xCC**] CALL Z, a16
-    - <s>[**0xCD**] CALL a16</s>
     - [**0xD8**] RET C
     - [**0xD9**] RETI
-    - [**0xDC**] CALL C, a16
+
 

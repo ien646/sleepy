@@ -1635,6 +1635,42 @@ namespace sleepy
 		{
 			_instImpl->opcode_call_a16(args);
 		});
+
+		add_instruction(opcode(0xCC), "CALL Z,a16", 12, 0, 2, [&](const byte_t* args)
+		{
+			if(_regs->read_flag(registers::flag::ZERO))
+			{
+				delay_cycles(12);
+				_instImpl->opcode_call_a16(args);
+			}
+		});
+
+		add_instruction(opcode(0xDC), "CALL C,a16", 12, 0, 2, [&](const byte_t* args)
+		{
+			if(_regs->read_flag(registers::flag::CARRY))
+			{
+				delay_cycles(12);
+				_instImpl->opcode_call_a16(args);
+			}
+		});
+
+		add_instruction(opcode(0xD4), "CALL NC,a16", 12, 0, 2, [&](const byte_t* args)
+		{
+			if(!_regs->read_flag(registers::flag::CARRY))
+			{
+				delay_cycles(12);
+				_instImpl->opcode_call_a16(args);
+			}
+		});
+
+		add_instruction(opcode(0xC4), "CALL NZ,a16", 12, 0, 2, [&](const byte_t* args)
+		{
+			if(!_regs->read_flag(registers::flag::ZERO))
+			{
+				delay_cycles(12);
+				_instImpl->opcode_call_a16(args);
+			}
+		});
 	}
 
 	void vcpu_firmware::add_instruction(
