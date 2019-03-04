@@ -70,6 +70,7 @@ namespace sleepy
 		void initmap_jumps();
 
 		void initmap_push();
+		void initmap_pop();
 
 		void add_instruction(
 			opcode opc, 

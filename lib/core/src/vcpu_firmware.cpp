@@ -53,7 +53,9 @@ namespace sleepy
 		initmap_rst();
 
 		initmap_jumps();
+		
 		initmap_push();
+		initmap_pop();
 	}
 
 	void vcpu_firmware::initmap_misc()
@@ -1591,6 +1593,37 @@ namespace sleepy
 		add_instruction(opcode(0xE5), "PUSH HL", 16, 1, 0, [&](const byte_t* args)
 		{
 			_instImpl->opcode_push_r16(_regs->hl());
+		});
+	}
+
+	void vcpu_firmware::initmap_pop()
+	{
+		add_instruction(opcode(0xF1), "POP AF", 12, 1, 0, [&](const byte_t* args)
+		{
+			word_t val = _mem->read_word(_regs->sp);
+			_regs->af(val);
+			_regs->sp += 2;
+		});
+
+		add_instruction(opcode(0xC1), "POP BC", 12, 1, 0, [&](const byte_t* args)
+		{
+			word_t val = _mem->read_word(_regs->sp);
+			_regs->bc(val);
+			_regs->sp += 2;
+		});
+
+		add_instruction(opcode(0xD1), "POP DE", 12, 1, 0, [&](const byte_t* args)
+		{
+			word_t val = _mem->read_word(_regs->sp);
+			_regs->de(val);
+			_regs->sp += 2;
+		});
+
+		add_instruction(opcode(0xE1), "POP HL", 12, 1, 0, [&](const byte_t* args)
+		{
+			word_t val = _mem->read_word(_regs->sp);
+			_regs->hl(val);
+			_regs->sp += 2;
 		});
 	}
 
