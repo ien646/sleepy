@@ -41,6 +41,7 @@ namespace sleepy
 		void opcode_daa();
 
 		void opcode_push_r16(reg16_t r16);
-	};
 
+		void opcode_call_a16(const byte_t* args);
+	};
 }

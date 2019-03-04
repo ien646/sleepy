@@ -56,6 +56,8 @@ namespace sleepy
 		
 		initmap_push();
 		initmap_pop();
+
+		initmap_call();
 	}
 
 	void vcpu_firmware::initmap_misc()
@@ -1624,6 +1626,14 @@ namespace sleepy
 			word_t val = _mem->read_word(_regs->sp);
 			_regs->hl(val);
 			_regs->sp += 2;
+		});
+	}
+
+	void vcpu_firmware::initmap_call()
+	{
+		add_instruction(opcode(0xCD), "CALL a16", 24, 0, 2, [&](const byte_t* args)
+		{
+			_instImpl->opcode_call_a16(args);
 		});
 	}
 

@@ -333,4 +333,19 @@ namespace sleepy
 		_regs->sp -= 2;
 		_mem->write_word(_regs->sp, r16);
 	}
+
+	void instruction_impl::opcode_call_a16(const byte_t* args)
+	{
+		// jump address
+		addr_t a16 = read_word(args); 
+		// return address
+		addr_t save_addr = read_word(args + 2); 
+
+		// push operation
+		_regs->sp -= 2;
+		_mem->write_word(_regs->sp, save_addr);
+
+		// jump
+		_regs->pc = a16;
+	}
 }

@@ -72,6 +72,8 @@ namespace sleepy
 		void initmap_push();
 		void initmap_pop();
 
+		void initmap_call();
+
 		void add_instruction(
 			opcode opc, 
 			const std::string& mnem, 
