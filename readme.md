@@ -26,7 +26,7 @@
     - [**0xC9**] RET
     - [**0xCB**] **PREFIX CB**
     - [**0xCC**] CALL Z, a16
-    - [**0xCD**] CALL a16
+    - <s>[**0xCD**] CALL a16</s>
     - [**0xD8**] RET C
     - [**0xD9**] RETI
     - [**0xDC**] CALL C, a16
