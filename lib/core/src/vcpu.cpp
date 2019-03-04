@@ -91,7 +91,7 @@ namespace sleepy
 
     void vcpu::enable_debug(bool enabled)
     {
-        _debug_enabled = false;
+        _debug_enabled = enabled;
     }
 
     const vcpu_instruction* vcpu::last_executed_instruction() const noexcept

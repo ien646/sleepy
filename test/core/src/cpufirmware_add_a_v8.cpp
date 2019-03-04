@@ -81,61 +81,62 @@ namespace sleepy
 			const vcpu_instruction& add_a_phl = inst_map[opcode(0x86)];
 			const vcpu_instruction& add_a_d8 = inst_map[opcode(0xC6)];
 
-			byte_t expectedValue = 0x00;
+            word_t expectedValue = 0x00;
 
 			regs.a = 0xF0;
 			add_a_a.call(nullptr);
-			expectedValue = (byte_t)(0xF0 + 0xF0);
-			REQUIRE(expectedValue == regs.a);
+			expectedValue = 0xF0 + 0xF0;
+			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.b = 0x0B;
 			add_a_b.call(nullptr);
-			expectedValue = (byte_t)(0xF0 + 0x0B);
-			REQUIRE(expectedValue == regs.a);
+			expectedValue = 0xF0 + 0x0B;
+			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.c = 0x0C;
 			add_a_c.call(nullptr);
-			expectedValue = (byte_t)(0xF0 + 0x0C);
-			REQUIRE(expectedValue == regs.a);
+			expectedValue = 0xF0 + 0x0C;
+			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.d = 0x0D;
 			add_a_d.call(nullptr);
-			expectedValue = (byte_t)(0xF0 + 0x0D);
-			REQUIRE(expectedValue == regs.a);
+			expectedValue = 0xF0 + 0x0D;
+			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.e = 0x0E;
 			add_a_e.call(nullptr);
-			expectedValue = (byte_t)(0xF0 + 0x0E);
-			REQUIRE(expectedValue == regs.a);
+			expectedValue = 0xF0 + 0x0E;
+			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.h = 0x0F;
 			add_a_h.call(nullptr);
-			expectedValue = (byte_t)(0xF0 + 0x0F);
-			REQUIRE(expectedValue == regs.a);
+			expectedValue = 0xF0 + 0x0F;
+			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
 
 			regs.a = 0xF0;
 			regs.l = 0xFF;
 			add_a_l.call(nullptr);
-			expectedValue = (byte_t)(0xF0 + 0xFF);
-			REQUIRE(expectedValue == regs.a);
+			expectedValue = 0xF0 + 0xFF;
+			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
 
 			addr_t addrHL = 0xF0F0;
 			mem.write_byte(addrHL, 0xFA);
 			regs.hl(addrHL);
 			regs.a = 0xF0;
 			add_a_phl.call(nullptr);
-			expectedValue = (byte_t)(0xF0 + 0xFA);
-			REQUIRE(expectedValue == regs.a);
+			expectedValue = 0xF0 + 0xFA;
+			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
 
 			byte_t v8 = 0xFF;
 			regs.a = 0x10;
 			add_a_d8.call(&v8);
-			REQUIRE((byte_t)(0xFF + 0x10) == regs.a);
+            expectedValue = 0xFF + 0x10;
+			REQUIRE(static_cast<byte_t>(expectedValue) == regs.a);
 		}
 
 		SECTION("ADD_A_V8_FlagsAreCorrect")
@@ -144,12 +145,12 @@ namespace sleepy
 
 			const vcpu_instruction& add_a_a = inst_map[opcode(0x87)];
 			const vcpu_instruction& add_a_b = inst_map[opcode(0x80)];
-			const vcpu_instruction& add_a_c = inst_map[opcode(0x81)];
-			const vcpu_instruction& add_a_d = inst_map[opcode(0x82)];
-			const vcpu_instruction& add_a_e = inst_map[opcode(0x83)];
-			const vcpu_instruction& add_a_h = inst_map[opcode(0x84)];
-			const vcpu_instruction& add_a_l = inst_map[opcode(0x85)];
-			const vcpu_instruction& add_a_phl = inst_map[opcode(0x86)];
+			//const vcpu_instruction& add_a_c = inst_map[opcode(0x81)];
+			//const vcpu_instruction& add_a_d = inst_map[opcode(0x82)];
+			//const vcpu_instruction& add_a_e = inst_map[opcode(0x83)];
+			//const vcpu_instruction& add_a_h = inst_map[opcode(0x84)];
+			//const vcpu_instruction& add_a_l = inst_map[opcode(0x85)];
+			//const vcpu_instruction& add_a_phl = inst_map[opcode(0x86)];
 
 			// Zero add zero sets only flag_zero
 			regs.reset_flags();

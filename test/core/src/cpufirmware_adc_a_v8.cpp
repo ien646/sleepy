@@ -153,12 +153,12 @@ namespace sleepy
 
 			const vcpu_instruction& adc_a_a = inst_map[opcode(0x8F)];
 			const vcpu_instruction& adc_a_b = inst_map[opcode(0x88)];
-			const vcpu_instruction& adc_a_c = inst_map[opcode(0x89)];
-			const vcpu_instruction& adc_a_d = inst_map[opcode(0x8A)];
-			const vcpu_instruction& adc_a_e = inst_map[opcode(0x8B)];
-			const vcpu_instruction& adc_a_h = inst_map[opcode(0x8C)];
-			const vcpu_instruction& adc_a_l = inst_map[opcode(0x8D)];
-			const vcpu_instruction& adc_a_phl = inst_map[opcode(0x8E)];
+			//const vcpu_instruction& adc_a_c = inst_map[opcode(0x89)];
+			//const vcpu_instruction& adc_a_d = inst_map[opcode(0x8A)];
+			//const vcpu_instruction& adc_a_e = inst_map[opcode(0x8B)];
+			//const vcpu_instruction& adc_a_h = inst_map[opcode(0x8C)];
+			//const vcpu_instruction& adc_a_l = inst_map[opcode(0x8D)];
+			//const vcpu_instruction& adc_a_phl = inst_map[opcode(0x8E)];
 
 			regs.reset_flags();
 

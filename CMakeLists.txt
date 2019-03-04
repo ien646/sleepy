@@ -1,5 +1,13 @@
 project(sleepy LANGUAGES CXX C)
 
+message("")
+message("****************************************")
+message("**               ------               **")
+message("**             - SLEEPY -             **")
+message("**               ------               **")
+message("****************************************")
+message("")
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -13,6 +21,16 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG 	${PROJECT_BINARY_DIR}/output/bin/no-ca
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE 	${PROJECT_BINARY_DIR}/output/lib/shared)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE 	${PROJECT_BINARY_DIR}/output/lib/static)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE 	${PROJECT_BINARY_DIR}/output/bin/no-category)
+
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    add_definitions(-Wall -Wextra -Wpedantic)
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    add_definitions(-Wall -Wextra -Wpedantic)
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+    add_definitions(-Wall -Wextra -Wpedantic)
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+    add_definitions(/W4 /MP)
+endif()
 
 add_subdirectory(third-party)
 add_subdirectory(lib)

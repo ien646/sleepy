@@ -104,26 +104,26 @@ namespace sleepy
 
 		add_instruction(opcode(0x37), "SCF", 4, 1, 0, [&](const byte_t* args)
 		{
-			_regs->set_flag(FLAG_CARRY);
+			_regs->set_flag(registers::flag::CARRY);
 			RET_NO_ARGS_REF;
 		});
 
 		add_instruction(opcode(0xE8), "ADD SP,d8", 16, 2, 1, [&](const byte_t* args)
 		{
 			byte_t d8 = *&args[0];
-			dword val = _regs->sp + d8;
+			dword_t val = _regs->sp + d8;
 			_regs->sp = (word_t)val;
 
 			_regs->reset_flags();
 
 			if (val > BYTE_MAX)
 			{
-				_regs->set_flag(FLAG_CARRY);
-				_regs->set_flag(FLAG_HCARRY);
+				_regs->set_flag(registers::flag::CARRY);
+				_regs->set_flag(registers::flag::HALF_CARRY);
 			}
 			else if (val > HBYTE_MAX)
 			{
-				_regs->set_flag(FLAG_HCARRY);
+				_regs->set_flag(registers::flag::HALF_CARRY);
 			}
 		});		
 	}
@@ -704,19 +704,19 @@ namespace sleepy
 		add_instruction(opcode(0xF8), "LD HL, SP + d8", 12, 2, 1, [&](const byte_t* args)
 		{
 			byte_t d8 = *(&args[0]);
-			dword val = d8 + _regs->sp;
+			dword_t val = d8 + _regs->sp;
 			_regs->hl((word_t)val);
 
 			_regs->reset_flags();
 
 			if (val > BYTE_MAX)
 			{
-				_regs->set_flag(FLAG_CARRY);
-				_regs->set_flag(FLAG_HCARRY);
+				_regs->set_flag(registers::flag::CARRY);
+				_regs->set_flag(registers::flag::HALF_CARRY);
 			}
 			else if (val > HBYTE_MAX)
 			{
-				_regs->set_flag(FLAG_HCARRY);
+				_regs->set_flag(registers::flag::HALF_CARRY);
 			}
 		});
 
@@ -1556,7 +1556,7 @@ namespace sleepy
 		{
 			if(_regs->read_flag(registers::flag::CARRY))
 			{
-				delay_cycles(4); 
+				delay_cycles(4);
 				addr_t a16 = read_word(args);
 				_regs->pc = a16;
 			}
@@ -1566,6 +1566,7 @@ namespace sleepy
 		{
 			addr_t phl = _mem->read_word(_regs->hl());
 			_regs->pc = phl;
+            RET_NO_ARGS_REF;
 		});
 	}
 
