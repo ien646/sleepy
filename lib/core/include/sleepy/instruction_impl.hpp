@@ -39,6 +39,8 @@ namespace sleepy
 		void opcode_cpl();
 		void opcode_ccf();
 		void opcode_daa();
+
+		void opcode_push_r16(reg16_t r16);
 	};
 
 }

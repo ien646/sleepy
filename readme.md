@@ -10,18 +10,18 @@
     - <s>[**0xDA**] JP C, a16</s>
     - <s>[**0xCA**] JP Z, a16</s>
     - <s>[**0xE9**] JP (HL)</s>
+    - <s>[**0xC5**] PUSH BC</s>
+    - <s>[**0xF5**] PUSH AF</s>
+    - <s>[**0xE5**] PUSH HL</s>
+    - <s>[**0xD5**] PUSH DE</s>
     - [**0xC0**] RET NZ
     - [**0xC1**] POP BC
     - [**0xC4**] CALL NZ, a16
-    - [**0xC5**] PUSH BC
     - [**0xD0**] RET NC 
     - [**0xD1**] POP DE
     - [**0xD4**] CALL NC, a16
-    - [**0xD5**] PUSH DE
     - [**0xE1**] POP HL
-    - [**0xE5**] PUSH HL
     - [**0xF1**] POP AF **{Z,N,H,C}**
-    - [**0xF5**] PUSH AF
     - [**0xC8**] RET Z
     - [**0xC9**] RET
     - [**0xCB**] **PREFIX CB**

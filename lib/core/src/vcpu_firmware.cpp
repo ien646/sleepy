@@ -53,6 +53,7 @@ namespace sleepy
 		initmap_rst();
 
 		initmap_jumps();
+		initmap_push();
 	}
 
 	void vcpu_firmware::initmap_misc()
@@ -1567,6 +1568,29 @@ namespace sleepy
 			addr_t phl = _mem->read_word(_regs->hl());
 			_regs->pc = phl;
             RET_NO_ARGS_REF;
+		});
+	}
+
+	void vcpu_firmware::initmap_push()
+	{
+		add_instruction(opcode(0xF5), "PUSH AF", 16, 1, 0, [&](const byte_t* args)
+		{
+			_instImpl->opcode_push_r16(_regs->af());
+		});
+
+		add_instruction(opcode(0xC5), "PUSH BC", 16, 1, 0, [&](const byte_t* args)
+		{
+			_instImpl->opcode_push_r16(_regs->bc());
+		});
+
+		add_instruction(opcode(0xD5), "PUSH DE", 16, 1, 0, [&](const byte_t* args)
+		{
+			_instImpl->opcode_push_r16(_regs->de());
+		});
+
+		add_instruction(opcode(0xE5), "PUSH HL", 16, 1, 0, [&](const byte_t* args)
+		{
+			_instImpl->opcode_push_r16(_regs->hl());
 		});
 	}
 

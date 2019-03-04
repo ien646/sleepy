@@ -327,4 +327,10 @@ namespace sleepy
 		}
 		_regs->reset_flag(registers::flag::HALF_CARRY);
 	}
+
+	void instruction_impl::opcode_push_r16(reg16_t r16)
+	{
+		_regs->sp -= 2;
+		_mem->write_word(_regs->sp, r16);
+	}
 }
