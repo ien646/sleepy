@@ -28,4 +28,4 @@
     - <s>[**0xC8**] RET Z</s>
     - <s>[**0xC9**] RET</s>
     - <s>[**0xD8**] RET C</s>
-    - [**0xD9**] RETI
+    - <s>[**0xD9**] RETI</s>

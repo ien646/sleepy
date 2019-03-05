@@ -1729,6 +1729,12 @@ namespace sleepy
 				RET_NO_ARGS_REF;
 			}
 		});
+
+		add_instruction(opcode(0xD9), "RETI", 16, 0, 0, [&](const u8* args)
+		{
+			_instImpl->opcode_ret();
+			RET_NO_ARGS_REF;
+		});
 	}
 
 	void vcpu_firmware::add_instruction(
