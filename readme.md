@@ -26,7 +26,7 @@
     - [**0xC0**] RET NZ
     - [**0xD0**] RET NC 
     - [**0xC8**] RET Z
-    - [**0xC9**] RET
+    - <s>[**0xC9**] RET</s>
     - [**0xCB**] **PREFIX CB**
     - [**0xD8**] RET C
     - [**0xD9**] RETI
