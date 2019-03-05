@@ -20,5 +20,10 @@ namespace sleepy
             REQUIRE(regs.sp == 0xAA08u);
             REQUIRE(regs.pc == val);
         }
+
+        //SECTION("RET Z")  { }
+        //SECTION("RET C")  { }
+        //SECTION("RET NZ") { }
+        //SECTION("RET NC") { }
     };
 }

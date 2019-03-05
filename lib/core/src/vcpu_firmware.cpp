@@ -1689,6 +1689,46 @@ namespace sleepy
 			_instImpl->opcode_ret();
 			RET_NO_ARGS_REF;
 		});
+
+		add_instruction(opcode(0xC8), "RET Z", 8, 0, 0, [&](const u8* args)
+		{
+			if(_regs->read_flag(registers::flag::ZERO))
+			{
+				delay_cycles(12);
+				_instImpl->opcode_ret();
+				RET_NO_ARGS_REF;
+			}
+		});
+
+		add_instruction(opcode(0xD8), "RET C", 8, 0, 0, [&](const u8* args)
+		{
+			if(_regs->read_flag(registers::flag::CARRY))
+			{
+				delay_cycles(12);
+				_instImpl->opcode_ret();
+				RET_NO_ARGS_REF;
+			}
+		});
+
+		add_instruction(opcode(0xC0), "RET NZ", 8, 0, 0, [&](const u8* args)
+		{
+			if(!_regs->read_flag(registers::flag::ZERO))
+			{
+				delay_cycles(12);
+				_instImpl->opcode_ret();
+				RET_NO_ARGS_REF;
+			}
+		});
+
+		add_instruction(opcode(0xD0), "RET NC", 8, 0, 0, [&](const u8* args)
+		{
+			if(!_regs->read_flag(registers::flag::CARRY))
+			{
+				delay_cycles(12);
+				_instImpl->opcode_ret();
+				RET_NO_ARGS_REF;
+			}
+		});
 	}
 
 	void vcpu_firmware::add_instruction(

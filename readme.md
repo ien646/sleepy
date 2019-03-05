@@ -23,10 +23,9 @@
     - <s>[**0xCC**] CALL Z, a16</s>
     - <s>[**0xD4**] CALL NC, a16</s>
     - <s>[**0xC4**] CALL NZ, a16</s>
-    - [**0xC0**] RET NZ
-    - [**0xD0**] RET NC 
-    - [**0xC8**] RET Z
+    - <s>[**0xC0**] RET NZ</s>
+    - <s>[**0xD0**] RET NC</s>
+    - <s>[**0xC8**] RET Z</s>
     - <s>[**0xC9**] RET</s>
-    - [**0xCB**] **PREFIX CB**
-    - [**0xD8**] RET C
+    - <s>[**0xD8**] RET C</s>
     - [**0xD9**] RETI
