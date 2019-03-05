@@ -73,6 +73,7 @@ namespace sleepy
 		void initmap_pop();
 
 		void initmap_call();
+		void initmap_ret();
 
 		void add_instruction(
 			opcode opc, 

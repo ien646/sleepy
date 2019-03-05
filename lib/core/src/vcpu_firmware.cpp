@@ -58,6 +58,7 @@ namespace sleepy
 		initmap_pop();
 
 		initmap_call();
+		initmap_ret();
 	}
 
 	void vcpu_firmware::initmap_misc()
@@ -1678,6 +1679,15 @@ namespace sleepy
 				delay_cycles(12);
 				_instImpl->opcode_call_a16(args);
 			}
+		});
+	}
+
+	void vcpu_firmware::initmap_ret()
+	{
+		add_instruction(opcode(0xC9), "RET", 16, 0, 0, [&](const u8* args)
+		{
+			_instImpl->opcode_ret();
+			RET_NO_ARGS_REF;
 		});
 	}
 

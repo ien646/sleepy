@@ -30,5 +30,3 @@
     - [**0xCB**] **PREFIX CB**
     - [**0xD8**] RET C
     - [**0xD9**] RETI
-
-

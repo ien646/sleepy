@@ -347,4 +347,10 @@ namespace sleepy
 		// jump
 		_regs->pc = a16;
 	}
+
+	void instruction_impl::opcode_ret()
+	{
+		_regs->pc = _mem->read_word(_regs->sp);
+		_regs->sp += 2;
+	}
 }
