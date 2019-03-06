@@ -1,13 +1,13 @@
 #pragma once
 
-#include <sleepy/vcpu_firmware.hpp>
+#include <sleepy/vcpu_impl.hpp>
 #include <sleepy/vcpu_instruction.hpp>
 #include <sleepy/memory.hpp>
 #include <sleepy/registers.hpp>
 
 #define _CPUFW_SLEEPYTEST_INIT_VARS()	registers regs; \
 										memory mem; \
-										vcpu_firmware vfw(&mem, &regs); \
+										vcpu_impl vfw(&mem, &regs); \
 										auto& inst_map = vfw.inst_map; \
 										mem.zero_memory(); \
 										regs.zero_registers(true);\

@@ -3,7 +3,7 @@
 #include <sleepy/common.hpp>
 #include <sleepy/memory.hpp>
 #include <sleepy/registers.hpp>
-#include <sleepy/vcpu_firmware.hpp>
+#include <sleepy/vcpu_impl.hpp>
 #include <istream>
 #include <functional>
 
@@ -14,7 +14,7 @@ namespace sleepy
     private:
         memory _mem;
         registers _regs;
-        vcpu_firmware _vfw;
+        vcpu_impl _vfw;
 
         bool _memory_set = false;
         const vcpu_instruction* _last_executed_inst = nullptr;

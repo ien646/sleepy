@@ -14,7 +14,7 @@ namespace sleepy
 			u8* data = memory.data();
 
 			// Run
-			memory.write_word((u16)0x0000, (u16)0xF0AE);
+			memory.write_word(U16(0x0000), U16(0xF0AE));
 			
 			// Assert
 			REQUIRE(0xAE == data[0]);
@@ -29,7 +29,7 @@ namespace sleepy
 			((u16*)memory.data())[0] = 0xF0AE;
 
 			// Run
-			u16 res = memory.read_word((u16)0x0000);
+			u16 res = memory.read_word(U16(0x0000));
 
 			// Assert
 			REQUIRE(0xAE == data[0]);

@@ -6,7 +6,7 @@
 namespace sleepy
 {
     vcpu::vcpu()
-        : _vfw(vcpu_firmware(&_mem, &_regs))
+        : _vfw(vcpu_impl(&_mem, &_regs))
     { }
 
     void vcpu::exec_op(opcode op, u8* args)

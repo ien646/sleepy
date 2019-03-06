@@ -13,11 +13,11 @@ namespace sleepy
 	class memory;
 	class registers;
 
-	class vcpu_firmware
+	class vcpu_impl
 	{
 	public:
-		vcpu_firmware() = delete;
-		vcpu_firmware(memory* mem_ptr, registers* regs_ptr);
+		vcpu_impl() = delete;
+		vcpu_impl(memory* mem_ptr, registers* regs_ptr);
 
 		instruction_map inst_map;
 

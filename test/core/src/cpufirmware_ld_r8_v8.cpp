@@ -30,13 +30,13 @@ namespace sleepy
 			ld_l_a.call(nullptr);			
 
 			// Assert
-			REQUIRE(regs.a == (u8)0xCA);
-			REQUIRE(regs.b == (u8)0xCA);
-			REQUIRE(regs.c == (u8)0xCA);
-			REQUIRE(regs.d == (u8)0xCA);
-			REQUIRE(regs.e == (u8)0xCA);
-			REQUIRE(regs.h == (u8)0xCA);
-			REQUIRE(regs.l == (u8)0xCA);
+			REQUIRE(regs.a == U8(0xCA));
+			REQUIRE(regs.b == U8(0xCA));
+			REQUIRE(regs.c == U8(0xCA));
+			REQUIRE(regs.d == U8(0xCA));
+			REQUIRE(regs.e == U8(0xCA));
+			REQUIRE(regs.h == U8(0xCA));
+			REQUIRE(regs.l == U8(0xCA));
 		}
 
 		SECTION("CPUF_LD_R8_B")
@@ -63,13 +63,13 @@ namespace sleepy
 			ld_l_b.call(nullptr);
 
 			// Assert
-			REQUIRE(regs.a == (u8)0xCA);
-			REQUIRE(regs.b == (u8)0xCA);
-			REQUIRE(regs.c == (u8)0xCA);
-			REQUIRE(regs.d == (u8)0xCA);
-			REQUIRE(regs.e == (u8)0xCA);
-			REQUIRE(regs.h == (u8)0xCA);
-			REQUIRE(regs.l == (u8)0xCA);
+			REQUIRE(regs.a == U8(0xCA));
+			REQUIRE(regs.b == U8(0xCA));
+			REQUIRE(regs.c == U8(0xCA));
+			REQUIRE(regs.d == U8(0xCA));
+			REQUIRE(regs.e == U8(0xCA));
+			REQUIRE(regs.h == U8(0xCA));
+			REQUIRE(regs.l == U8(0xCA));
 		}
 
 		SECTION("CPUF_LD_R8_C")
@@ -96,13 +96,13 @@ namespace sleepy
 			ld_l_c.call(nullptr);
 
 			// Assert
-			REQUIRE(regs.a == (u8)0xCA);
-			REQUIRE(regs.b == (u8)0xCA);
-			REQUIRE(regs.c == (u8)0xCA);
-			REQUIRE(regs.d == (u8)0xCA);
-			REQUIRE(regs.e == (u8)0xCA);
-			REQUIRE(regs.h == (u8)0xCA);
-			REQUIRE(regs.l == (u8)0xCA);
+			REQUIRE(regs.a == U8(0xCA));
+			REQUIRE(regs.b == U8(0xCA));
+			REQUIRE(regs.c == U8(0xCA));
+			REQUIRE(regs.d == U8(0xCA));
+			REQUIRE(regs.e == U8(0xCA));
+			REQUIRE(regs.h == U8(0xCA));
+			REQUIRE(regs.l == U8(0xCA));
 		}
 
 		SECTION("CPUF_LD_R8_D")
@@ -129,13 +129,13 @@ namespace sleepy
 			ld_l_d.call(nullptr);			
 
 			// Assert
-			REQUIRE(regs.a == (u8)0xCA);
-			REQUIRE(regs.b == (u8)0xCA);
-			REQUIRE(regs.c == (u8)0xCA);
-			REQUIRE(regs.d == (u8)0xCA);
-			REQUIRE(regs.e == (u8)0xCA);
-			REQUIRE(regs.h == (u8)0xCA);
-			REQUIRE(regs.l == (u8)0xCA);
+			REQUIRE(regs.a == U8(0xCA));
+			REQUIRE(regs.b == U8(0xCA));
+			REQUIRE(regs.c == U8(0xCA));
+			REQUIRE(regs.d == U8(0xCA));
+			REQUIRE(regs.e == U8(0xCA));
+			REQUIRE(regs.h == U8(0xCA));
+			REQUIRE(regs.l == U8(0xCA));
 		}
 
 		SECTION("CPUF_LD_R8_E")
@@ -162,13 +162,13 @@ namespace sleepy
 			ld_l_e.call(nullptr);
 
 			// Assert
-			REQUIRE(regs.a == (u8)0xCA);
-			REQUIRE(regs.b == (u8)0xCA);
-			REQUIRE(regs.c == (u8)0xCA);
-			REQUIRE(regs.d == (u8)0xCA);
-			REQUIRE(regs.e == (u8)0xCA);
-			REQUIRE(regs.h == (u8)0xCA);
-			REQUIRE(regs.l == (u8)0xCA);
+			REQUIRE(regs.a == U8(0xCA));
+			REQUIRE(regs.b == U8(0xCA));
+			REQUIRE(regs.c == U8(0xCA));
+			REQUIRE(regs.d == U8(0xCA));
+			REQUIRE(regs.e == U8(0xCA));
+			REQUIRE(regs.h == U8(0xCA));
+			REQUIRE(regs.l == U8(0xCA));
 		}
 
 		SECTION("CPUF_LD_R8_H")
@@ -195,13 +195,13 @@ namespace sleepy
 			ld_l_h.call(nullptr);
 
 			// Assert
-			REQUIRE(regs.a == (u8)0xCA);
-			REQUIRE(regs.b == (u8)0xCA);
-			REQUIRE(regs.c == (u8)0xCA);
-			REQUIRE(regs.d == (u8)0xCA);
-			REQUIRE(regs.e == (u8)0xCA);
-			REQUIRE(regs.h == (u8)0xCA);
-			REQUIRE(regs.l == (u8)0xCA);
+			REQUIRE(regs.a == U8(0xCA));
+			REQUIRE(regs.b == U8(0xCA));
+			REQUIRE(regs.c == U8(0xCA));
+			REQUIRE(regs.d == U8(0xCA));
+			REQUIRE(regs.e == U8(0xCA));
+			REQUIRE(regs.h == U8(0xCA));
+			REQUIRE(regs.l == U8(0xCA));
 		}
 
 		SECTION("CPUF_LD_R8_L")
@@ -228,13 +228,13 @@ namespace sleepy
 			ld_l_l.call(nullptr);
 
 			// Assert
-			REQUIRE(regs.a == (u8)0xCA);
-			REQUIRE(regs.b == (u8)0xCA);
-			REQUIRE(regs.c == (u8)0xCA);
-			REQUIRE(regs.d == (u8)0xCA);
-			REQUIRE(regs.e == (u8)0xCA);
-			REQUIRE(regs.h == (u8)0xCA);
-			REQUIRE(regs.l == (u8)0xCA);
+			REQUIRE(regs.a == U8(0xCA));
+			REQUIRE(regs.b == U8(0xCA));
+			REQUIRE(regs.c == U8(0xCA));
+			REQUIRE(regs.d == U8(0xCA));
+			REQUIRE(regs.e == U8(0xCA));
+			REQUIRE(regs.h == U8(0xCA));
+			REQUIRE(regs.l == U8(0xCA));
 		}
 
 		SECTION("CPUF_LD_R8_pHL")

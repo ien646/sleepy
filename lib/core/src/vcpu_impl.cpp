@@ -1,11 +1,11 @@
-#include <sleepy/vcpu_firmware.hpp>
+#include <sleepy/vcpu_impl.hpp>
 
 #include <sleepy/memory.hpp>
 #include <sleepy/registers.hpp>
 
 namespace sleepy
 {
-	vcpu_firmware::vcpu_firmware(memory* mem_ptr, registers* regs_ptr)
+	vcpu_impl::vcpu_impl(memory* mem_ptr, registers* regs_ptr)
 		: _mem(mem_ptr)
 		, _regs(regs_ptr)
 	{
@@ -13,7 +13,7 @@ namespace sleepy
 		init_inst_map();
 	}
 
-	void vcpu_firmware::init_inst_map()
+	void vcpu_impl::init_inst_map()
 	{
 		initmap_misc();
 
@@ -59,7 +59,7 @@ namespace sleepy
 		initmap_ret();
 	}
 
-	void vcpu_firmware::initmap_misc()
+	void vcpu_impl::initmap_misc()
 	{
 		add_instruction(opcode(0x00), "NOP", 4, 1, 0, [&](const u8*)
 		{
@@ -106,8 +106,8 @@ namespace sleepy
 		add_instruction(opcode(0xE8), "ADD SP,d8", 16, 2, 1, [&](const u8* args)
 		{
 			u8 d8 = *&args[0];
-			u32 val = _regs->sp + d8;
-			_regs->sp = (u16)val;
+			u32 val = U32(_regs->sp) + U32(d8);
+			_regs->sp = U16(val);
 
 			_regs->reset_flags();
 
@@ -123,7 +123,7 @@ namespace sleepy
 		});		
 	}
 
-	void vcpu_firmware::initmap_ld_a_x8()
+	void vcpu_impl::initmap_ld_a_x8()
 	{
 		add_instruction(opcode(0x7F), "LD A,A", 4, 1, 0, [&](const u8*)
 		{
@@ -162,12 +162,12 @@ namespace sleepy
 
 		add_instruction(opcode(0x7E), "LD A,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			u16 addr = (u16)_regs->hl();
+			u16 addr = U16(_regs->hl());
 			_regs->a = _mem->read_byte(addr);
 		});
 	}
 
-	void vcpu_firmware::initmap_ld_b_x8()
+	void vcpu_impl::initmap_ld_b_x8()
 	{
 		add_instruction(opcode(0x47), "LD B,A", 4, 1, 0, [&](const u8*)
 		{
@@ -206,12 +206,12 @@ namespace sleepy
 
 		add_instruction(opcode(0x46), "LD B,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			u16 addr = (u16)_regs->hl();
+			u16 addr = U16(_regs->hl());
 			_regs->b = _mem->read_byte(addr);
 		});
 	}
 
-	void vcpu_firmware::initmap_ld_c_x8()
+	void vcpu_impl::initmap_ld_c_x8()
 	{
 		add_instruction(opcode(0x4F), "LD C,A", 4, 1, 0, [&](const u8*)
 		{
@@ -250,12 +250,12 @@ namespace sleepy
 
 		add_instruction(opcode(0x4E), "LD C,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			u16 addr = (u16)_regs->hl();
+			u16 addr = U16(_regs->hl());
 			_regs->c = _mem->read_byte(addr);
 		});
 	}
 
-	void vcpu_firmware::initmap_ld_d_x8()
+	void vcpu_impl::initmap_ld_d_x8()
 	{
 		add_instruction(opcode(0x57), "LD D,A", 4, 1, 0, [&](const u8*)
 		{
@@ -294,12 +294,12 @@ namespace sleepy
 
 		add_instruction(opcode(0x56), "LD D,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			u16 addr = (u16)_regs->hl();
+			u16 addr = U16(_regs->hl());
 			_regs->d = _mem->read_byte(addr);
 		});
 	}
 
-	void vcpu_firmware::initmap_ld_e_x8()
+	void vcpu_impl::initmap_ld_e_x8()
 	{
 		add_instruction(opcode(0x5F), "LD E,A", 4, 1, 0, [&](const u8*)
 		{
@@ -338,12 +338,12 @@ namespace sleepy
 
 		add_instruction(opcode(0x5E), "LD E,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			u16 addr = (u16)_regs->hl();
+			u16 addr = U16(_regs->hl());
 			_regs->e = _mem->read_byte(addr);
 		});		
 	}
 
-	void vcpu_firmware::initmap_ld_h_x8()
+	void vcpu_impl::initmap_ld_h_x8()
 	{
 		add_instruction(opcode(0x67), "LD H,A", 4, 1, 0, [&](const u8*)
 		{
@@ -382,12 +382,12 @@ namespace sleepy
 
 		add_instruction(opcode(0x66), "LD H,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			u16 addr = (u16)_regs->hl();
+			u16 addr = U16(_regs->hl());
 			_regs->h = _mem->read_byte(addr);
 		});
 	}
 
-	void vcpu_firmware::initmap_ld_l_x8()
+	void vcpu_impl::initmap_ld_l_x8()
 	{
 		add_instruction(opcode(0x6F), "LD L,A", 4, 1, 0, [&](const u8*)
 		{
@@ -426,12 +426,12 @@ namespace sleepy
 
 		add_instruction(opcode(0x6E), "LD L,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			u16 addr = (u16)_regs->hl();
+			u16 addr = U16(_regs->hl());
 			_regs->l = _mem->read_byte(addr);
 		});
 	}
 
-	void vcpu_firmware::initmap_ld_phl_x8()
+	void vcpu_impl::initmap_ld_phl_x8()
 	{
 		add_instruction(opcode(0x77), "LD (HL),A", 8, 1, 0, [&](const u8*)
 		{
@@ -469,7 +469,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_ld_r8_d8()
+	void vcpu_impl::initmap_ld_r8_d8()
 	{
 		add_instruction(opcode(0x3E), "LD A,d8", 8, 2, 1, [&](const u8* args)
 		{
@@ -521,36 +521,36 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_ld_ptr_a()
+	void vcpu_impl::initmap_ld_ptr_a()
 	{
 		add_instruction(opcode(0x02), "LD (BC),A", 8, 1, 0, [&](const u8*)
 		{
-			u16 addr = (u16)(_regs->bc());
+			u16 addr = U16(_regs->bc());
 			_mem->write_byte(addr, _regs->a);
 		});
 
 		add_instruction(opcode(0x12), "LD (DE),A", 8, 1, 0, [&](const u8*)
 		{
-			u16 addr = (u16)(_regs->de());
+			u16 addr = U16(_regs->de());
 			_mem->write_byte(addr, _regs->a);
 		});
 
 		add_instruction(opcode(0x22), "LD (HL+),A", 8, 1, 0, [&](const u8*)
 		{
-			u16 addr = (u16)(_regs->hl());
+			u16 addr = U16(_regs->hl());
 			_mem->write_byte(addr, _regs->a);
 			_regs->hl(_regs->hl() + 1);
 		});
 
 		add_instruction(opcode(0x32), "LD (HL-),A", 8, 1, 0, [&](const u8*)
 		{
-			u16 addr = (u16)(_regs->hl());
+			u16 addr = U16(_regs->hl());
 			_mem->write_byte(addr, _regs->a);
 			_regs->hl(_regs->hl() - 1);
 		});
 	}
 
-	void vcpu_firmware::initmap_ld_a_ptr()
+	void vcpu_impl::initmap_ld_a_ptr()
 	{
 		add_instruction(opcode(0x0A), "LD A,(BC)", 8, 1, 0, [&](const u8*)
 		{
@@ -577,7 +577,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_ld_r16_d16()
+	void vcpu_impl::initmap_ld_r16_d16()
 	{
 		add_instruction(opcode(0x01), "LD BC,d16", 12, 3, 2, [&](const u8* args)
 		{
@@ -604,11 +604,11 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_ld_misc()
+	void vcpu_impl::initmap_ld_misc()
 	{
 		add_instruction(opcode(0xE2), "LD (C),A", 8, 1, 0, [&](const u8*)
 		{
-			_mem->write_byte((u16)(0xFF00 + _regs->c), _regs->a);
+			_mem->write_byte(U16(0xFF00 + _regs->c), _regs->a);
 		});
 
 		add_instruction(opcode(0xF2), "LD A,(C)", 8, 1, 0, [&](const u8*)
@@ -627,7 +627,7 @@ namespace sleepy
 		{
 			u8 d8 = *(&args[0]);
 			u32 val = d8 + _regs->sp;
-			_regs->hl((u16)val);
+			_regs->hl(U16(val));
 
 			_regs->reset_flags();
 
@@ -678,7 +678,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_add_a_x8()
+	void vcpu_impl::initmap_add_a_x8()
 	{
 		add_instruction(opcode(0x87), "ADD A,A", 4, 1, 0, [&](const u8*)
 		{
@@ -727,7 +727,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_add_hl_r16()
+	void vcpu_impl::initmap_add_hl_r16()
 	{
 		add_instruction(opcode(0x09), "ADD HL,BC", 8, 1, 0, [&](const u8*)
 		{
@@ -750,7 +750,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_sub_a_x8()
+	void vcpu_impl::initmap_sub_a_x8()
 	{
 		add_instruction(opcode(0x97), "SUB A,A", 4, 1, 0, [&](const u8*)
 		{
@@ -799,7 +799,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_adc_a_x8()
+	void vcpu_impl::initmap_adc_a_x8()
 	{
 		add_instruction(opcode(0x8F), "ADC A,A", 4, 1, 0, [&](const u8*)
 		{
@@ -848,7 +848,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_sbc_a_x8()
+	void vcpu_impl::initmap_sbc_a_x8()
 	{
 		add_instruction(opcode(0x9F), "SBC A,A", 4, 1, 0, [&](const u8*)
 		{
@@ -897,7 +897,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_and_a_x8()
+	void vcpu_impl::initmap_and_a_x8()
 	{
 		add_instruction(opcode(0xA7), "AND A,A", 4, 1, 0, [&](const u8*)
 		{
@@ -946,7 +946,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_or_a_x8()
+	void vcpu_impl::initmap_or_a_x8()
 	{
 		add_instruction(opcode(0xB7), "OR A,A", 4, 1, 0, [&](const u8*)
 		{
@@ -995,7 +995,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_xor_a_x8()
+	void vcpu_impl::initmap_xor_a_x8()
 	{
 		add_instruction(opcode(0xAF), "XOR A,A", 4, 1, 0, [&](const u8*)
 		{
@@ -1044,7 +1044,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_inc_r8()
+	void vcpu_impl::initmap_inc_r8()
 	{
 		add_instruction(opcode(0x3C), "INC A", 4, 1, 0, [&](const u8*)
 		{
@@ -1090,23 +1090,23 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_inc_r16()
+	void vcpu_impl::initmap_inc_r16()
 	{
 		add_instruction(opcode(0x03), "INC BC", 8, 1, 0, [&](const u8*)
 		{
-			u16 val = (u16)(_regs->bc() + 1);
+			u16 val = U16(_regs->bc() + 1);
 			_regs->bc(val);
 		});
 
 		add_instruction(opcode(0x13), "INC DE", 8, 1, 0, [&](const u8*)
 		{
-			u16 val = (u16)(_regs->de() + 1);
+			u16 val = U16(_regs->de() + 1);
 			_regs->de(val);
 		});
 
 		add_instruction(opcode(0x23), "INC HL", 8, 1, 0, [&](const u8*)
 		{
-			u16 val = (u16)(_regs->hl() + 1);
+			u16 val = U16(_regs->hl() + 1);
 			_regs->hl(val);
 		});
 
@@ -1116,7 +1116,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_dec_r8()
+	void vcpu_impl::initmap_dec_r8()
 	{
 		add_instruction(opcode(0x3D), "DEC A", 4, 1, 0, [&](const u8*)
 		{
@@ -1162,23 +1162,23 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_dec_r16()
+	void vcpu_impl::initmap_dec_r16()
 	{
 		add_instruction(opcode(0x0B), "DEC BC", 8, 1, 0, [&](const u8*)
 		{
-			u16 val = (u16)(_regs->bc() - 1);
+			u16 val = U16(_regs->bc() - 1);
 			_regs->bc(val);
 		});
 
 		add_instruction(opcode(0x1B), "DEC DE", 8, 1, 0, [&](const u8*)
 		{
-			u16 val = (u16)(_regs->de() - 1);
+			u16 val = U16(_regs->de() - 1);
 			_regs->de(val);
 		});
 
 		add_instruction(opcode(0x2B), "DEC HL", 8, 1, 0, [&](const u8*)
 		{
-			u16 val = (u16)(_regs->hl() - 1);
+			u16 val = U16(_regs->hl() - 1);
 			_regs->hl(val);
 		});
 
@@ -1188,7 +1188,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_cp_r8()
+	void vcpu_impl::initmap_cp_r8()
 	{
 		add_instruction(opcode(0xBF), "CP A", 4, 1, 0, [&](const u8*)
 		{
@@ -1237,7 +1237,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_bitrotations()
+	void vcpu_impl::initmap_bitrotations()
 	{
 		add_instruction(opcode(0x0F), "RRCA", 4, 1, 0, [&](const u8*)
 		{
@@ -1260,7 +1260,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_rst()
+	void vcpu_impl::initmap_rst()
 	{
 		add_instruction(opcode(0xC7), "RST 00H", 16, 1, 0, [&](const u8*)
 		{
@@ -1303,7 +1303,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_jumps()
+	void vcpu_impl::initmap_jumps()
 	{
 		add_instruction(opcode(0x18), "JR i8", 12, 0, 1, [&](const u8* args)
 		{
@@ -1384,7 +1384,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_push()
+	void vcpu_impl::initmap_push()
 	{
 		add_instruction(opcode(0xF5), "PUSH AF", 16, 1, 0, [&](const u8*)
 		{
@@ -1407,7 +1407,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_pop()
+	void vcpu_impl::initmap_pop()
 	{
 		add_instruction(opcode(0xF1), "POP AF", 12, 1, 0, [&](const u8*)
 		{
@@ -1438,7 +1438,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_call()
+	void vcpu_impl::initmap_call()
 	{
 		add_instruction(opcode(0xCD), "CALL a16", 24, 0, 2, [&](const u8* args)
 		{
@@ -1482,7 +1482,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::initmap_ret()
+	void vcpu_impl::initmap_ret()
 	{
 		add_instruction(opcode(0xC9), "RET", 16, 0, 0, [&](const u8*)
 		{
@@ -1531,7 +1531,7 @@ namespace sleepy
 		});
 	}
 
-	void vcpu_firmware::add_instruction(
+	void vcpu_impl::add_instruction(
 		opcode opc, 
 		const std::string& mnem, 
 		u8 cycc, 

@@ -84,7 +84,7 @@ namespace sleepy
 			regs.sp = 0xAAAA;
 			d8 = 0xBB;
 			ld_hl_spd8.call(&d8);
-			REQUIRE(regs.hl() == (u16)(0xAAAA + 0xBB));
+			REQUIRE(regs.hl() == U16(0xAAAA + 0xBB));
 
 			regs.reset_flags();
 			regs.sp = 0x0000;

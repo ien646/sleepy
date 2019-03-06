@@ -53,10 +53,10 @@ namespace sleepy
 			u16 HL = r.hl();
 
 			// Assert
-			REQUIRE((u16)0xFF00 == AF);
-			REQUIRE((u16)0xEE11 == BC);
-			REQUIRE((u16)0xDD22 == DE);
-			REQUIRE((u16)0xCC33 == HL);
+			REQUIRE(U16(0xFF00) == AF);
+			REQUIRE(U16(0xEE11) == BC);
+			REQUIRE(U16(0xDD22) == DE);
+			REQUIRE(U16(0xCC33) == HL);
 		};
 
 		SECTION("Set_Flags_CorrectBit")
