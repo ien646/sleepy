@@ -29,7 +29,7 @@ namespace sleepy
 	private:
 		registers* _regs;
 		memory* _mem;
-		std::unique_ptr<instruction_impl> _instImpl;
+		std::unique_ptr<instruction_impl> _inst_impl;
 		bool _interrupts_enabled = false;		
 
 		void init_inst_map();

@@ -9,7 +9,7 @@ namespace sleepy
 		: _mem(mem_ptr)
 		, _regs(regs_ptr)
 	{
-		_instImpl = std::make_unique<instruction_impl>(mem_ptr, regs_ptr);
+		_inst_impl = std::make_unique<instruction_impl>(mem_ptr, regs_ptr);
 		init_inst_map();
 	}
 
@@ -88,17 +88,17 @@ namespace sleepy
 
 		add_instruction(opcode(0x2F), "CPL", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_cpl();
+			_inst_impl->opcode_cpl();
 		});
 
 		add_instruction(opcode(0x3F), "CCF", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_ccf();
+			_inst_impl->opcode_ccf();
 		});
 
 		add_instruction(opcode(0x27), "DAA", 4, 1, 0, [&](const u8*)
 		{			
-			_instImpl->opcode_daa();
+			_inst_impl->opcode_daa();
 		});
 
 		add_instruction(opcode(0x37), "SCF", 4, 1, 0, [&](const u8*)
@@ -685,48 +685,48 @@ namespace sleepy
 	{
 		add_instruction(opcode(0x87), "ADD A,A", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_a_v8(_regs->a);
+			_inst_impl->opcode_add_a_v8(_regs->a);
 		});
 
 		add_instruction(opcode(0x80), "ADD A,B", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_a_v8(_regs->b);
+			_inst_impl->opcode_add_a_v8(_regs->b);
 		});
 
 		add_instruction(opcode(0x81), "ADD A,C", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_a_v8(_regs->c);
+			_inst_impl->opcode_add_a_v8(_regs->c);
 		});
 
 		add_instruction(opcode(0x82), "ADD A,D", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_a_v8(_regs->d);
+			_inst_impl->opcode_add_a_v8(_regs->d);
 		});
 
 		add_instruction(opcode(0x83), "ADD A,E", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_a_v8(_regs->e);
+			_inst_impl->opcode_add_a_v8(_regs->e);
 		});
 
 		add_instruction(opcode(0x84), "ADD A,H", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_a_v8(_regs->h);
+			_inst_impl->opcode_add_a_v8(_regs->h);
 		});
 
 		add_instruction(opcode(0x85), "ADD A,L", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_a_v8(_regs->l);
+			_inst_impl->opcode_add_a_v8(_regs->l);
 		});
 
 		add_instruction(opcode(0x86), "ADD A,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_a_v8(_mem->read_byte(_regs->hl()));
+			_inst_impl->opcode_add_a_v8(_mem->read_byte(_regs->hl()));
 		});
 
 		add_instruction(opcode(0xC6), "ADD A,d8", 8, 2, 1, [&](const u8* args)
 		{
 			u8 d8 = args[0];
-			_instImpl->opcode_add_a_v8(d8);
+			_inst_impl->opcode_add_a_v8(d8);
 		});
 	}
 
@@ -734,22 +734,22 @@ namespace sleepy
 	{
 		add_instruction(opcode(0x09), "ADD HL,BC", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_hl_v16(_regs->bc());
+			_inst_impl->opcode_add_hl_v16(_regs->bc());
 		});
 
 		add_instruction(opcode(0x19), "ADD HL,DE", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_hl_v16(_regs->de());
+			_inst_impl->opcode_add_hl_v16(_regs->de());
 		});
 
 		add_instruction(opcode(0x29), "ADD HL,HL", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_hl_v16(_regs->hl());
+			_inst_impl->opcode_add_hl_v16(_regs->hl());
 		});
 
 		add_instruction(opcode(0x39), "ADD HL,SP", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_add_hl_v16(_regs->sp);
+			_inst_impl->opcode_add_hl_v16(_regs->sp);
 		});
 	}
 
@@ -757,48 +757,48 @@ namespace sleepy
 	{
 		add_instruction(opcode(0x97), "SUB A,A", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sub_a_v8(_regs->a);
+			_inst_impl->opcode_sub_a_v8(_regs->a);
 		});
 
 		add_instruction(opcode(0x90), "SUB A,B", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sub_a_v8(_regs->b);
+			_inst_impl->opcode_sub_a_v8(_regs->b);
 		});
 
 		add_instruction(opcode(0x91), "SUB A,C", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sub_a_v8(_regs->c);
+			_inst_impl->opcode_sub_a_v8(_regs->c);
 		});
 
 		add_instruction(opcode(0x92), "SUB A,D", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sub_a_v8(_regs->d);
+			_inst_impl->opcode_sub_a_v8(_regs->d);
 		});
 
 		add_instruction(opcode(0x93), "SUB A,E", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sub_a_v8(_regs->e);
+			_inst_impl->opcode_sub_a_v8(_regs->e);
 		});
 
 		add_instruction(opcode(0x94), "SUB A,H", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sub_a_v8(_regs->h);
+			_inst_impl->opcode_sub_a_v8(_regs->h);
 		});
 
 		add_instruction(opcode(0x95), "SUB A,L", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sub_a_v8(_regs->l);
+			_inst_impl->opcode_sub_a_v8(_regs->l);
 		});
 
 		add_instruction(opcode(0x96), "SUB A,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sub_a_v8(_mem->read_byte(_regs->hl()));
+			_inst_impl->opcode_sub_a_v8(_mem->read_byte(_regs->hl()));
 		});
 
 		add_instruction(opcode(0xD6), "SUB A,d8", 8, 2, 1, [&](const u8* args)
 		{
 			u8 d8 = args[0];
-			_instImpl->opcode_sub_a_v8(d8);
+			_inst_impl->opcode_sub_a_v8(d8);
 		});
 	}
 
@@ -806,48 +806,48 @@ namespace sleepy
 	{
 		add_instruction(opcode(0x8F), "ADC A,A", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_adc_a_v8(_regs->a);
+			_inst_impl->opcode_adc_a_v8(_regs->a);
 		});
 
 		add_instruction(opcode(0x88), "ADC A,B", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_adc_a_v8(_regs->b);
+			_inst_impl->opcode_adc_a_v8(_regs->b);
 		});
 
 		add_instruction(opcode(0x89), "ADC A,C", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_adc_a_v8(_regs->c);
+			_inst_impl->opcode_adc_a_v8(_regs->c);
 		});
 
 		add_instruction(opcode(0x8A), "ADC A,D", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_adc_a_v8(_regs->d);
+			_inst_impl->opcode_adc_a_v8(_regs->d);
 		});
 
 		add_instruction(opcode(0x8B), "ADC A,E", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_adc_a_v8(_regs->e);
+			_inst_impl->opcode_adc_a_v8(_regs->e);
 		});
 
 		add_instruction(opcode(0x8C), "ADC A,H", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_adc_a_v8(_regs->h);
+			_inst_impl->opcode_adc_a_v8(_regs->h);
 		});
 
 		add_instruction(opcode(0x8D), "ADC A,L", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_adc_a_v8(_regs->l);
+			_inst_impl->opcode_adc_a_v8(_regs->l);
 		});
 
 		add_instruction(opcode(0x8E), "ADC A,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_adc_a_v8(_mem->read_byte(_regs->hl()));
+			_inst_impl->opcode_adc_a_v8(_mem->read_byte(_regs->hl()));
 		});
 
 		add_instruction(opcode(0xCE), "ADC A,d8", 8, 2, 1, [&](const u8* args)
 		{
 			u8 d8 = args[0];
-			_instImpl->opcode_adc_a_v8(d8);
+			_inst_impl->opcode_adc_a_v8(d8);
 		});
 	}
 
@@ -855,48 +855,48 @@ namespace sleepy
 	{
 		add_instruction(opcode(0x9F), "SBC A,A", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sbc_a_v8(_regs->a);
+			_inst_impl->opcode_sbc_a_v8(_regs->a);
 		});
 
 		add_instruction(opcode(0x98), "SBC A,B", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sbc_a_v8(_regs->b);
+			_inst_impl->opcode_sbc_a_v8(_regs->b);
 		});
 
 		add_instruction(opcode(0x99), "SBC A,C", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sbc_a_v8(_regs->c);
+			_inst_impl->opcode_sbc_a_v8(_regs->c);
 		});
 
 		add_instruction(opcode(0x9A), "SBC A,D", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sbc_a_v8(_regs->d);
+			_inst_impl->opcode_sbc_a_v8(_regs->d);
 		});
 
 		add_instruction(opcode(0x9B), "SBC A,E", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sbc_a_v8(_regs->e);
+			_inst_impl->opcode_sbc_a_v8(_regs->e);
 		});
 
 		add_instruction(opcode(0x9C), "SBC A,H", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sbc_a_v8(_regs->h);
+			_inst_impl->opcode_sbc_a_v8(_regs->h);
 		});
 
 		add_instruction(opcode(0x9D), "SBC A,L", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sbc_a_v8(_regs->l);
+			_inst_impl->opcode_sbc_a_v8(_regs->l);
 		});
 
 		add_instruction(opcode(0x9E), "SBC A,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_sbc_a_v8(_mem->read_byte(_regs->hl()));
+			_inst_impl->opcode_sbc_a_v8(_mem->read_byte(_regs->hl()));
 		});
 
 		add_instruction(opcode(0xDE), "SBC A,d8", 8, 2, 1, [&](const u8* args)
 		{
 			u8 d8 = args[0];
-			_instImpl->opcode_sbc_a_v8(d8);
+			_inst_impl->opcode_sbc_a_v8(d8);
 		});
 	}
 
@@ -904,48 +904,48 @@ namespace sleepy
 	{
 		add_instruction(opcode(0xA7), "AND A,A", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_and_a_v8(_regs->a);
+			_inst_impl->opcode_and_a_v8(_regs->a);
 		});
 
 		add_instruction(opcode(0xA0), "AND A,B", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_and_a_v8(_regs->b);
+			_inst_impl->opcode_and_a_v8(_regs->b);
 		});
 
 		add_instruction(opcode(0xA1), "AND A,C", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_and_a_v8(_regs->c);
+			_inst_impl->opcode_and_a_v8(_regs->c);
 		});
 
 		add_instruction(opcode(0xA2), "AND A,D", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_and_a_v8(_regs->d);
+			_inst_impl->opcode_and_a_v8(_regs->d);
 		});
 
 		add_instruction(opcode(0xA3), "AND A,E", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_and_a_v8(_regs->e);
+			_inst_impl->opcode_and_a_v8(_regs->e);
 		});
 
 		add_instruction(opcode(0xA4), "AND A,H", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_and_a_v8(_regs->h);
+			_inst_impl->opcode_and_a_v8(_regs->h);
 		});
 
 		add_instruction(opcode(0xA5), "AND A,L", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_and_a_v8(_regs->l);
+			_inst_impl->opcode_and_a_v8(_regs->l);
 		});
 
 		add_instruction(opcode(0xA6), "AND A,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_and_a_v8(_mem->read_byte(_regs->hl()));
+			_inst_impl->opcode_and_a_v8(_mem->read_byte(_regs->hl()));
 		});
 
 		add_instruction(opcode(0xE6), "AND A,d8", 8, 2, 1, [&](const u8* args)
 		{
 			u8 d8 = args[0];
-			_instImpl->opcode_and_a_v8(d8);
+			_inst_impl->opcode_and_a_v8(d8);
 		});
 	}
 
@@ -953,48 +953,48 @@ namespace sleepy
 	{
 		add_instruction(opcode(0xB7), "OR A,A", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_or_a_v8(_regs->a);
+			_inst_impl->opcode_or_a_v8(_regs->a);
 		});
 
 		add_instruction(opcode(0xB0), "OR A,B", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_or_a_v8(_regs->b);
+			_inst_impl->opcode_or_a_v8(_regs->b);
 		});
 
 		add_instruction(opcode(0xB1), "OR A,C", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_or_a_v8(_regs->c);
+			_inst_impl->opcode_or_a_v8(_regs->c);
 		});
 
 		add_instruction(opcode(0xB2), "OR A,D", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_or_a_v8(_regs->d);
+			_inst_impl->opcode_or_a_v8(_regs->d);
 		});
 
 		add_instruction(opcode(0xB3), "OR A,E", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_or_a_v8(_regs->e);
+			_inst_impl->opcode_or_a_v8(_regs->e);
 		});
 
 		add_instruction(opcode(0xB4), "OR A,H", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_or_a_v8(_regs->h);
+			_inst_impl->opcode_or_a_v8(_regs->h);
 		});
 
 		add_instruction(opcode(0xB5), "OR A,L", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_or_a_v8(_regs->l);
+			_inst_impl->opcode_or_a_v8(_regs->l);
 		});
 
 		add_instruction(opcode(0xB6), "OR A,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_or_a_v8(_mem->read_byte(_regs->hl()));
+			_inst_impl->opcode_or_a_v8(_mem->read_byte(_regs->hl()));
 		});
 
 		add_instruction(opcode(0xF6), "OR A,d8", 8, 2, 1, [&](const u8* args)
 		{
 			u8 d8 = args[0];
-			_instImpl->opcode_or_a_v8(d8);
+			_inst_impl->opcode_or_a_v8(d8);
 		});
 	}
 
@@ -1002,48 +1002,48 @@ namespace sleepy
 	{
 		add_instruction(opcode(0xAF), "XOR A,A", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_xor_a_v8(_regs->a);
+			_inst_impl->opcode_xor_a_v8(_regs->a);
 		});
 
 		add_instruction(opcode(0xA8), "XOR A,B", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_xor_a_v8(_regs->b);
+			_inst_impl->opcode_xor_a_v8(_regs->b);
 		});
 
 		add_instruction(opcode(0xA9), "XOR A,C", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_xor_a_v8(_regs->c);
+			_inst_impl->opcode_xor_a_v8(_regs->c);
 		});
 
 		add_instruction(opcode(0xAA), "XOR A,D", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_xor_a_v8(_regs->d);
+			_inst_impl->opcode_xor_a_v8(_regs->d);
 		});
 
 		add_instruction(opcode(0xAB), "XOR A,E", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_xor_a_v8(_regs->e);
+			_inst_impl->opcode_xor_a_v8(_regs->e);
 		});
 
 		add_instruction(opcode(0xAC), "XOR A,H", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_xor_a_v8(_regs->h);
+			_inst_impl->opcode_xor_a_v8(_regs->h);
 		});
 
 		add_instruction(opcode(0xAD), "XOR A,L", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_xor_a_v8(_regs->l);
+			_inst_impl->opcode_xor_a_v8(_regs->l);
 		});
 
 		add_instruction(opcode(0xAE), "XOR A,(HL)", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_xor_a_v8(_mem->read_byte(_regs->hl()));
+			_inst_impl->opcode_xor_a_v8(_mem->read_byte(_regs->hl()));
 		});
 
 		add_instruction(opcode(0xEE), "XOR A,d8", 8, 2, 1, [&](const u8* args)
 		{
 			u8 d8 = args[0];
-			_instImpl->opcode_xor_a_v8(d8);
+			_inst_impl->opcode_xor_a_v8(d8);
 		});
 	}
 
@@ -1051,44 +1051,44 @@ namespace sleepy
 	{
 		add_instruction(opcode(0x3C), "INC A", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_inc_r8(_regs->a);
+			_inst_impl->opcode_inc_r8(_regs->a);
 		});
 
 		add_instruction(opcode(0x04), "INC B", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_inc_r8(_regs->b);
+			_inst_impl->opcode_inc_r8(_regs->b);
 		});
 
 		add_instruction(opcode(0x0C), "INC C", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_inc_r8(_regs->c);
+			_inst_impl->opcode_inc_r8(_regs->c);
 		});
 
 		add_instruction(opcode(0x14), "INC D", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_inc_r8(_regs->d);
+			_inst_impl->opcode_inc_r8(_regs->d);
 		});
 
 		add_instruction(opcode(0x1C), "INC E", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_inc_r8(_regs->e);
+			_inst_impl->opcode_inc_r8(_regs->e);
 		});
 
 		add_instruction(opcode(0x24), "INC H", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_inc_r8(_regs->h);
+			_inst_impl->opcode_inc_r8(_regs->h);
 		});
 
 		add_instruction(opcode(0x2C), "INC L", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_inc_r8(_regs->e);
+			_inst_impl->opcode_inc_r8(_regs->e);
 		});
 
 		add_instruction(opcode(0x34), "INC (HL)", 12, 1, 0, [&](const u8*)
 		{
 			u16 addr = _regs->hl();
 			u8 val = _mem->read_byte(addr);
-			_instImpl->opcode_inc_r8(val);
+			_inst_impl->opcode_inc_r8(val);
 			_mem->write_byte(addr, val);
 		});
 	}
@@ -1123,44 +1123,44 @@ namespace sleepy
 	{
 		add_instruction(opcode(0x3D), "DEC A", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_dec_r8(_regs->a);
+			_inst_impl->opcode_dec_r8(_regs->a);
 		});
 
 		add_instruction(opcode(0x05), "DEC B", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_dec_r8(_regs->b);
+			_inst_impl->opcode_dec_r8(_regs->b);
 		});
 
 		add_instruction(opcode(0x0D), "DEC C", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_dec_r8(_regs->c);
+			_inst_impl->opcode_dec_r8(_regs->c);
 		});
 
 		add_instruction(opcode(0x15), "DEC D", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_dec_r8(_regs->d);
+			_inst_impl->opcode_dec_r8(_regs->d);
 		});
 
 		add_instruction(opcode(0x1D), "DEC E", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_dec_r8(_regs->e);
+			_inst_impl->opcode_dec_r8(_regs->e);
 		});
 
 		add_instruction(opcode(0x25), "DEC H", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_dec_r8(_regs->h);
+			_inst_impl->opcode_dec_r8(_regs->h);
 		});
 
 		add_instruction(opcode(0x2D), "DEC L", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_dec_r8(_regs->e);
+			_inst_impl->opcode_dec_r8(_regs->e);
 		});
 
 		add_instruction(opcode(0x35), "DEC (HL)", 12, 1, 0, [&](const u8*)
 		{
 			u16 addr = _regs->hl();
 			u8 val = _mem->read_byte(addr);
-			_instImpl->opcode_dec_r8(val);
+			_inst_impl->opcode_dec_r8(val);
 			_mem->write_byte(addr, val);
 		});
 	}
@@ -1195,48 +1195,48 @@ namespace sleepy
 	{
 		add_instruction(opcode(0xBF), "CP A", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_cp_r8(_regs->a);
+			_inst_impl->opcode_cp_r8(_regs->a);
 		});
 
 		add_instruction(opcode(0xB8), "CP B", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_cp_r8(_regs->b);
+			_inst_impl->opcode_cp_r8(_regs->b);
 		});
 
 		add_instruction(opcode(0xB9), "CP C", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_cp_r8(_regs->c);
+			_inst_impl->opcode_cp_r8(_regs->c);
 		});
 
 		add_instruction(opcode(0xBA), "CP D", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_cp_r8(_regs->d);
+			_inst_impl->opcode_cp_r8(_regs->d);
 		});
 
 		add_instruction(opcode(0xBB), "CP E", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_cp_r8(_regs->e);
+			_inst_impl->opcode_cp_r8(_regs->e);
 		});
 
 		add_instruction(opcode(0xBC), "CP H", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_cp_r8(_regs->h);
+			_inst_impl->opcode_cp_r8(_regs->h);
 		});
 
 		add_instruction(opcode(0xBD), "CP L", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_cp_r8(_regs->l);
+			_inst_impl->opcode_cp_r8(_regs->l);
 		});
 
 		add_instruction(opcode(0xBE), "CP (HL)", 8, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_cp_r8(_regs->l);
+			_inst_impl->opcode_cp_r8(_regs->l);
 		});
 
 		add_instruction(opcode(0xFE), "CP d8", 8, 2, 1, [&](const u8* args)
 		{
 			u8 d8 = args[0];
-			_instImpl->opcode_cp_r8(d8);
+			_inst_impl->opcode_cp_r8(d8);
 		});
 	}
 
@@ -1244,22 +1244,22 @@ namespace sleepy
 	{
 		add_instruction(opcode(0x0F), "RRCA", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rrca();
+			_inst_impl->opcode_rrca();
 		});
 
 		add_instruction(opcode(0x1F), "RRA", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rra();
+			_inst_impl->opcode_rra();
 		});
 
 		add_instruction(opcode(0x07), "RLCA", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rlca();
+			_inst_impl->opcode_rlca();
 		});
 
 		add_instruction(opcode(0x17), "RLA", 4, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rla();
+			_inst_impl->opcode_rla();
 		});
 	}
 
@@ -1391,22 +1391,22 @@ namespace sleepy
 	{
 		add_instruction(opcode(0xF5), "PUSH AF", 16, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_push_r16(_regs->af());
+			_inst_impl->opcode_push_r16(_regs->af());
 		});
 
 		add_instruction(opcode(0xC5), "PUSH BC", 16, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_push_r16(_regs->bc());
+			_inst_impl->opcode_push_r16(_regs->bc());
 		});
 
 		add_instruction(opcode(0xD5), "PUSH DE", 16, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_push_r16(_regs->de());
+			_inst_impl->opcode_push_r16(_regs->de());
 		});
 
 		add_instruction(opcode(0xE5), "PUSH HL", 16, 1, 0, [&](const u8*)
 		{
-			_instImpl->opcode_push_r16(_regs->hl());
+			_inst_impl->opcode_push_r16(_regs->hl());
 		});
 	}
 
@@ -1445,7 +1445,7 @@ namespace sleepy
 	{
 		add_instruction(opcode(0xCD), "CALL a16", 24, 0, 2, [&](const u8* args)
 		{
-			_instImpl->opcode_call_a16(args);
+			_inst_impl->opcode_call_a16(args);
 		});
 
 		add_instruction(opcode(0xCC), "CALL Z,a16", 12, 0, 2, [&](const u8* args)
@@ -1453,7 +1453,7 @@ namespace sleepy
 			if(_regs->read_flag(registers::flag::ZERO))
 			{
 				delay_cycles(12);
-				_instImpl->opcode_call_a16(args);
+				_inst_impl->opcode_call_a16(args);
 			}
 		});
 
@@ -1462,7 +1462,7 @@ namespace sleepy
 			if(_regs->read_flag(registers::flag::CARRY))
 			{
 				delay_cycles(12);
-				_instImpl->opcode_call_a16(args);
+				_inst_impl->opcode_call_a16(args);
 			}
 		});
 
@@ -1471,7 +1471,7 @@ namespace sleepy
 			if(!_regs->read_flag(registers::flag::CARRY))
 			{
 				delay_cycles(12);
-				_instImpl->opcode_call_a16(args);
+				_inst_impl->opcode_call_a16(args);
 			}
 		});
 
@@ -1480,7 +1480,7 @@ namespace sleepy
 			if(!_regs->read_flag(registers::flag::ZERO))
 			{
 				delay_cycles(12);
-				_instImpl->opcode_call_a16(args);
+				_inst_impl->opcode_call_a16(args);
 			}
 		});
 	}
@@ -1489,7 +1489,7 @@ namespace sleepy
 	{
 		add_instruction(opcode(0xC9), "RET", 16, 0, 0, [&](const u8*)
 		{
-			_instImpl->opcode_ret();
+			_inst_impl->opcode_ret();
 		});
 
 		add_instruction(opcode(0xC8), "RET Z", 8, 0, 0, [&](const u8*)
@@ -1497,7 +1497,7 @@ namespace sleepy
 			if(_regs->read_flag(registers::flag::ZERO))
 			{
 				delay_cycles(12);
-				_instImpl->opcode_ret();
+				_inst_impl->opcode_ret();
 			}
 		});
 
@@ -1506,7 +1506,7 @@ namespace sleepy
 			if(_regs->read_flag(registers::flag::CARRY))
 			{
 				delay_cycles(12);
-				_instImpl->opcode_ret();
+				_inst_impl->opcode_ret();
 			}
 		});
 
@@ -1515,7 +1515,7 @@ namespace sleepy
 			if(!_regs->read_flag(registers::flag::ZERO))
 			{
 				delay_cycles(12);
-				_instImpl->opcode_ret();
+				_inst_impl->opcode_ret();
 			}
 		});
 
@@ -1524,13 +1524,13 @@ namespace sleepy
 			if(!_regs->read_flag(registers::flag::CARRY))
 			{
 				delay_cycles(12);
-				_instImpl->opcode_ret();
+				_inst_impl->opcode_ret();
 			}
 		});
 
 		add_instruction(opcode(0xD9), "RETI", 16, 0, 0, [&](const u8*)
 		{
-			_instImpl->opcode_ret();
+			_inst_impl->opcode_ret();
 		});
 	}
 
@@ -1538,45 +1538,45 @@ namespace sleepy
 	{
 		add_instruction(opcode(0xCB, 0x00), "RLC B", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rlc(_regs->b);
+			_inst_impl->opcode_rlc(_regs->b);
 		});
 
 		add_instruction(opcode(0xCB, 0x01), "RLC C", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rlc(_regs->c);
+			_inst_impl->opcode_rlc(_regs->c);
 		});
 
 		add_instruction(opcode(0xCB, 0x02), "RLC D", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rlc(_regs->d);
+			_inst_impl->opcode_rlc(_regs->d);
 		});
 
 		add_instruction(opcode(0xCB, 0x03), "RLC E", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rlc(_regs->e);
+			_inst_impl->opcode_rlc(_regs->e);
 		});
 
 		add_instruction(opcode(0xCB, 0x04), "RLC H", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rlc(_regs->h);
+			_inst_impl->opcode_rlc(_regs->h);
 		});
 
 		add_instruction(opcode(0xCB, 0x05), "RLC L", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rlc(_regs->l);
+			_inst_impl->opcode_rlc(_regs->l);
 		});
 
 		add_instruction(opcode(0xCB, 0x06), "RLC (HL)", 16, 2, 0, [&](const u8*)
 		{
 			u16 hl = _regs->hl();
 			u8 val = _mem->read_byte(hl);
-			_instImpl->opcode_rlc(val);
+			_inst_impl->opcode_rlc(val);
 			_mem->write_byte(hl, val);
 		});
 
 		add_instruction(opcode(0xCB, 0x07), "RLC A", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rlc(_regs->a);
+			_inst_impl->opcode_rlc(_regs->a);
 		});
 	}
 
@@ -1584,45 +1584,45 @@ namespace sleepy
 	{
 		add_instruction(opcode(0xCB, 0x08), "RRC B", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rrc(_regs->b);
+			_inst_impl->opcode_rrc(_regs->b);
 		});
 
 		add_instruction(opcode(0xCB, 0x09), "RRC C", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rrc(_regs->c);
+			_inst_impl->opcode_rrc(_regs->c);
 		});
 
 		add_instruction(opcode(0xCB, 0x0A), "RRC D", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rrc(_regs->d);
+			_inst_impl->opcode_rrc(_regs->d);
 		});
 
 		add_instruction(opcode(0xCB, 0x0B), "RRC E", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rrc(_regs->e);
+			_inst_impl->opcode_rrc(_regs->e);
 		});
 
 		add_instruction(opcode(0xCB, 0x0C), "RRC H", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rrc(_regs->h);
+			_inst_impl->opcode_rrc(_regs->h);
 		});
 
 		add_instruction(opcode(0xCB, 0x0D), "RRC L", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rrc(_regs->l);
+			_inst_impl->opcode_rrc(_regs->l);
 		});
 
 		add_instruction(opcode(0xCB, 0x0E), "RRC (HL)", 16, 2, 0, [&](const u8*)
 		{
 			u16 hl = _regs->hl();
 			u8 val = _mem->read_byte(hl);
-			_instImpl->opcode_rrc(val);
+			_inst_impl->opcode_rrc(val);
 			_mem->write_byte(hl, val);
 		});
 
 		add_instruction(opcode(0xCB, 0x0F), "RRC A", 8, 2, 0, [&](const u8*)
 		{
-			_instImpl->opcode_rrc(_regs->a);
+			_inst_impl->opcode_rrc(_regs->a);
 		});
 	}
 
