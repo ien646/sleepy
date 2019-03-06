@@ -59,6 +59,7 @@ namespace sleepy
 		initmap_ret();
 
 		initmap_rlc();
+		initmap_rrc();
 	}
 
 	void vcpu_impl::initmap_misc()
@@ -1565,7 +1566,7 @@ namespace sleepy
 			_instImpl->opcode_rlc(_regs->l);
 		});
 
-		add_instruction(opcode(0xCB, 0x06), "RLC (HL)", 8, 16, 0, [&](const u8*)
+		add_instruction(opcode(0xCB, 0x06), "RLC (HL)", 16, 2, 0, [&](const u8*)
 		{
 			u16 hl = _regs->hl();
 			u8 val = _mem->read_byte(hl);
@@ -1576,6 +1577,52 @@ namespace sleepy
 		add_instruction(opcode(0xCB, 0x07), "RLC A", 8, 2, 0, [&](const u8*)
 		{
 			_instImpl->opcode_rlc(_regs->a);
+		});
+	}
+
+	void vcpu_impl::initmap_rrc()
+	{
+		add_instruction(opcode(0xCB, 0x08), "RRC B", 8, 2, 0, [&](const u8*)
+		{
+			_instImpl->opcode_rrc(_regs->b);
+		});
+
+		add_instruction(opcode(0xCB, 0x09), "RRC C", 8, 2, 0, [&](const u8*)
+		{
+			_instImpl->opcode_rrc(_regs->c);
+		});
+
+		add_instruction(opcode(0xCB, 0x0A), "RRC D", 8, 2, 0, [&](const u8*)
+		{
+			_instImpl->opcode_rrc(_regs->d);
+		});
+
+		add_instruction(opcode(0xCB, 0x0B), "RRC E", 8, 2, 0, [&](const u8*)
+		{
+			_instImpl->opcode_rrc(_regs->e);
+		});
+
+		add_instruction(opcode(0xCB, 0x0C), "RRC H", 8, 2, 0, [&](const u8*)
+		{
+			_instImpl->opcode_rrc(_regs->h);
+		});
+
+		add_instruction(opcode(0xCB, 0x0D), "RRC L", 8, 2, 0, [&](const u8*)
+		{
+			_instImpl->opcode_rrc(_regs->l);
+		});
+
+		add_instruction(opcode(0xCB, 0x0E), "RRC (HL)", 16, 2, 0, [&](const u8*)
+		{
+			u16 hl = _regs->hl();
+			u8 val = _mem->read_byte(hl);
+			_instImpl->opcode_rrc(val);
+			_mem->write_byte(hl, val);
+		});
+
+		add_instruction(opcode(0xCB, 0x0F), "RRC A", 8, 2, 0, [&](const u8*)
+		{
+			_instImpl->opcode_rrc(_regs->a);
 		});
 	}
 

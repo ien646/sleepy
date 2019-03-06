@@ -25,8 +25,7 @@ namespace sleepy
 		{
 			_regs->set_flag(registers::flag::CARRY);
 			_regs->set_flag(registers::flag::HALF_CARRY);
-		}
-		else if (result > 0x0F)
+		}else if (result > 0x0F)
 		{
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
@@ -370,6 +369,26 @@ namespace sleepy
 			_regs->set_flag(registers::flag::CARRY);
 		}
 
+		vref = U8(aux);
+	}
+
+	void instruction_impl::opcode_rrc(u8& vref)
+	{
+		_regs->reset_flags();
+		if(vref == 0x00) 
+		{
+			_regs->set_flag(registers::flag::ZERO);
+			return;
+		}
+
+		bool rbit = vref % 2 == 1;
+		u16 aux = U16(vref) >> 1;
+		if(rbit) 
+		{
+			aux |= 0x80u;
+			_regs->set_flag(registers::flag::CARRY);
+		}
+		
 		vref = U8(aux);
 	}
 }
