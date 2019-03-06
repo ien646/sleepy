@@ -41,6 +41,16 @@ namespace sleepy
 		return U8(val);
 	}
 
+	constexpr u8 lonibble(u8 val)
+	{
+		return val & 0x0F;
+	}
+
+	constexpr u8 hinibble(u8 val)
+	{
+		return val >> 4;
+	}
+
 	constexpr u16 compose_word(u8 hibyte, u8 lobyte)
 	{
 		return (hibyte << 8) | lobyte;

@@ -16,20 +16,21 @@ namespace sleepy
 
 		u16 result = U16(_regs->a) + U16(v8);
 
+		// Z
 		if (U8(result) == 0x00)
 		{
 			_regs->set_flag(registers::flag::ZERO);
 		}
-
+		// C
 		if (result > 0xFF)
 		{
 			_regs->set_flag(registers::flag::CARRY);
-			_regs->set_flag(registers::flag::HALF_CARRY);
-		}else if (result > 0x0F)
+		}
+		// H
+		if((lonibble(v8) + lonibble(_regs->a)) > 0x0F)
 		{
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
-
 		_regs->a = U8(result);
 	}
 
@@ -38,16 +39,17 @@ namespace sleepy
 		_regs->reset_flag(registers::flag::SUB);
 
 		u32 result = U32(_regs->hl()) + U32(v16);
+
+		// C
 		if (result > 0x0000FFFF)
 		{
 			_regs->set_flag(registers::flag::CARRY);
-			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
-		else if (result > 0x000000FF)
+		// H
+		if((lonibble(hibyte(v16)) + lonibble(hibyte(_regs->hl()))) > 0x0F)
 		{
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
-
 		_regs->hl(U16(result));
 	}
 
@@ -65,9 +67,8 @@ namespace sleepy
 		if (result > 0xFF)
 		{
 			_regs->set_flag(registers::flag::CARRY);
-			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
-		else if (result > 0x0F)
+		if (U8(lonibble(_regs->a) - lonibble(v8)) > 0x0F)
 		{
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
@@ -77,8 +78,8 @@ namespace sleepy
 
 	void instruction_impl::opcode_adc_a_v8(u8 v8)
 	{
-		u16 result = U16(_regs->a) + U16(v8)
-			+ (_regs->read_flag(registers::flag::CARRY) ? 1 : 0);
+		u8 carry = _regs->read_flag(registers::flag::CARRY) ? U8(1) : U8(0);
+		u16 result = U16(_regs->a) + U16(v8) + carry;
 
 		_regs->reset_flags();
 
@@ -90,9 +91,8 @@ namespace sleepy
 		if (result > 0xFF)
 		{
 			_regs->set_flag(registers::flag::CARRY);
-			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
-		else if (result > 0x0F)
+		if ((lonibble(v8) + lonibble(_regs->a) + carry) > 0x0F)
 		{
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
@@ -102,23 +102,24 @@ namespace sleepy
 
 	void instruction_impl::opcode_sbc_a_v8(u8 v8)
 	{
-		u16 result = U16(_regs->a) 
-			- (v8 + (_regs->read_flag(registers::flag::CARRY) ? 1 : 0));
+		u8 carry = _regs->read_flag(registers::flag::CARRY) ? 1 : 0;
+		u16 result = U16(_regs->a) - (v8 + carry);
 
 		_regs->reset_flags();
 		_regs->set_flag(registers::flag::SUB);
 
+		// Z
 		if (U8(result) == 0x00)
 		{
 			_regs->set_flag(registers::flag::ZERO);
 		}
-
+		// C
 		if (result > 0xFF)
 		{
 			_regs->set_flag(registers::flag::CARRY);
-			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
-		else if (result > 0x0F)
+		// H
+		if (U8(lonibble(_regs->a) - lonibble(v8 + carry)) > 0x0F)
 		{
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
@@ -175,16 +176,16 @@ namespace sleepy
 		_regs->reset_flag(registers::flag::HALF_CARRY);
 		_regs->reset_flag(registers::flag::SUB);
 
+		if(lonibble(reg) == 0x0F)
+		{
+			_regs->set_flag(registers::flag::HALF_CARRY);
+		}
+
 		++reg;
 
 		if (reg == 0x00)
 		{
 			_regs->set_flag(registers::flag::ZERO);
-		}
-
-		if (reg > 0x0F)
-		{
-			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
 	}
 
@@ -194,16 +195,16 @@ namespace sleepy
 		_regs->reset_flag(registers::flag::HALF_CARRY);
 		_regs->set_flag(registers::flag::SUB);
 
+		if (lonibble(reg) == 0x00)
+		{
+			_regs->set_flag(registers::flag::HALF_CARRY);
+		}
+
 		--reg;
 
 		if (reg == 0x00)
 		{
 			_regs->set_flag(registers::flag::ZERO);
-		}
-
-		if (reg > 0x0F)
-		{
-			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
 	}
 
@@ -221,13 +222,11 @@ namespace sleepy
 		if (result > 0xFF)
 		{
 			_regs->set_flag(registers::flag::CARRY);
-			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
-		else if (result > 0x0F)
+		if (U8(lonibble(_regs->a) - lonibble(reg)) > 0x0F)
 		{
 			_regs->set_flag(registers::flag::HALF_CARRY);
 		}
-		/* -- omit result -- */
 	}
 
 	void instruction_impl::opcode_rrca()
@@ -308,13 +307,13 @@ namespace sleepy
 
 	void instruction_impl::opcode_daa()
 	{
-		u8 lowNibble = 0x0F & _regs->a;
-		u8 hiNibble = (0xF0 & _regs->a) >> 4;
-		if ((lowNibble > 9) || (_regs->read_flag(registers::flag::HALF_CARRY)))
+		u8 lo_nibble = 0x0F & _regs->a;
+		u8 hi_nibble = (0xF0 & _regs->a) >> 4;
+		if ((lo_nibble > 9) || (_regs->read_flag(registers::flag::HALF_CARRY)))
 		{
 			_regs->a += 0x06;
 		}
-		if ((hiNibble > 9) || (_regs->read_flag(registers::flag::CARRY)))
+		if ((hi_nibble > 9) || (_regs->read_flag(registers::flag::CARRY)))
 		{
 			_regs->a += 0x60;
 			_regs->set_flag(registers::flag::CARRY);

@@ -183,7 +183,15 @@ namespace sleepy
 			sub_a_b.call(nullptr);
 			REQUIRE(regs.read_flag(FLAG_SUB));
 			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
-			REQUIRE(!(regs.read_flag(FLAG_HCARRY)));
+			REQUIRE((regs.read_flag(FLAG_HCARRY)));
+			REQUIRE(!(regs.read_flag(FLAG_CARRY)));
+
+			regs.a = 0xF0;
+			regs.b = 0x01;
+			sub_a_b.call(nullptr);
+			REQUIRE(regs.read_flag(FLAG_SUB));
+			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
+			REQUIRE((regs.read_flag(FLAG_HCARRY)));
 			REQUIRE(!(regs.read_flag(FLAG_CARRY)));
 
 			regs.a = 0x11;
@@ -191,7 +199,7 @@ namespace sleepy
 			sub_a_b.call(nullptr);
 			REQUIRE(regs.read_flag(FLAG_SUB));
 			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
-			REQUIRE(regs.read_flag(FLAG_HCARRY));
+			REQUIRE(!regs.read_flag(FLAG_HCARRY));
 			REQUIRE(!(regs.read_flag(FLAG_CARRY)));
 		}
 	};

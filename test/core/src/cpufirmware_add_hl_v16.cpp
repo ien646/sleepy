@@ -91,13 +91,22 @@ namespace sleepy
 			regs.bc(0x0001);
 			add_hl_bc.call(nullptr);
 			REQUIRE(!(regs.read_flag(FLAG_CARRY)));
-			REQUIRE(regs.read_flag(FLAG_HCARRY));
+			REQUIRE(!regs.read_flag(FLAG_HCARRY));
 			REQUIRE(!(regs.read_flag(FLAG_SUB)));
 			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
 
 			regs.reset_flags();
 			regs.hl(0xFFFF);
 			regs.bc(0x0001);
+			add_hl_bc.call(nullptr);
+			REQUIRE(regs.read_flag(FLAG_CARRY));
+			REQUIRE(!regs.read_flag(FLAG_HCARRY));
+			REQUIRE(!(regs.read_flag(FLAG_SUB)));
+			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
+
+			regs.reset_flags();
+			regs.hl(0xFFFF);
+			regs.bc(0x0100);
 			add_hl_bc.call(nullptr);
 			REQUIRE(regs.read_flag(FLAG_CARRY));
 			REQUIRE(regs.read_flag(FLAG_HCARRY));

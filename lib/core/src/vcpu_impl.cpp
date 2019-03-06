@@ -108,21 +108,22 @@ namespace sleepy
 
 		add_instruction(opcode(0xE8), "ADD SP,d8", 16, 2, 1, [&](const u8* args)
 		{
-			u8 d8 = *&args[0];
-			u32 val = U32(_regs->sp) + U32(d8);
-			_regs->sp = U16(val);
-
 			_regs->reset_flags();
 
-			if (val > BYTE_MAX)
+			u8 d8 = *&args[0];
+			u32 val = U32(_regs->sp) + U32(d8);	
+			bool hcarry = (hibyte(_regs->sp) == 0xFFu)
+				&& ((U16(lobyte(_regs->sp)) + U16(d8)) > 0xFF);
+
+			if (val > 0xFFFFu)
 			{
 				_regs->set_flag(registers::flag::CARRY);
-				_regs->set_flag(registers::flag::HALF_CARRY);
 			}
-			else if (val > HBYTE_MAX)
+			if (hcarry)
 			{
 				_regs->set_flag(registers::flag::HALF_CARRY);
 			}
+			_regs->sp = U16(val);
 		});		
 	}
 
@@ -628,21 +629,20 @@ namespace sleepy
 
 		add_instruction(opcode(0xF8), "LD HL, SP + d8", 12, 2, 1, [&](const u8* args)
 		{
-			u8 d8 = *(&args[0]);
-			u32 val = d8 + _regs->sp;
-			_regs->hl(U16(val));
-
 			_regs->reset_flags();
 
-			if (val > BYTE_MAX)
+			u8 d8 = *(&args[0]);
+			u32 val = U16(_regs->sp) + U16(d8);
+
+			if (val > 0xFF)
 			{
 				_regs->set_flag(registers::flag::CARRY);
-				_regs->set_flag(registers::flag::HALF_CARRY);
 			}
-			else if (val > HBYTE_MAX)
+			if ((lonibble(lobyte(_regs->sp)) + lonibble(d8)) > 0x0F)
 			{
 				_regs->set_flag(registers::flag::HALF_CARRY);
 			}
+			_regs->hl(U16(val));
 		});
 
 		add_instruction(opcode(0xEA), "LD (a16), A", 16, 3, 2, [&](const u8* args)

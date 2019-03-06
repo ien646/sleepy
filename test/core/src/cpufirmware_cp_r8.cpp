@@ -20,6 +20,7 @@ namespace sleepy
 			//const vcpu_instruction& cp_phl = inst_map[opcode(0xBE)];
 			//const vcpu_instruction& cp_d8 = inst_map[opcode(0xFE)];
 
+			regs.reset_flags();
 			regs.a = 0x00;
 			cp_a.call(nullptr);
 			REQUIRE(regs.read_flag(FLAG_SUB));
@@ -27,6 +28,7 @@ namespace sleepy
 			REQUIRE(!(regs.read_flag(FLAG_HCARRY)));
 			REQUIRE(!(regs.read_flag(FLAG_CARRY)));
 
+			regs.reset_flags();
 			regs.a = 0x00;
 			regs.b = 0x01;
 			cp_b.call(nullptr);
@@ -35,20 +37,22 @@ namespace sleepy
 			REQUIRE(regs.read_flag(FLAG_HCARRY));
 			REQUIRE(regs.read_flag(FLAG_CARRY));
 
+			regs.reset_flags();
 			regs.a = 0x10;
 			regs.b = 0x01;
 			cp_b.call(nullptr);
 			REQUIRE(regs.read_flag(FLAG_SUB));
 			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
-			REQUIRE(!(regs.read_flag(FLAG_HCARRY)));
+			REQUIRE((regs.read_flag(FLAG_HCARRY)));
 			REQUIRE(!(regs.read_flag(FLAG_CARRY)));
 
+			regs.reset_flags();
 			regs.a = 0x11;
 			regs.b = 0x01;
 			cp_b.call(nullptr);
 			REQUIRE(regs.read_flag(FLAG_SUB));
 			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
-			REQUIRE(regs.read_flag(FLAG_HCARRY));
+			REQUIRE(!regs.read_flag(FLAG_HCARRY));
 			REQUIRE(!(regs.read_flag(FLAG_CARRY))); 
 		}
 	};

@@ -185,7 +185,7 @@ namespace sleepy
 			add_a_a.call(nullptr);
 			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
 			REQUIRE(!(regs.read_flag(FLAG_SUB)));
-			REQUIRE(regs.read_flag(FLAG_HCARRY));
+			REQUIRE(!regs.read_flag(FLAG_HCARRY));
 			REQUIRE(regs.read_flag(FLAG_CARRY));
 
 			// 255 + 1 == 0, sets halfcarry, carry, and zero

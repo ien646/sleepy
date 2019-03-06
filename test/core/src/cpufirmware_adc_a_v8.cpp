@@ -201,7 +201,7 @@ namespace sleepy
 			regs.b = 0x00;
 			adc_a_b.call(nullptr);
 			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
-			REQUIRE(regs.read_flag(FLAG_HCARRY));
+			REQUIRE(!regs.read_flag(FLAG_HCARRY));
 			REQUIRE(!(regs.read_flag(FLAG_CARRY)));
 			REQUIRE(!(regs.read_flag(FLAG_SUB)));
 

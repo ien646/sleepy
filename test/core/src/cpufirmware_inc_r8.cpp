@@ -62,10 +62,17 @@ namespace sleepy
 			REQUIRE(!(regs.read_flag(FLAG_SUB)));
 			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
 
-			regs.a = 0xFF;
+			regs.a = 0xFE;
 			inc_a.call(nullptr);
 			REQUIRE(!(regs.read_flag(FLAG_CARRY)));
 			REQUIRE(!(regs.read_flag(FLAG_HCARRY)));
+			REQUIRE(!(regs.read_flag(FLAG_SUB)));
+			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
+
+			regs.a = 0xFF;
+			inc_a.call(nullptr);
+			REQUIRE(!(regs.read_flag(FLAG_CARRY)));
+			REQUIRE((regs.read_flag(FLAG_HCARRY)));
 			REQUIRE(!(regs.read_flag(FLAG_SUB)));
 			REQUIRE(regs.read_flag(FLAG_ZERO));
 		}

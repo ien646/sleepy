@@ -110,7 +110,7 @@ namespace sleepy
 			ld_hl_spd8.call(&d8);
 			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
 			REQUIRE(!(regs.read_flag(FLAG_SUB)));
-			REQUIRE(regs.read_flag(FLAG_HCARRY));
+			REQUIRE(!regs.read_flag(FLAG_HCARRY));
 			REQUIRE(!(regs.read_flag(FLAG_CARRY)));
 
 			regs.reset_flags();
@@ -123,8 +123,28 @@ namespace sleepy
 			REQUIRE(regs.read_flag(FLAG_CARRY));
 
 			regs.reset_flags();
+			regs.sp = 0x0F00;
+			d8 = 0x01;
+			ld_hl_spd8.call(&d8);
+			REQUIRE(regs.hl() == 0x0F01);
+			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
+			REQUIRE(!(regs.read_flag(FLAG_SUB)));
+			REQUIRE(!regs.read_flag(FLAG_HCARRY));
+			REQUIRE(regs.read_flag(FLAG_CARRY));
+
+			regs.reset_flags();
 			regs.sp = 0xFFF1;
-			d8 = HBYTE_MAX;
+			d8 = 0xFF;
+			ld_hl_spd8.call(&d8);
+			REQUIRE(regs.hl() == U16(0xFFF1 + 0xFF));
+			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
+			REQUIRE(!(regs.read_flag(FLAG_SUB)));
+			REQUIRE(regs.read_flag(FLAG_HCARRY));
+			REQUIRE(regs.read_flag(FLAG_CARRY));
+
+			regs.reset_flags();
+			regs.sp = 0xFFFF;
+			d8 = 0x01;
 			ld_hl_spd8.call(&d8);
 			REQUIRE(regs.hl() == 0x0000);
 			REQUIRE(!(regs.read_flag(FLAG_ZERO)));
