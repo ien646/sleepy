@@ -353,4 +353,23 @@ namespace sleepy
 		_regs->pc = _mem->read_word(_regs->sp);
 		_regs->sp += 2;
 	}
+
+	void instruction_impl::opcode_rlc(u8& vref)
+	{
+		_regs->reset_flags();
+		if(vref == 0x00) 
+		{
+			_regs->set_flag(registers::flag::ZERO);
+			return;
+		}
+
+		u16 aux = U16(vref) << 1;
+		if(aux > 0xFF)
+		{
+			aux += 1; // rotated bit
+			_regs->set_flag(registers::flag::CARRY);
+		}
+
+		vref = U8(aux);
+	}
 }

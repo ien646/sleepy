@@ -34,8 +34,8 @@ namespace sleepy
 
 		void init_inst_map();
 
+		/* -- Non prefixed opcodes -- */
 		void initmap_misc();
-
 		void initmap_ld_a_x8();
 		void initmap_ld_b_x8();
 		void initmap_ld_c_x8();
@@ -49,13 +49,11 @@ namespace sleepy
 		void initmap_ld_a_ptr();
 		void initmap_ld_r16_d16();
 		void initmap_ld_misc();
-
 		void initmap_add_a_x8();
 		void initmap_add_hl_r16();
 		void initmap_sub_a_x8();
 		void initmap_adc_a_x8();
 		void initmap_sbc_a_x8();
-
 		void initmap_and_a_x8();
 		void initmap_or_a_x8();
 		void initmap_xor_a_x8();
@@ -63,17 +61,17 @@ namespace sleepy
 		void initmap_inc_r16();
 		void initmap_dec_r8();
 		void initmap_dec_r16();
-
 		void initmap_cp_r8();
 		void initmap_bitrotations();
 		void initmap_rst();
 		void initmap_jumps();
-
 		void initmap_push();
 		void initmap_pop();
-
 		void initmap_call();
 		void initmap_ret();
+
+		/* -- 0xCB prefixed opcodes -- */
+		void initmap_rlc();
 
 		void add_instruction(
 			opcode opc, 
