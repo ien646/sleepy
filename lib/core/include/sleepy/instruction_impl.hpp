@@ -44,5 +44,6 @@ namespace sleepy
 
 		void opcode_rlc(u8& vref);
 		void opcode_rrc(u8& vref);
+		void opcode_rl(u8& vref);
 	};
 }

@@ -73,6 +73,7 @@ namespace sleepy
 		/* -- 0xCB prefixed opcodes -- */
 		void initmap_rlc();
 		void initmap_rrc();
+		void initmap_rl();
 
 		void add_instruction(
 			opcode opc, 

@@ -78,6 +78,12 @@ namespace sleepy
                 inst.call(nullptr);
                 REQUIRE(reg == 0x00);
 
+                regs.set_flag(registers::flag::CARRY);
+                reg = 0x00;
+                inst.call(nullptr);
+                REQUIRE(reg == 0x00);
+                regs.reset_flags();
+
                 reg = 0x01;
                 inst.call(nullptr);
                 REQUIRE(reg == 0x02);
