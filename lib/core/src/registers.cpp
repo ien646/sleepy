@@ -76,12 +76,12 @@ namespace sleepy
 		f ^= flagMask;
 	}
 
-	bool registers::read_flag(flag flagMask)
+	bool registers::read_flag(flag flagMask) const
 	{
 		return (U8(flagMask) | f) == f;
 	}
 
-	bool registers::read_flag(u8 flagMask)
+	bool registers::read_flag(u8 flagMask) const
 	{
 		return (flagMask | f) == f;
 	}

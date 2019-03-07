@@ -51,8 +51,8 @@ namespace sleepy
 		void reset_flag(u8 flagMask);
 		void invert_flag(flag flagMask);
 		void invert_flag(u8 flagMask);
-		bool read_flag(flag flagMask);
-		bool read_flag(u8 flagMask);
+		bool read_flag(flag flagMask) const;
+		bool read_flag(u8 flagMask) const;
 		
 		void reset_flags();
 

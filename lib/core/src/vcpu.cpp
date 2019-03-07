@@ -36,7 +36,7 @@ namespace sleepy
         return _regs;
     }
 
-    const vcpu_instruction& vcpu::get_inst_data(opcode op)
+    const vcpu_instruction& vcpu::get_inst_data(opcode op) const
     {
         return _vfw.inst_map[op];
     }

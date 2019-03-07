@@ -32,7 +32,7 @@ namespace sleepy
         void setup_debug(debug_func_t pre_exec, debug_func_t post_exec);
         void enable_debug(bool enabled);
 
-        const vcpu_instruction& get_inst_data(opcode op);
+        const vcpu_instruction& get_inst_data(opcode op) const;
 
         const memory& memory() const noexcept;
         const registers& registers() const noexcept;

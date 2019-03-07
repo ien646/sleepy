@@ -22,6 +22,6 @@ namespace sleepy
         instruction_map(instruction_map&& move_src) = delete;
 
         void emplace(opcode, vcpu_instruction&&);
-        const vcpu_instruction& operator[](opcode);
+        const vcpu_instruction& operator[](opcode) const;
     };
 }

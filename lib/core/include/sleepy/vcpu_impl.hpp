@@ -23,7 +23,7 @@ namespace sleepy
 
 		void enable_interrupts() { _interrupts_enabled = true; }
 		void disable_interrupts() { _interrupts_enabled = false; }
-		bool interrupts_enabled() { return _interrupts_enabled; }
+		bool interrupts_enabled() const noexcept { return _interrupts_enabled; }
         void delay_cycles(size_t count) { UNREFERENCED_PARAMETER(count); return; }
 
 	private:

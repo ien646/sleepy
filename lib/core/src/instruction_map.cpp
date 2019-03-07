@@ -14,7 +14,7 @@ namespace sleepy
         }
     }
 
-    const vcpu_instruction& instruction_map::operator[](opcode opc)
+    const vcpu_instruction& instruction_map::operator[](opcode opc) const
     {
         if(opc.is_extended())
         {

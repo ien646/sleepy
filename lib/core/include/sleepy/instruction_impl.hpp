@@ -14,10 +14,7 @@ namespace sleepy
 		registers* _regs;
 
 	public:
-		instruction_impl() = delete;
 		instruction_impl(memory* mem_ptr, registers* reg_ptr);
-		instruction_impl(const instruction_impl& copy_src) = delete;
-		instruction_impl(instruction_impl&& move_src) = default;
 
 		void opcode_add_a_v8(u8 v8);
 		void opcode_add_hl_v16(u16 v16);
