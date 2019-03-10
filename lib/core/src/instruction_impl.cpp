@@ -408,7 +408,28 @@ namespace sleepy
 			_regs->set_flag(registers::flag::CARRY);
 		}
 		aux += carry;
+		if(U8(aux) == 0x00u) { _regs->set_flag(registers::flag::ZERO); }
 		
 		vref = U8(aux);
+	}
+
+	void instruction_impl::opcode_rr(u8& vref)
+	{
+		bool carry = _regs->read_flag(registers::flag::CARRY);
+		_regs->reset_flags();
+		if(vref == 0x00 && !carry) 
+		{
+			_regs->set_flag(registers::flag::ZERO);
+			return;
+		}
+
+		bool bit0 = get_bit(vref, 0);
+		u16 aux = U16(vref) >> 1;
+
+		if(bit0) { _regs->set_flag(registers::flag::CARRY); }
+		if(carry) { aux |= 0x80u; }
+		if(U8(aux) == 0x00u) { _regs->set_flag(registers::flag::ZERO); }
+
+        vref = U8(aux);
 	}
 }

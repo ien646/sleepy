@@ -4,19 +4,19 @@
 
 namespace sleepy
 {
-	TEST_CASE("CpuFirmware_RL")
+	TEST_CASE("CpuFirmware_RR")
 	{
-        SECTION("CpuFirmware_RL_Registers_Flags")
+        SECTION("CpuFirmware_RR_Registers_Flags")
         {
             CPUFW_SLEEPY_TESTINIT();
 
-            auto& rl_b = inst_map[opcode(0xCB, 0x10)];
-            auto& rl_c = inst_map[opcode(0xCB, 0x11)];
-            auto& rl_d = inst_map[opcode(0xCB, 0x12)];
-            auto& rl_e = inst_map[opcode(0xCB, 0x13)];
-            auto& rl_h = inst_map[opcode(0xCB, 0x14)];
-            auto& rl_l = inst_map[opcode(0xCB, 0x15)];
-            auto& rl_a = inst_map[opcode(0xCB, 0x17)];
+            auto& rr_b = inst_map[opcode(0xCB, 0x18)];
+            auto& rr_c = inst_map[opcode(0xCB, 0x19)];
+            auto& rr_d = inst_map[opcode(0xCB, 0x1A)];
+            auto& rr_e = inst_map[opcode(0xCB, 0x1B)];
+            auto& rr_h = inst_map[opcode(0xCB, 0x1C)];
+            auto& rr_l = inst_map[opcode(0xCB, 0x1D)];
+            auto& rr_a = inst_map[opcode(0xCB, 0x1F)];
 
             auto test_zero_flag = [&](const vcpu_instruction& inst, u8& reg)
             {
@@ -28,49 +28,71 @@ namespace sleepy
                 regs.reset_flags();
                 reg = 0x01;
                 inst.call(nullptr);
-                REQUIRE(!regs.read_flag(registers::flag::ZERO));
-            };
-            test_zero_flag(rl_b, regs.b);
-            test_zero_flag(rl_c, regs.c);
-            test_zero_flag(rl_d, regs.d);
-            test_zero_flag(rl_e, regs.e);
-            test_zero_flag(rl_h, regs.h);
-            test_zero_flag(rl_l, regs.l);
-            test_zero_flag(rl_a, regs.a);
-
-            auto test_carry_flag = [&](const vcpu_instruction& inst, u8& reg)
-            {
-                regs.reset_flags();
-                reg = 0x79;
-                inst.call(nullptr);
-                REQUIRE(!regs.read_flag(registers::flag::CARRY));
+                REQUIRE(regs.read_flag(registers::flag::ZERO));
 
                 regs.reset_flags();
                 reg = 0x80;
                 inst.call(nullptr);
+                REQUIRE(!regs.read_flag(registers::flag::ZERO));
+
+                regs.reset_flags();
+                regs.set_flag(registers::flag::CARRY);
+                reg = 0x00;
+                inst.call(nullptr);
+                REQUIRE(!regs.read_flag(registers::flag::ZERO));
+
+            };
+            test_zero_flag(rr_b, regs.b);
+            test_zero_flag(rr_c, regs.c);
+            test_zero_flag(rr_d, regs.d);
+            test_zero_flag(rr_e, regs.e);
+            test_zero_flag(rr_h, regs.h);
+            test_zero_flag(rr_l, regs.l);
+            test_zero_flag(rr_a, regs.a);
+
+            auto test_carry_flag = [&](const vcpu_instruction& inst, u8& reg)
+            {
+                regs.reset_flags();
+                reg = 0x00;
+                inst.call(nullptr);
+                REQUIRE(!regs.read_flag(registers::flag::CARRY));
+
+                regs.reset_flags();
+                reg = 0x01;
+                inst.call(nullptr);
+                REQUIRE(regs.read_flag(registers::flag::CARRY));
+
+                regs.reset_flags();
+                reg = 0x02;
+                inst.call(nullptr);
+                REQUIRE(!regs.read_flag(registers::flag::CARRY));
+
+                regs.reset_flags();
+                reg = 0x03;
+                inst.call(nullptr);
                 REQUIRE(regs.read_flag(registers::flag::CARRY));
             };
 
-            test_carry_flag(rl_b, regs.b);
-            test_carry_flag(rl_c, regs.c);
-            test_carry_flag(rl_d, regs.d);
-            test_carry_flag(rl_e, regs.e);
-            test_carry_flag(rl_h, regs.h);
-            test_carry_flag(rl_l, regs.l);
-            test_carry_flag(rl_a, regs.a);
+            test_carry_flag(rr_b, regs.b);
+            test_carry_flag(rr_c, regs.c);
+            test_carry_flag(rr_d, regs.d);
+            test_carry_flag(rr_e, regs.e);
+            test_carry_flag(rr_h, regs.h);
+            test_carry_flag(rr_l, regs.l);
+            test_carry_flag(rr_a, regs.a);
         }
 
-        SECTION("CpuFirmware_RL_Registers_Operation")
+        SECTION("CpuFirmware_RR_Registers_Operation")
         {
             CPUFW_SLEEPY_TESTINIT();
 
-            auto& rl_b = inst_map[opcode(0xCB, 0x10)];
-            auto& rl_c = inst_map[opcode(0xCB, 0x11)];
-            auto& rl_d = inst_map[opcode(0xCB, 0x12)];
-            auto& rl_e = inst_map[opcode(0xCB, 0x13)];
-            auto& rl_h = inst_map[opcode(0xCB, 0x14)];
-            auto& rl_l = inst_map[opcode(0xCB, 0x15)];
-            auto& rl_a = inst_map[opcode(0xCB, 0x17)];
+            auto& rr_b = inst_map[opcode(0xCB, 0x18)];
+            auto& rr_c = inst_map[opcode(0xCB, 0x19)];
+            auto& rr_d = inst_map[opcode(0xCB, 0x1A)];
+            auto& rr_e = inst_map[opcode(0xCB, 0x1B)];
+            auto& rr_h = inst_map[opcode(0xCB, 0x1C)];
+            auto& rr_l = inst_map[opcode(0xCB, 0x1D)];
+            auto& rr_a = inst_map[opcode(0xCB, 0x1F)];
 
             auto test_value = [&](const vcpu_instruction& inst, u8& reg)
             {
@@ -83,34 +105,33 @@ namespace sleepy
                 regs.set_flag(registers::flag::CARRY);
                 reg = 0x00;
                 inst.call(nullptr);
-                REQUIRE(reg == 0x01);
+                REQUIRE(reg == 0x80);
                 regs.reset_flags();
 
                 regs.reset_flags();
                 reg = 0x01;
                 inst.call(nullptr);
-                REQUIRE(reg == 0x02);
+                REQUIRE(reg == 0x00);
 
                 regs.reset_flags();
                 reg = 0x02;
                 inst.call(nullptr);
-                REQUIRE(reg == 0x04);
+                REQUIRE(reg == 0x01);
 
                 regs.reset_flags();
                 reg = 0x10;
                 inst.call(nullptr);
-                REQUIRE(reg == 0x20);
+                REQUIRE(reg == 0x08);
 
                 regs.reset_flags();
                 reg = 0x80;
                 inst.call(nullptr);
-                REQUIRE(reg == 0x00);
-                REQUIRE(regs.read_flag(registers::flag::CARRY));
+                REQUIRE(reg == 0x40);
 
                 regs.reset_flags();
                 reg = 0xFF;
                 inst.call(nullptr);
-                REQUIRE(reg == 0xFE);
+                REQUIRE(reg == 0x7F);
 
                 regs.reset_flags();
                 regs.set_flag(registers::flag::CARRY);
@@ -119,27 +140,27 @@ namespace sleepy
                 REQUIRE(reg == 0xFF);
             };
 
-            test_value(rl_b, regs.b);
-            test_value(rl_c, regs.c);
-            test_value(rl_d, regs.d);
-            test_value(rl_e, regs.e);
-            test_value(rl_h, regs.h);
-            test_value(rl_l, regs.l);
-            test_value(rl_a, regs.a);
+            test_value(rr_b, regs.b);
+            test_value(rr_c, regs.c);
+            test_value(rr_d, regs.d);
+            test_value(rr_e, regs.e);
+            test_value(rr_h, regs.h);
+            test_value(rr_l, regs.l);
+            test_value(rr_a, regs.a);
         }
 
-        SECTION("CpuFirmware_RL_PHL")
+        SECTION("CpuFirmware_RR_PHL")
         {
             CPUFW_SLEEPY_TESTINIT();
 
-            auto& rl_phl = inst_map[opcode(0xCB, 0x16)];
+            auto& rr_phl = inst_map[opcode(0xCB, 0x1E)];
 
             regs.reset_flags();
             u16 addr = 0xF122;
             u8 val = 0x00;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            rl_phl.call(nullptr);
+            rr_phl.call(nullptr);
             REQUIRE(mem.read_byte(addr) == val);
             REQUIRE(regs.read_flag(registers::flag::ZERO));
             REQUIRE(!regs.read_flag(registers::flag::CARRY));
@@ -150,8 +171,8 @@ namespace sleepy
             val = 0x00;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            rl_phl.call(nullptr);
-            REQUIRE(mem.read_byte(addr) == (val + 1));
+            rr_phl.call(nullptr);
+            REQUIRE(mem.read_byte(addr) == 0x80);
             REQUIRE(!regs.read_flag(registers::flag::ZERO));
             REQUIRE(!regs.read_flag(registers::flag::CARRY));
 
@@ -160,18 +181,18 @@ namespace sleepy
             val = 0x01;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            rl_phl.call(nullptr);
-            REQUIRE(mem.read_byte(addr) == 0x02);
-            REQUIRE(!regs.read_flag(registers::flag::ZERO));
-            REQUIRE(!regs.read_flag(registers::flag::CARRY));
+            rr_phl.call(nullptr);
+            REQUIRE(mem.read_byte(addr) == 0x00);
+            REQUIRE(regs.read_flag(registers::flag::ZERO));
+            REQUIRE(regs.read_flag(registers::flag::CARRY));
 
             regs.reset_flags();
             addr = 0xF122;
             val = 0x02;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            rl_phl.call(nullptr);
-            REQUIRE(mem.read_byte(addr) == 0x04);
+            rr_phl.call(nullptr);
+            REQUIRE(mem.read_byte(addr) == 0x01);
             REQUIRE(!regs.read_flag(registers::flag::ZERO));
             REQUIRE(!regs.read_flag(registers::flag::CARRY));
 
@@ -180,10 +201,10 @@ namespace sleepy
             val = 0x80;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            rl_phl.call(nullptr);
-            REQUIRE(mem.read_byte(addr) == 0x00);
-            REQUIRE(regs.read_flag(registers::flag::ZERO));
-            REQUIRE(regs.read_flag(registers::flag::CARRY));
+            rr_phl.call(nullptr);
+            REQUIRE(mem.read_byte(addr) == 0x40);
+            REQUIRE(!regs.read_flag(registers::flag::ZERO));
+            REQUIRE(!regs.read_flag(registers::flag::CARRY));
 
             regs.reset_flags();
             regs.set_flag(registers::flag::CARRY);
@@ -191,18 +212,18 @@ namespace sleepy
             val = 0x80;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            rl_phl.call(nullptr);
-            REQUIRE(mem.read_byte(addr) == 0x01);
+            rr_phl.call(nullptr);
+            REQUIRE(mem.read_byte(addr) == 0xC0);
             REQUIRE(!regs.read_flag(registers::flag::ZERO));
-            REQUIRE(regs.read_flag(registers::flag::CARRY));
+            REQUIRE(!regs.read_flag(registers::flag::CARRY));
 
             regs.reset_flags();
             addr = 0xF122;
             val = 0xFF;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            rl_phl.call(nullptr);
-            REQUIRE(mem.read_byte(addr) == 0xFE);
+            rr_phl.call(nullptr);
+            REQUIRE(mem.read_byte(addr) == 0x7F);
             REQUIRE(!regs.read_flag(registers::flag::ZERO));
             REQUIRE(regs.read_flag(registers::flag::CARRY));
 
@@ -212,7 +233,7 @@ namespace sleepy
             val = 0xFF;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            rl_phl.call(nullptr);
+            rr_phl.call(nullptr);
             REQUIRE(mem.read_byte(addr) == 0xFF);
             REQUIRE(!regs.read_flag(registers::flag::ZERO));
             REQUIRE(regs.read_flag(registers::flag::CARRY));
