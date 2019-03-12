@@ -432,4 +432,17 @@ namespace sleepy
 
         vref = U8(aux);
 	}
+
+	void instruction_impl::opcode_sla(u8& vref)
+	{
+		bool carry = vref >= 0x80u;
+		_regs->reset_flags();
+
+		u16 aux = U16(vref) << 1;
+		aux &= 0xFEu;
+		if(carry) { _regs->set_flag(registers::flag::CARRY); } 
+		if(U8(aux) == 0x00u) { _regs->set_flag(registers::flag::ZERO); }
+
+		vref = U8(aux);
+	}
 }
