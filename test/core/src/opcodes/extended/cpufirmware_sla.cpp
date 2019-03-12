@@ -140,5 +140,57 @@ namespace sleepy
             test_value(sla_l, regs.l);
             test_value(sla_a, regs.a);
         }
+
+        SECTION("CpuFirmware_SLA_PHL")
+        {
+            CPUFW_SLEEPY_TESTINIT();
+
+            auto& sla_phl = inst_map[opcode(0xCB, 0x26)];
+
+            u16 addr = 0xF122;
+            u8 val = 0x00;
+            regs.hl(addr);
+            mem.write_byte(addr, val);
+            sla_phl.call(nullptr);
+            REQUIRE(mem.read_byte(addr) == val);
+            REQUIRE(regs.read_flag(registers::flag::ZERO));
+            REQUIRE(!regs.read_flag(registers::flag::CARRY));
+
+            addr = 0xF122;
+            val = 0x01;
+            regs.hl(addr);
+            mem.write_byte(addr, val);
+            sla_phl.call(nullptr);
+            REQUIRE(mem.read_byte(addr) == 0x02);
+            REQUIRE(!regs.read_flag(registers::flag::ZERO));
+            REQUIRE(!regs.read_flag(registers::flag::CARRY));
+
+            addr = 0xF122;
+            val = 0x02;
+            regs.hl(addr);
+            mem.write_byte(addr, val);
+            sla_phl.call(nullptr);
+            REQUIRE(mem.read_byte(addr) == 0x04);
+            REQUIRE(!regs.read_flag(registers::flag::ZERO));
+            REQUIRE(!regs.read_flag(registers::flag::CARRY));
+
+            addr = 0xF122;
+            val = 0x80;
+            regs.hl(addr);
+            mem.write_byte(addr, val);
+            sla_phl.call(nullptr);
+            REQUIRE(mem.read_byte(addr) == 0x00);
+            REQUIRE(regs.read_flag(registers::flag::ZERO));
+            REQUIRE(regs.read_flag(registers::flag::CARRY));
+
+            addr = 0xF122;
+            val = 0xFF;
+            regs.hl(addr);
+            mem.write_byte(addr, val);
+            sla_phl.call(nullptr);
+            REQUIRE(mem.read_byte(addr) == 0xFE);
+            REQUIRE(!regs.read_flag(registers::flag::ZERO));
+            REQUIRE(regs.read_flag(registers::flag::CARRY));
+        }
     }
 }
