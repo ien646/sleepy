@@ -141,17 +141,17 @@ namespace sleepy
             test_value(sra_a, regs.a);
         }
 
-        SECTION("CpuFirmware_SLA_PHL")
+        SECTION("CpuFirmware_SRA_PHL")
         {
             CPUFW_SLEEPY_TESTINIT();
 
-            auto& sla_phl = inst_map[opcode(0xCB, 0x2E)];
+            auto& sra_phl = inst_map[opcode(0xCB, 0x2E)];
 
             u16 addr = 0xF122;
             u8 val = 0x00;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            sla_phl.call(nullptr);
+            sra_phl.call(nullptr);
             REQUIRE(mem.read_byte(addr) == val);
             REQUIRE(regs.read_flag(registers::flag::ZERO));
             REQUIRE(!regs.read_flag(registers::flag::CARRY));
@@ -160,7 +160,7 @@ namespace sleepy
             val = 0x01;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            sla_phl.call(nullptr);
+            sra_phl.call(nullptr);
             REQUIRE(mem.read_byte(addr) == 0x00);
             REQUIRE(regs.read_flag(registers::flag::ZERO));
             REQUIRE(regs.read_flag(registers::flag::CARRY));
@@ -169,7 +169,7 @@ namespace sleepy
             val = 0x02;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            sla_phl.call(nullptr);
+            sra_phl.call(nullptr);
             REQUIRE(mem.read_byte(addr) == 0x01);
             REQUIRE(!regs.read_flag(registers::flag::ZERO));
             REQUIRE(!regs.read_flag(registers::flag::CARRY));
@@ -178,7 +178,7 @@ namespace sleepy
             val = 0x80;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            sla_phl.call(nullptr);
+            sra_phl.call(nullptr);
             REQUIRE(mem.read_byte(addr) == 0xC0);
             REQUIRE(!regs.read_flag(registers::flag::ZERO));
             REQUIRE(!regs.read_flag(registers::flag::CARRY));
@@ -187,7 +187,7 @@ namespace sleepy
             val = 0xFF;
             regs.hl(addr);
             mem.write_byte(addr, val);
-            sla_phl.call(nullptr);
+            sra_phl.call(nullptr);
             REQUIRE(mem.read_byte(addr) == 0xFF);
             REQUIRE(!regs.read_flag(registers::flag::ZERO));
             REQUIRE(regs.read_flag(registers::flag::CARRY));
