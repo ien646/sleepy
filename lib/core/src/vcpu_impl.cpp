@@ -64,6 +64,7 @@ namespace sleepy
 		initmap_rl();
 		initmap_rr();
 		initmap_sla();
+		initmap_sra();
 	}
 
 	void vcpu_impl::initmap_misc()
@@ -1765,6 +1766,52 @@ namespace sleepy
 		add_instruction(opcode(0xCB, 0x27), "SLA A", 8, 2, 0, [&](const u8*)
 		{
 			_inst_impl->opcode_sla(_regs->a);
+		});
+	}
+
+	void vcpu_impl::initmap_sra()
+	{
+		add_instruction(opcode(0xCB, 0x28), "SRA B", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_sra(_regs->b);
+		});
+
+		add_instruction(opcode(0xCB, 0x29), "SRA C", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_sra(_regs->c);
+		});
+
+		add_instruction(opcode(0xCB, 0x2A), "SRA D", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_sra(_regs->d);
+		});
+
+		add_instruction(opcode(0xCB, 0x2B), "SRA E", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_sra(_regs->e);
+		});
+
+		add_instruction(opcode(0xCB, 0x2C), "SRA H", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_sra(_regs->h);
+		});
+
+		add_instruction(opcode(0xCB, 0x2D), "SRA L", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_sra(_regs->l);
+		});
+
+		add_instruction(opcode(0xCB, 0x2E), "SRA (HL)", 16, 2, 0, [&](const u8*)
+		{
+			u16 hl = _regs->hl();
+			u8 val = _mem->read_byte(hl);
+			_inst_impl->opcode_sra(val);
+			_mem->write_byte(hl, val);
+		});
+
+		add_instruction(opcode(0xCB, 0x2F), "SRA A", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_sra(_regs->a);
 		});
 	}
 

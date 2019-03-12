@@ -435,13 +435,24 @@ namespace sleepy
 
 	void instruction_impl::opcode_sla(u8& vref)
 	{
-		bool carry = vref >= 0x80u;
 		_regs->reset_flags();
 
-		u16 aux = U16(vref) << 1;
-		aux &= 0xFEu;
-		if(carry) { _regs->set_flag(registers::flag::CARRY); } 
+		// Bit 0 is always zero post-shift
+		u16 aux = (U16(vref) << 1) & 0x00FE;
+		if(vref >= 0x80u) { _regs->set_flag(registers::flag::CARRY); } 
 		if(U8(aux) == 0x00u) { _regs->set_flag(registers::flag::ZERO); }
+
+		vref = U8(aux);
+	}
+
+	void instruction_impl::opcode_sra(u8& vref)
+	{
+		_regs->reset_flags();
+
+		// Bit 7 remains unchanged
+		u16 aux = (U16(vref) >> 1) | (get_bit(vref, 7) ? 0x80 : 0x00);
+		if(get_bit(vref, 0)) { _regs->set_flag(registers::flag::CARRY); }
+		if(aux == 0x00) { _regs->set_flag(registers::flag::ZERO);}
 
 		vref = U8(aux);
 	}
