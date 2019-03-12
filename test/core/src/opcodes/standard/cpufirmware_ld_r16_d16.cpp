@@ -37,5 +37,5 @@ namespace sleepy
 			ld_sp_d16.call((u8*)(&args));
 			REQUIRE(regs.sp == 0x5775);
 		}
-	};
+	}
 }

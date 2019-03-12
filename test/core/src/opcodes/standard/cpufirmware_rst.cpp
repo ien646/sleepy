@@ -51,5 +51,5 @@ namespace sleepy
 			rst_38.call(nullptr);
 			REQUIRE(regs.pc == 0x0038);
 		}
-	};
+	}
 }

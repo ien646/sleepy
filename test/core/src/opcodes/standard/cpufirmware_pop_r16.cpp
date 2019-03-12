@@ -61,5 +61,5 @@ namespace sleepy
             REQUIRE(regs.sp == (addr + 2));
             REQUIRE(regs.hl() == 0x11FF);
         }
-    };
+    }
 }

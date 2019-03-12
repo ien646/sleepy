@@ -256,5 +256,5 @@ namespace sleepy
 			ld_pff00a8_a.call(&a8);
 			REQUIRE(regs.a == 0x55);
 		}
-	};
+	}
 }

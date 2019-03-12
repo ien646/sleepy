@@ -57,5 +57,5 @@ namespace sleepy
             REQUIRE(regs.sp == 0xFF20);
             REQUIRE(mem.read_word(regs.sp) == 0xF123);
         }
-    };
+    }
 }

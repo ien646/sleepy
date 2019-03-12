@@ -66,5 +66,5 @@ namespace sleepy
 			memory.write_byte(0x0000, 0x00);
 			memory.write_byte(0xFFFF, 0x00);
 		}
-	};
+	}
 }

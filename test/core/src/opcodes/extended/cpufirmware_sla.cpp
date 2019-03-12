@@ -140,5 +140,5 @@ namespace sleepy
             test_value(sla_l, regs.l);
             test_value(sla_a, regs.a);
         }
-    };
+    }
 }

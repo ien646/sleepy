@@ -284,5 +284,5 @@ namespace sleepy
 			REQUIRE(mem.read_byte(addr_h) == 0x11);
 			REQUIRE(mem.read_byte(addr_l) == 0x22);
 		}
-	};
+	}
 }

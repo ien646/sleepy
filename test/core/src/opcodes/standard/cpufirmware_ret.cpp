@@ -25,5 +25,5 @@ namespace sleepy
         //SECTION("RET C")  { }
         //SECTION("RET NZ") { }
         //SECTION("RET NC") { }
-    };
+    }
 }

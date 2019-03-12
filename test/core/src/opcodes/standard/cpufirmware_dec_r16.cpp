@@ -55,5 +55,5 @@ namespace sleepy
 			dec_sp.call(nullptr);
 			REQUIRE(regs.sp == 0x0000);
 		}
-	};
+	}
 }

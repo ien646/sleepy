@@ -43,5 +43,5 @@ namespace sleepy
 			REQUIRE(0xF0 == val);
 			REQUIRE((0xF0F0 - 1) == regs.hl());
 		}
-	};
+	}
 }

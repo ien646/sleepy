@@ -223,5 +223,5 @@ namespace sleepy
             REQUIRE(!regs.read_flag(registers::flag::ZERO));
             REQUIRE(regs.read_flag(registers::flag::CARRY));
         }
-    };
+    }
 }

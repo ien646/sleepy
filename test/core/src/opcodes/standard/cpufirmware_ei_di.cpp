@@ -35,5 +35,5 @@ namespace sleepy
 			di.call(nullptr);
 			REQUIRE(!(vfw.interrupts_enabled()));
 		}
-	};
+	}
 }

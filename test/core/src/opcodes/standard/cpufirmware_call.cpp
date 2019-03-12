@@ -114,9 +114,8 @@ namespace sleepy
             REQUIRE(regs.pc == 0x1FF2u);
         }
 
-        // 
         // SECTION("CALL_NZ_a16") {}
         // SECTION("CALL_C_a16") {}
         // SECTION("CALL_NC_a16") {}
-    };
+    }
 }

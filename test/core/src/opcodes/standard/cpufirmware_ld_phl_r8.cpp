@@ -63,5 +63,5 @@ namespace sleepy
 			u8 datal = mem.read_byte(phlAddr);
 			REQUIRE(datal == regs.h);
 		}
-	};
+	}
 }

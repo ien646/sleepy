@@ -148,5 +148,5 @@ namespace sleepy
 			REQUIRE(0x99 == r.hl());
 
 		}
-	};
+	}
 }

@@ -43,5 +43,5 @@ namespace sleepy
 			u8 mval = mem.read_byte(regs.hl());
 			REQUIRE(mval == 0xAF);
 		}
-	};
+	}
 }

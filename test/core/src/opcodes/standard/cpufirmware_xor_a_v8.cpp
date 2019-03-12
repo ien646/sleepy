@@ -115,5 +115,5 @@ namespace sleepy
 			REQUIRE(regs.read_flag(FLAG_ZERO));
 			REQUIRE(!(regs.read_flag(FLAG_SUB)));
 		}
-	};
+	}
 }
