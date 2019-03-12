@@ -4,8 +4,6 @@
 #include <memory>
 #include <utility>
 
-#define UNREFERENCED_PARAMETER(x) x
-
 namespace sleepy
 {
     template<typename T>

@@ -56,11 +56,9 @@ static void debug_pre(
 }
 
 static void debug_post(
-    sleepy::vcpu& vcpu,
-    const sleepy::vcpu_instruction* inst)
+    [[maybe_unused]] sleepy::vcpu& vcpu,
+    [[maybe_unused]] const sleepy::vcpu_instruction* inst)
 {
-    UNREFERENCED_PARAMETER(vcpu);
-    UNREFERENCED_PARAMETER(inst);
     return;
 }
 
