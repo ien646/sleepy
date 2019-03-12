@@ -456,4 +456,18 @@ namespace sleepy
 
 		vref = U8(aux);
 	}
+
+	void instruction_impl::opcode_swap(u8& vref)
+	{
+		_regs->reset_flags();
+		if(vref == 0x00)
+		{
+			_regs->set_flag(registers::flag::ZERO);
+			return;
+		}
+		u8 lo = lonibble(vref);
+		u8 hi = hinibble(vref);
+		lo <<= 4;
+		vref = U8(lo | hi);
+	}
 }

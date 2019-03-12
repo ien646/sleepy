@@ -31,40 +31,41 @@ namespace sleepy
 		initmap_ld_r16_d16();
 		initmap_ld_misc();
 
-		initmap_add_a_x8();
-		initmap_add_hl_r16();
-		initmap_sub_a_x8();
-		initmap_adc_a_x8();
-		initmap_sbc_a_x8();
+        initmap_add_a_x8();
+        initmap_add_hl_r16();
+        initmap_sub_a_x8();
+        initmap_adc_a_x8();
+        initmap_sbc_a_x8();
 
-		initmap_and_a_x8();
-		initmap_or_a_x8();
-		initmap_xor_a_x8();
+        initmap_and_a_x8();
+        initmap_or_a_x8();
+        initmap_xor_a_x8();
 
-		initmap_inc_r8();
-		initmap_inc_r16();
-		initmap_dec_r8();
-		initmap_dec_r16();
+        initmap_inc_r8();
+        initmap_inc_r16();
+        initmap_dec_r8();
+        initmap_dec_r16();
 
-		initmap_cp_r8();
-		initmap_bitrotations();
-		initmap_rst();
+        initmap_cp_r8();
+        initmap_bitrotations();
+        initmap_rst();
 
-		initmap_jumps();
-		
-		initmap_push();
-		initmap_pop();
+        initmap_jumps();
 
-		initmap_call();
-		initmap_ret();
+        initmap_push();
+        initmap_pop();
 
-		// -- PREFIXED OPCODES --		
-		initmap_rlc();
-		initmap_rrc();
-		initmap_rl();
-		initmap_rr();
-		initmap_sla();
-		initmap_sra();
+        initmap_call();
+        initmap_ret();
+
+        // -- PREFIXED OPCODES --		
+        initmap_rlc();
+        initmap_rrc();
+        initmap_rl();
+        initmap_rr();
+        initmap_sla();
+        initmap_sra();
+        initmap_swap();
 	}
 
 	void vcpu_impl::initmap_misc()
@@ -1814,6 +1815,52 @@ namespace sleepy
 			_inst_impl->opcode_sra(_regs->a);
 		});
 	}
+
+    void vcpu_impl::initmap_swap()
+    {
+        add_instruction(opcode(0xCB, 0x30), "SWAP B", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_swap(_regs->b);
+		});
+
+		add_instruction(opcode(0xCB, 0x31), "SWAP C", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_swap(_regs->c);
+		});
+
+		add_instruction(opcode(0xCB, 0x32), "SWAP D", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_swap(_regs->d);
+		});
+
+		add_instruction(opcode(0xCB, 0x33), "SWAP E", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_swap(_regs->e);
+		});
+
+		add_instruction(opcode(0xCB, 0x34), "SWAP H", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_swap(_regs->h);
+		});
+
+		add_instruction(opcode(0xCB, 0x35), "SWAP L", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_swap(_regs->l);
+		});
+
+		add_instruction(opcode(0xCB, 0x36), "SWAP (HL)", 16, 2, 0, [&](const u8*)
+		{
+			u16 hl = _regs->hl();
+			u8 val = _mem->read_byte(hl);
+			_inst_impl->opcode_swap(val);
+			_mem->write_byte(hl, val);
+		});
+
+		add_instruction(opcode(0xCB, 0x37), "SWAP A", 8, 2, 0, [&](const u8*)
+		{
+			_inst_impl->opcode_swap(_regs->a);
+		});
+    }
 
 	void vcpu_impl::add_instruction(
 		opcode opc, 
