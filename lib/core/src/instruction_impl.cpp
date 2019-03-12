@@ -470,4 +470,16 @@ namespace sleepy
 		lo <<= 4;
 		vref = U8(lo | hi);
 	}
+
+	void instruction_impl::opcode_srl(u8& vref)
+	{
+		_regs->reset_flags();
+
+		// Bit 7 remains unchanged
+		u16 aux = (U16(vref) >> 1) & 0x7F;
+		if(get_bit(vref, 0)) { _regs->set_flag(registers::flag::CARRY); }
+		if(aux == 0x00) { _regs->set_flag(registers::flag::ZERO);}
+
+		vref = U8(aux);
+	}
 }
