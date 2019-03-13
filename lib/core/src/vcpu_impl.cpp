@@ -606,13 +606,13 @@ namespace sleepy
 			_regs->de(val);
 		});
 
-		add_instruction(opcode(0x21), "LD DE,d16", 12, 3, 2, [&](const u8* args)
+		add_instruction(opcode(0x21), "LD HL,d16", 12, 3, 2, [&](const u8* args)
 		{
 			u16 val = read_word(&args[0]);
 			_regs->hl(val);
 		});
 
-		add_instruction(opcode(0x31), "LD DE,d16", 12, 3, 2, [&](const u8* args)
+		add_instruction(opcode(0x31), "LD SP,d16", 12, 3, 2, [&](const u8* args)
 		{
 			u16 val = read_word(&args[0]);
 			_regs->sp = val;
@@ -1352,6 +1352,33 @@ namespace sleepy
 				_regs->pc += 2;
 			}
 		});
+
+		add_instruction(opcode(0x20), "JR NZ,i8", 8, 0, 1, [&](const u8* args)
+		{
+			if(!_regs->read_flag(registers::flag::ZERO))
+			{
+				delay_cycles(4); //16
+				int8_t i8 = static_cast<int8_t>(args[0]);
+				_regs->pc += i8;
+			}
+			else
+			{
+				_regs->pc += 2;
+			}
+		});
+
+		add_instruction(opcode(0x30), "JR C,i8", 8, 0, 1, [&](const u8* args)
+		{
+			if(!_regs->read_flag(registers::flag::CARRY))
+			{
+				delay_cycles(4); //16
+				int8_t i8 = static_cast<int8_t>(args[0]);
+				_regs->pc += i8;
+			}
+			else
+			{
+				_regs->pc += 2;
+			}
 		});
 
 		add_instruction(opcode(0xC3), "JP a16", 16, 0, 2, [&](const u8* args)
