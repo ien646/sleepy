@@ -7,11 +7,11 @@
     - <s>RRC</s>
     - <s>RL</s>
     - <s>RR</s>
-    - SLA
-    - SRA
-    - SWAP
-    - SRL
-    - BIT
+    - <s>SLA</s>
+    - <s>SRA</s>
+    - <s>SWAP</s>
+    - <s>SRL</s>
+    - <s>BIT</s>
     - RES
     - SET
   - Interrupt handling

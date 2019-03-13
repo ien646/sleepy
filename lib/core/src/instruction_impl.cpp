@@ -482,4 +482,15 @@ namespace sleepy
 
 		vref = U8(aux);
 	}
+
+	void instruction_impl::opcode_bit(u8 val, u8 index)
+	{
+		_regs->reset_flag(registers::flag::SUB);
+		_regs->set_flag(registers::flag::HALF_CARRY);
+		_regs->set_flag(registers::flag::ZERO);
+		if(get_bit(val, index))
+		{
+			_regs->reset_flag(registers::flag::ZERO);
+		}
+	}
 }

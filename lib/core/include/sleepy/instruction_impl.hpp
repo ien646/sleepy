@@ -50,5 +50,6 @@ namespace sleepy
 		void opcode_sra(u8& vref);
 		void opcode_swap(u8& vref);
 		void opcode_srl(u8& vref);
+		void opcode_bit(u8 val, u8 index);
 	};
 }
