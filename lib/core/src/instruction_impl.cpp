@@ -493,4 +493,9 @@ namespace sleepy
 			_regs->reset_flag(registers::flag::ZERO);
 		}
 	}
+
+	void instruction_impl::opcode_res(u8& val, u8 index)
+	{
+		reset_bit(val, index);
+	}
 }

@@ -29,27 +29,27 @@ namespace sleepy
 	const u16 WORD_MAX	= 0xFFFF;
 	const u32 DWORD_MAX	= 0xFFFFFFFF;
 
-	constexpr u8 hibyte(u16 val) 	
+	constexpr u8 hibyte(u16 val) noexcept
 	{ 
 		return U8(val >> 8); 
 	}
 
-	constexpr u8 lobyte(u16 val)
+	constexpr u8 lobyte(u16 val) noexcept
 	{
 		return U8(val);
 	}
 
-	constexpr u8 lonibble(u8 val)
+	constexpr u8 lonibble(u8 val) noexcept
 	{
 		return val & 0x0F;
 	}
 
-	constexpr u8 hinibble(u8 val)
+	constexpr u8 hinibble(u8 val) noexcept
 	{
 		return val >> 4;
 	}
 
-	constexpr u16 compose_word(u8 hibyte, u8 lobyte)
+	constexpr u16 compose_word(u8 hibyte, u8 lobyte) noexcept
 	{
 		return (hibyte << 8) | lobyte;
 	}
@@ -59,13 +59,23 @@ namespace sleepy
 		return *reinterpret_cast<const u16*>(ptr);
 	}
 
-	constexpr bool get_bit(u8 value, u8 index)
+	constexpr bool get_bit(u8 value, u8 index) noexcept
 	{
 		return (value | (1 << index)) == value;
 	}
 
-	constexpr bool get_bit(u16 value, u8 index)
+	constexpr bool get_bit(u16 value, u8 index) noexcept
 	{
 		return (value | (1 << index)) == value;
+	}
+
+	inline void set_bit(u8& val, const u8 index) noexcept
+	{
+		val |= U8(1u << index);
+	}
+
+	inline void reset_bit(u8& val, const u8 index) noexcept
+	{
+		val &= ~U8(1u << index);
 	}
 }

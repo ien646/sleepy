@@ -69,6 +69,7 @@ namespace sleepy
 		initmap_srl();
 
         initmap_bit();
+		initmap_res();
 	}
 
 	void vcpu_impl::initmap_misc()
@@ -1957,6 +1958,57 @@ namespace sleepy
 				{
 					u8 val = *reg;
 					_inst_impl->opcode_bit(val, bit_idx);
+				});
+			}
+		}
+	}
+
+	void vcpu_impl::initmap_res()
+	{
+		const std::array<char, 8> regname_seq = {'B', 'C', 'D', 'E', 'H', 'L', '_', 'A'};
+		const std::array<u8*, 8> operand_seq = {
+			&_regs->b,
+			&_regs->c,
+			&_regs->d,
+			&_regs->e,
+			&_regs->h,
+			&_regs->l,
+			nullptr, // (HL)
+			&_regs->a,
+		};
+
+		for(u8 i = 0x80u; i <= 0xBFu; ++i) // map opcodes
+		{
+			u8 seq_val = i - 0x80u;
+			u8 vtc_val = seq_val / 16u;
+			bool h_half = (seq_val % 16u) >= 8u;
+			u8 rsq_val = seq_val % 8u;
+
+			u8* reg = operand_seq[rsq_val];
+			u8 bit_idx = vtc_val * 2 + (h_half ? 1 : 0);
+
+			if(reg == nullptr) // (HL)
+			{
+				const std::string mnemonic = 
+					"RES " + std::to_string(static_cast<int>(bit_idx)) + ", (HL)";
+
+                add_instruction(opcode(0xCB, i), mnemonic, 16, 2, 0, [this, reg, bit_idx](const u8*)
+                {
+                    u16 hl = _regs->hl();
+                    u8 val = _mem->read_byte(hl);
+                    _inst_impl->opcode_res(val, bit_idx);
+					_mem->write_byte(hl, val);
+                });
+			}
+			else
+			{
+				const std::string mnemonic = 
+					"RES " + std::to_string(static_cast<int>(bit_idx)) +
+					", " + regname_seq[rsq_val];
+
+				add_instruction(opcode(0xCB, i), mnemonic, 8, 2, 0, [this, reg, bit_idx](const u8*)
+				{
+					_inst_impl->opcode_res(*reg, bit_idx);
 				});
 			}
 		}
