@@ -1465,6 +1465,10 @@ namespace sleepy
 				delay_cycles(12);
 				_inst_impl->opcode_call_a16(args);
 			}
+			else
+			{
+				_regs->pc += 3;
+			}
 		});
 
 		add_instruction(opcode(0xDC), "CALL C,a16", 12, 0, 2, [&](const u8* args)
@@ -1473,6 +1477,10 @@ namespace sleepy
 			{
 				delay_cycles(12);
 				_inst_impl->opcode_call_a16(args);
+			}
+			else
+			{
+				_regs->pc += 3;
 			}
 		});
 
@@ -1483,6 +1491,10 @@ namespace sleepy
 				delay_cycles(12);
 				_inst_impl->opcode_call_a16(args);
 			}
+			else
+			{
+				_regs->pc += 3;
+			}
 		});
 
 		add_instruction(opcode(0xC4), "CALL NZ,a16", 12, 0, 2, [&](const u8* args)
@@ -1491,6 +1503,10 @@ namespace sleepy
 			{
 				delay_cycles(12);
 				_inst_impl->opcode_call_a16(args);
+			}
+			else
+			{
+				_regs->pc += 3;
 			}
 		});
 	}

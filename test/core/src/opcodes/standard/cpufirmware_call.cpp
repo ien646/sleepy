@@ -35,7 +35,7 @@ namespace sleepy
 
             regs.reset_flag(registers::flag::ZERO);
             call_z_a16.call(args);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
             REQUIRE(regs.sp == 0xFFFEu);
 
             regs.set_flag(registers::flag::ZERO);
@@ -58,7 +58,7 @@ namespace sleepy
 
             regs.reset_flag(registers::flag::CARRY);
             call_c_a16.call(args);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
             REQUIRE(regs.sp == 0xFFFEu);
 
             regs.set_flag(registers::flag::CARRY);
@@ -81,7 +81,7 @@ namespace sleepy
 
             regs.set_flag(registers::flag::ZERO);
             call_nz_a16.call(args);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
             REQUIRE(regs.sp == 0xFFFEu);
 
             regs.reset_flag(registers::flag::ZERO);
@@ -104,7 +104,7 @@ namespace sleepy
 
             regs.set_flag(registers::flag::CARRY);
             call_nc_a16.call(args);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
             REQUIRE(regs.sp == 0xFFFEu);
 
             regs.reset_flag(registers::flag::CARRY);
