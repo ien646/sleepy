@@ -498,4 +498,9 @@ namespace sleepy
 	{
 		reset_bit(val, index);
 	}
+
+	void instruction_impl::opcode_set(u8& val, u8 index)
+	{
+		set_bit(val, index);
+	}
 }

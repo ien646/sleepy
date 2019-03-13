@@ -13,7 +13,7 @@ namespace sleepy
     {
         auto& inst = _vfw.inst_map[op];
 
-        if(inst.cycles == 0xFF) 
+        if(inst.cycles == 0xFF)
         {
             throw std::logic_error("Unimplemented opcode (dec): " + inst.op.value);
         }
@@ -78,7 +78,7 @@ namespace sleepy
 
         std::vector<u8> cdata(beg, end);
 
-        std::copy(cdata.begin(), cdata.end(), _mem.data() + 0x0100);
+        std::copy(cdata.begin(), cdata.end(), _mem.data());
         _memory_set = true;
     }
 

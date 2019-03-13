@@ -9,14 +9,14 @@ static void print_registers(const sleepy::registers* regs)
 {
     std::cout << std::hex;
     std::cout 
-        << "A: " << regs->a << " | "
-        << "B: " << regs->b << " | "
-        << "C: " << regs->c << " | "
-        << "D: " << regs->d << " | "
-        << "E: " << regs->e << " | "
-        << "F: " << regs->f << " | "
-        << "H: " << regs->h << " | "
-        << "L: " << regs->l << " | "
+        << "A: " << static_cast<int>(regs->a) << " | "
+        << "B: " << static_cast<int>(regs->b) << " | "
+        << "C: " << static_cast<int>(regs->c) << " | "
+        << "D: " << static_cast<int>(regs->d) << " | "
+        << "E: " << static_cast<int>(regs->e) << " | "
+        << "F: " << static_cast<int>(regs->f) << " | "
+        << "H: " << static_cast<int>(regs->h) << " | "
+        << "L: " << static_cast<int>(regs->l) << " | "
         << std::endl;
 
     std::cout 
@@ -54,7 +54,7 @@ static void debug_pre(
     
     print_registers(&vcpu.registers());
     using namespace std::chrono_literals;
-    std::this_thread::sleep_for(2s);
+    std::this_thread::sleep_for(1s);
 }
 
 static void debug_post(
