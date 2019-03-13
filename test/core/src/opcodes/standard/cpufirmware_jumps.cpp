@@ -77,27 +77,27 @@ namespace sleepy
             regs.pc = 0x0000u;
             arg = U8(0x00);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0002u);
 
             regs.pc = 0x0000u;
             arg = U8(0x01);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0000u); 
+            REQUIRE(regs.pc == 0x0002u); 
 
             regs.pc = 0x0000u;
             arg = U8(0x79);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0002u);
 
             regs.pc = 0x00FFu;
             arg = U8(0x88);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x00FFu);
+            REQUIRE(regs.pc == 0x0101u);
 
             regs.pc = 0x00FFu;
             arg = U8(0x01);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x00FFu);
+            REQUIRE(regs.pc == 0x0101u);
         }
 
         SECTION("JR C,i8 (Jump if carry-flag relative v8-signed)")
@@ -139,27 +139,27 @@ namespace sleepy
             regs.pc = 0x0000u;
             arg = U8(0x00);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0002u);
 
             regs.pc = 0x0000u;
             arg = U8(0x01);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0000u); 
+            REQUIRE(regs.pc == 0x0002u); 
 
             regs.pc = 0x0000u;
             arg = U8(0x79);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0002u);
 
             regs.pc = 0x00FFu;
             arg = U8(0x88);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x00FFu);
+            REQUIRE(regs.pc == 0x0101u);
 
             regs.pc = 0x00FFu;
             arg = U8(0x01);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x00FFu);
+            REQUIRE(regs.pc == 0x0101u);
         }
 
         SECTION("JP a16")
@@ -228,22 +228,22 @@ namespace sleepy
             regs.pc = 0x0000u;
             args = 0x0000u;
             jp_nz_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
 
             regs.pc = 0x0000u;
             args = 0x00FFu;
             jp_nz_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
 
             regs.pc = 0x00FFu;
             args = 0x0000u;
             jp_nz_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x00FFu);
+            REQUIRE(regs.pc == 0x0102u);
 
             regs.pc = 0xFF00u;
             args = 0x00FFu;
             jp_nz_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0xFF00u);
+            REQUIRE(regs.pc == 0xFF03u);
         }
 
         SECTION("JP NC,a16")
@@ -282,22 +282,22 @@ namespace sleepy
             regs.pc = 0x0000u;
             args = 0x0000u;
             jp_nc_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
 
             regs.pc = 0x0000u;
             args = 0x00FFu;
             jp_nc_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
 
             regs.pc = 0x00FFu;
             args = 0x0000u;
             jp_nc_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x00FFu);
+            REQUIRE(regs.pc == 0x0102u);
 
             regs.pc = 0xFF00u;
             args = 0x00FFu;
             jp_nc_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0xFF00u);
+            REQUIRE(regs.pc == 0xFF03u);
         }
 
         SECTION("JP Z,a16")
@@ -337,22 +337,22 @@ namespace sleepy
             regs.pc = 0x0000u;
             args = 0x0000u;
             jp_z_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
 
             regs.pc = 0x0000u;
             args = 0x00FFu;
             jp_z_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
 
             regs.pc = 0x00FFu;
             args = 0x0000u;
             jp_z_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x00FFu);
+            REQUIRE(regs.pc == 0x0102u);
 
             regs.pc = 0xFF00u;
             args = 0x00FFu;
             jp_z_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0xFF00u);
+            REQUIRE(regs.pc == 0xFF03u);
         }
 
         SECTION("JP C,a16")
@@ -392,22 +392,22 @@ namespace sleepy
             regs.pc = 0x0000u;
             args = 0x0000u;
             jp_c_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
 
             regs.pc = 0x0000u;
             args = 0x00FFu;
             jp_c_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0003u);
 
             regs.pc = 0x00FFu;
             args = 0x0000u;
             jp_c_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0x00FFu);
+            REQUIRE(regs.pc == 0x0102u);
 
             regs.pc = 0xFF00u;
             args = 0x00FFu;
             jp_c_a16.call(args_ptr);
-            REQUIRE(regs.pc == 0xFF00u);
+            REQUIRE(regs.pc == 0xFF03u);
         }
 
         SECTION("JP (HL)")

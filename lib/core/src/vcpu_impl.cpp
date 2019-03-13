@@ -1333,6 +1333,10 @@ namespace sleepy
 				int8_t i8 = static_cast<int8_t>(args[0]);
 				_regs->pc += i8;
 			}
+			else
+			{
+				_regs->pc += 2;
+			}
 		});
 
 		add_instruction(opcode(0x38), "JR C,i8", 8, 0, 1, [&](const u8* args)
@@ -1343,6 +1347,11 @@ namespace sleepy
 				int8_t i8 = static_cast<int8_t>(args[0]);
 				_regs->pc += i8;
 			}
+			else
+			{
+				_regs->pc += 2;
+			}
+		});
 		});
 
 		add_instruction(opcode(0xC3), "JP a16", 16, 0, 2, [&](const u8* args)
@@ -1359,6 +1368,10 @@ namespace sleepy
 				u16 a16 = read_word(args);
 				_regs->pc = a16;
 			}
+			else
+			{
+				_regs->pc += 3;
+			}
 		});
 
 		add_instruction(opcode(0xD2), "JP NC,a16", 12, 0, 2, [&](const u8* args)
@@ -1368,6 +1381,10 @@ namespace sleepy
 				delay_cycles(4); 
 				u16 a16 = read_word(args);
 				_regs->pc = a16;
+			}
+			else
+			{
+				_regs->pc += 3;
 			}
 		});
 
@@ -1379,6 +1396,10 @@ namespace sleepy
 				u16 a16 = read_word(args);
 				_regs->pc = a16;
 			}
+			else
+			{
+				_regs->pc += 3;
+			}
 		});
 		 
 		add_instruction(opcode(0xDA), "JP C,a16", 12, 0, 2, [&](const u8* args)
@@ -1388,6 +1409,10 @@ namespace sleepy
 				delay_cycles(4);
 				u16 a16 = read_word(args);
 				_regs->pc = a16;
+			}
+			else
+			{
+				_regs->pc += 3;
 			}
 		});
 
@@ -1943,7 +1968,7 @@ namespace sleepy
 			&_regs->a,
 		};
 
-		for(u8 i = 0x40u; i <= 0x7Fu; ++i) // map opcodes
+		for(u16 i = 0x40u; i <= 0x7Fu; ++i) // map opcodes
 		{
 			u8 seq_val = i - 0x40u;
 			u8 vtc_val = seq_val / 16u;
