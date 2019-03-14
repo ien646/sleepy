@@ -1335,7 +1335,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 3;
+				_regs->pc += 2;
 			}
 		});
 
@@ -1349,7 +1349,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 3;
+				_regs->pc += 2;
 			}
 		});
 
@@ -1363,7 +1363,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 3;
+				_regs->pc += 2;
 			}
 		});
 
@@ -1377,7 +1377,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 3;
+				_regs->pc += 2;
 			}
 		});
 
@@ -1397,7 +1397,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 4;
+				_regs->pc += 3;
 			}
 		});
 
@@ -1411,7 +1411,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 4;
+				_regs->pc += 3;
 			}
 		});
 
@@ -1425,7 +1425,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 4;
+				_regs->pc += 3;
 			}
 		});
 		 
@@ -1439,7 +1439,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 4;
+				_regs->pc += 3;
 			}
 		});
 
