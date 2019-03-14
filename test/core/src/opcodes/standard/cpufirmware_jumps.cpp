@@ -11,31 +11,32 @@ namespace sleepy
             CPUFW_SLEEPY_TESTINIT();
 
             auto& jr_i8 = inst_map[opcode(0x18)];
+            const u16 OPCODE_SZ = 2;
 
             regs.pc = 0x0000u;
             u8 arg = U8(0x00);
             jr_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0000u + OPCODE_SZ);
 
             regs.pc = 0x0000u;
             arg = U8(0x01);
             jr_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0001u);
+            REQUIRE(regs.pc == 0x0001u + OPCODE_SZ);
 
             regs.pc = 0x0000u;
             arg = U8(0x79);
             jr_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0079u);
+            REQUIRE(regs.pc == 0x0079u + OPCODE_SZ);
 
             regs.pc = 0x00FFu;
             arg = U8(0x88);
             jr_i8.call(&arg);
-            REQUIRE(regs.pc == 0x00FFu + static_cast<int8_t>(arg));
+            REQUIRE(regs.pc == 0x00FFu + static_cast<int8_t>(arg) + OPCODE_SZ);
 
             regs.pc = 0x00FFu;
             arg = U8(0x01);
             jr_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0100u);
+            REQUIRE(regs.pc == 0x0100u + OPCODE_SZ);
         }
 
         SECTION("JR Z,i8 (Jump if zero-flag relative v8-signed)")
@@ -47,119 +48,123 @@ namespace sleepy
             // -- On zero-flag set, behaves like 'JR i8' --
             regs.set_flag(registers::flag::ZERO);
 
+            const u16 OPCODE_SZ = 2;
+
             regs.pc = 0x0000u;
             u8 arg = U8(0x00);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0000u);
+            REQUIRE(regs.pc == 0x0000u + OPCODE_SZ);
 
             regs.pc = 0x0000u;
             arg = U8(0x01);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0001u);
+            REQUIRE(regs.pc == 0x0001u + OPCODE_SZ);
 
             regs.pc = 0x0000u;
             arg = U8(0x79);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0079u);
+            REQUIRE(regs.pc == 0x0079u + OPCODE_SZ);
 
             regs.pc = 0x00FFu;
             arg = U8(0x88);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x00FFu + static_cast<int8_t>(arg));
+            REQUIRE(regs.pc == 0x00FFu + OPCODE_SZ + static_cast<int8_t>(arg));
 
             regs.pc = 0x00FFu;
             arg = U8(0x01);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0100u);
+            REQUIRE(regs.pc == 0x0100u + OPCODE_SZ);
 
             // -- On zero-flag unset, do nothing --
             regs.reset_flag(registers::flag::ZERO);
             regs.pc = 0x0000u;
             arg = U8(0x00);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0002u);
+            REQUIRE(regs.pc == 0x0000u + OPCODE_SZ);
 
             regs.pc = 0x0000u;
             arg = U8(0x01);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0002u); 
+            REQUIRE(regs.pc == 0x0000u + OPCODE_SZ); 
 
             regs.pc = 0x0000u;
             arg = U8(0x79);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0002u);
+            REQUIRE(regs.pc == 0x0000u + OPCODE_SZ);
 
             regs.pc = 0x00FFu;
             arg = U8(0x88);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0101u);
+            REQUIRE(regs.pc == 0x00FFu + OPCODE_SZ);
 
             regs.pc = 0x00FFu;
             arg = U8(0x01);
             jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0101u);
+            REQUIRE(regs.pc == 0x00FFu + OPCODE_SZ);
         }
 
         SECTION("JR C,i8 (Jump if carry-flag relative v8-signed)")
         {
             CPUFW_SLEEPY_TESTINIT();
 
-            auto& jr_z_i8 = inst_map[opcode(0x38)];
+            auto& jr_c_i8 = inst_map[opcode(0x38)];
 
             // -- On carry-flag set, behaves like 'JR i8' --
             regs.set_flag(registers::flag::CARRY);
 
+            const u16 OPCODE_SZ = 2;
+
             regs.pc = 0x0000u;
             u8 arg = U8(0x00);
-            jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0000u);
+            jr_c_i8.call(&arg);
+            REQUIRE(regs.pc == 0x0000u + OPCODE_SZ);
 
             regs.pc = 0x0000u;
             arg = U8(0x01);
-            jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0001u);
+            jr_c_i8.call(&arg);
+            REQUIRE(regs.pc == 0x0001u + OPCODE_SZ);
 
             regs.pc = 0x0000u;
             arg = U8(0x79);
-            jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0079u);
+            jr_c_i8.call(&arg);
+            REQUIRE(regs.pc == 0x0079u + OPCODE_SZ);
 
             regs.pc = 0x00FFu;
             arg = U8(0x88);
-            jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x00FFu + static_cast<int8_t>(arg));
+            jr_c_i8.call(&arg);
+            REQUIRE(regs.pc == 0x00FFu + OPCODE_SZ + static_cast<int8_t>(arg));
 
             regs.pc = 0x00FFu;
             arg = U8(0x01);
-            jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0100u);
+            jr_c_i8.call(&arg);
+            REQUIRE(regs.pc == 0x0100u + OPCODE_SZ);
 
             // -- On carry-flag unset, do nothing --
             regs.reset_flag(registers::flag::CARRY);
             regs.pc = 0x0000u;
             arg = U8(0x00);
-            jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0002u);
+            jr_c_i8.call(&arg);
+            REQUIRE(regs.pc == 0x0000u + OPCODE_SZ);
 
             regs.pc = 0x0000u;
             arg = U8(0x01);
-            jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0002u); 
+            jr_c_i8.call(&arg);
+            REQUIRE(regs.pc == 0x0000u + OPCODE_SZ); 
 
             regs.pc = 0x0000u;
             arg = U8(0x79);
-            jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0002u);
+            jr_c_i8.call(&arg);
+            REQUIRE(regs.pc == 0x0000u + OPCODE_SZ);
 
             regs.pc = 0x00FFu;
             arg = U8(0x88);
-            jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0101u);
+            jr_c_i8.call(&arg);
+            REQUIRE(regs.pc == 0x00FFu + OPCODE_SZ);
 
             regs.pc = 0x00FFu;
             arg = U8(0x01);
-            jr_z_i8.call(&arg);
-            REQUIRE(regs.pc == 0x0101u);
+            jr_c_i8.call(&arg);
+            REQUIRE(regs.pc == 0x00FFu + OPCODE_SZ);
         }
 
         SECTION("JP a16")
