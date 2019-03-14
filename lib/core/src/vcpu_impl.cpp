@@ -1322,7 +1322,7 @@ namespace sleepy
 		add_instruction(opcode(0x18), "JR i8", 12, 0, 1, [&](const u8* args)
 		{
 			int8_t i8 = static_cast<int8_t>(args[0]);
-			_regs->pc += i8;
+			_regs->pc += i8 + 2;
 		});
 
 		add_instruction(opcode(0x28), "JR Z,i8", 8, 0, 1, [&](const u8* args)
@@ -1331,11 +1331,11 @@ namespace sleepy
 			{
 				delay_cycles(4); //16
 				int8_t i8 = static_cast<int8_t>(args[0]);
-				_regs->pc += i8;
+				_regs->pc += i8 + 2;
 			}
 			else
 			{
-				_regs->pc += 2;
+				_regs->pc += 3;
 			}
 		});
 
@@ -1345,11 +1345,11 @@ namespace sleepy
 			{
 				delay_cycles(4); //16
 				int8_t i8 = static_cast<int8_t>(args[0]);
-				_regs->pc += i8;
+				_regs->pc += i8 + 2;
 			}
 			else
 			{
-				_regs->pc += 2;
+				_regs->pc += 3;
 			}
 		});
 
@@ -1359,11 +1359,11 @@ namespace sleepy
 			{
 				delay_cycles(4); //16
 				int8_t i8 = static_cast<int8_t>(args[0]);
-				_regs->pc += i8;
+				_regs->pc += i8 + 2;
 			}
 			else
 			{
-				_regs->pc += 2;
+				_regs->pc += 3;
 			}
 		});
 
@@ -1373,11 +1373,11 @@ namespace sleepy
 			{
 				delay_cycles(4); //16
 				int8_t i8 = static_cast<int8_t>(args[0]);
-				_regs->pc += i8;
+				_regs->pc += i8 + 2;
 			}
 			else
 			{
-				_regs->pc += 2;
+				_regs->pc += 3;
 			}
 		});
 
@@ -1397,7 +1397,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 3;
+				_regs->pc += 4;
 			}
 		});
 
@@ -1411,7 +1411,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 3;
+				_regs->pc += 4;
 			}
 		});
 
@@ -1425,7 +1425,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 3;
+				_regs->pc += 4;
 			}
 		});
 		 
@@ -1439,7 +1439,7 @@ namespace sleepy
 			}
 			else
 			{
-				_regs->pc += 3;
+				_regs->pc += 4;
 			}
 		});
 
