@@ -4,11 +4,15 @@
 #include <iostream>
 #include <iomanip>
 #include <thread>
+#include <sstream>
+
+int batch_cc = 0;
+std::stringstream batch;
 
 static void print_registers(const sleepy::registers* regs)
 {
-    std::cout << std::hex;
-    std::cout 
+    batch << std::hex;
+    batch 
         << "A: " << static_cast<int>(regs->a) << " | "
         << "B: " << static_cast<int>(regs->b) << " | "
         << "C: " << static_cast<int>(regs->c) << " | "
@@ -19,14 +23,14 @@ static void print_registers(const sleepy::registers* regs)
         << "L: " << static_cast<int>(regs->l) << " | "
         << std::endl;
 
-    std::cout 
+    batch 
         << "AF:" << regs->af() << " | "
         << "BC:" << regs->bc() << " | "
         << "DE:" << regs->de() << " | "
         << "HL:" << regs->hl() << " | "
         << std::endl;
 
-    std::cout 
+    batch
         << "PC:" << regs->pc << " | "
         << "SP:" << regs->sp << " | "
         << std::endl;
@@ -35,26 +39,26 @@ static void print_registers(const sleepy::registers* regs)
 static void debug_pre(
     sleepy::vcpu& vcpu,
     const sleepy::vcpu_instruction* inst)
-{
-    std::cout << "Next instruction: " << inst->mnemonic << std::endl;
-    std::cout << "Arguments: ";
+{    
+    if(batch_cc++ % 10 == 0) { std::cout << batch.str(); batch.str(""); }
+    batch << "Next instruction: " << inst->mnemonic << std::endl;
+    batch << "Arguments: ";
     if(inst->arg_count == 0) 
     { 
-        std::cout << "None" << std::endl; 
+        batch << "None" << std::endl; 
     }
     else
     {
         for(sleepy::u8 i = 0; i < inst->arg_count; i++)
         {
             sleepy::u8 arg = vcpu.memory().read_byte(vcpu.registers().pc + 1 + i);
-            std::cout << "[" << static_cast<int>(i) << "]=" << static_cast<int>(arg);
+            batch << "[" << static_cast<int>(i) << "]=" << static_cast<int>(arg);
         }
-        std::cout << std::endl;
+        batch << std::endl;
     }
     
     print_registers(&vcpu.registers());
     using namespace std::chrono_literals;
-    std::this_thread::sleep_for(1s);
 }
 
 static void debug_post(

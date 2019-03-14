@@ -41,5 +41,6 @@ namespace sleepy
 
     private:
         void exec_op(opcode op, u8* args);
+        void init_state();
     };
 }
