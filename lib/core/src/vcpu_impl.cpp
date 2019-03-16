@@ -1998,7 +1998,7 @@ namespace sleepy
 
 		for(u16 i = 0x40u; i <= 0x7Fu; ++i) // map opcodes
 		{
-			u8 seq_val = i - 0x40u;
+			u8 seq_val = U8(i) - 0x40u;
 			u8 vtc_val = seq_val / 16u;
 			bool h_half = (seq_val % 16u) >= 8u;
 			u8 rsq_val = seq_val % 8u;
@@ -2011,7 +2011,7 @@ namespace sleepy
 				const std::string mnemonic = 
 					"BIT " + std::to_string(static_cast<int>(bit_idx)) + ", (HL)";
 
-                add_instruction(opcode(0xCB, i), mnemonic, 16, 2, 0, [this, reg, bit_idx](const u8*)
+                add_instruction(opcode(0xCB, U8(i)), mnemonic, 16, 2, 0, [this, reg, bit_idx](const u8*)
                 {
                     u16 hl = _regs->hl();
                     u8 val = _mem->read_byte(hl);
@@ -2024,7 +2024,7 @@ namespace sleepy
 					"BIT " + std::to_string(static_cast<int>(bit_idx)) +
 					", " + regname_seq[rsq_val];
 
-				add_instruction(opcode(0xCB, i), mnemonic, 8, 2, 0, [this, reg, bit_idx](const u8*)
+				add_instruction(opcode(0xCB, U8(i)), mnemonic, 8, 2, 0, [this, reg, bit_idx](const u8*)
 				{
 					u8 val = *reg;
 					_inst_impl->opcode_bit(val, bit_idx);
@@ -2049,7 +2049,7 @@ namespace sleepy
 
 		for(u8 i = 0x80u; i <= 0xBFu; ++i) // map opcodes
 		{
-			u8 seq_val = i - 0x80u;
+			u8 seq_val = U8(i) - 0x80u;
 			u8 vtc_val = seq_val / 16u;
 			bool h_half = (seq_val % 16u) >= 8u;
 			u8 rsq_val = seq_val % 8u;
@@ -2062,7 +2062,7 @@ namespace sleepy
 				const std::string mnemonic = 
 					"RES " + std::to_string(static_cast<int>(bit_idx)) + ", (HL)";
 
-                add_instruction(opcode(0xCB, i), mnemonic, 16, 2, 0, [this, reg, bit_idx](const u8*)
+                add_instruction(opcode(0xCB, U8(i)), mnemonic, 16, 2, 0, [this, reg, bit_idx](const u8*)
                 {
                     u16 hl = _regs->hl();
                     u8 val = _mem->read_byte(hl);
@@ -2076,7 +2076,7 @@ namespace sleepy
 					"RES " + std::to_string(static_cast<int>(bit_idx)) +
 					", " + regname_seq[rsq_val];
 
-				add_instruction(opcode(0xCB, i), mnemonic, 8, 2, 0, [this, reg, bit_idx](const u8*)
+				add_instruction(opcode(0xCB, U8(i)), mnemonic, 8, 2, 0, [this, reg, bit_idx](const u8*)
 				{
 					_inst_impl->opcode_res(*reg, bit_idx);
 				});
@@ -2100,7 +2100,7 @@ namespace sleepy
 
 		for(u16 i = 0xC0u; i <= 0xFFu; ++i) // map opcodes
 		{
-			u8 seq_val = i - 0xC0u;
+			u8 seq_val = U8(i) - 0xC0u;
 			u8 vtc_val = seq_val / 16u;
 			bool h_half = (seq_val % 16u) >= 8u;
 			u8 rsq_val = seq_val % 8u;
@@ -2113,7 +2113,7 @@ namespace sleepy
 				const std::string mnemonic = 
 					"SET " + std::to_string(static_cast<int>(bit_idx)) + ", (HL)";
 
-                add_instruction(opcode(0xCB, i), mnemonic, 16, 2, 0, [this, reg, bit_idx](const u8*)
+                add_instruction(opcode(0xCB, U8(i)), mnemonic, 16, 2, 0, [this, reg, bit_idx](const u8*)
                 {
                     u16 hl = _regs->hl();
                     u8 val = _mem->read_byte(hl);
@@ -2127,7 +2127,7 @@ namespace sleepy
 					"SET " + std::to_string(static_cast<int>(bit_idx)) +
 					", " + regname_seq[rsq_val];
 
-				add_instruction(opcode(0xCB, i), mnemonic, 8, 2, 0, [this, reg, bit_idx](const u8*)
+				add_instruction(opcode(0xCB, U8(i)), mnemonic, 8, 2, 0, [this, reg, bit_idx](const u8*)
 				{
 					_inst_impl->opcode_set(*reg, bit_idx);
 				});
