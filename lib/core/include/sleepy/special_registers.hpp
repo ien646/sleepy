@@ -21,7 +21,7 @@ namespace sleepy
         NR41 = 0xFF20, NR42 = 0xFF21, NR43 = 0xFF22, NR44 = 0xFF23, 
         NR50 = 0xFF24, NR51 = 0xFF25, NR52 = 0xFF26,
         WAV_PRAM = 0xFF30,
-        LDLC = 0xFF40,
+        LCDC = 0xFF40,
         STAT = 0xFF41,
         SCY = 0xFF42,
         SCX = 0xFF43,
@@ -34,5 +34,14 @@ namespace sleepy
         WY = 0xFF4A,
         WX = 0xFF4B,
         IE = 0xFFFF
+    };
+
+    enum class interrupt_flags
+    {
+        VBLANK = 0x01,
+        LCDC = 0x02,
+        TIMER_OVERFLOW = 0x04,
+        SIO_TRANSFER_COMPLETE = 0x08,
+        HI_LO_P10_P13 = 0x010
     };
 }
