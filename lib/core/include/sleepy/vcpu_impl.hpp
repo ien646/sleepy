@@ -21,16 +21,16 @@ namespace sleepy
 
 		instruction_map inst_map;
 
-		void enable_interrupts() { _interrupts_enabled = true; }
-		void disable_interrupts() { _interrupts_enabled = false; }
-		bool interrupts_enabled() const noexcept { return _interrupts_enabled; }
+		void enable_interrupts() { _global_interrupt_flag = true; }
+		void disable_interrupts() { _global_interrupt_flag = false; }
+		bool interrupts_enabled() const noexcept { return _global_interrupt_flag; }
         void delay_cycles([[maybe_unused]] size_t count) { return; }
 
 	private:
 		registers* _regs;
 		memory* _mem;
 		std::unique_ptr<instruction_impl> _inst_impl;
-		bool _interrupts_enabled = false;		
+		bool _global_interrupt_flag = false;		
 
 		void init_inst_map();
 

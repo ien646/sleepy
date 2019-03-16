@@ -89,12 +89,12 @@ namespace sleepy
 
 		add_instruction(opcode(0xF3), "DI", 4, 1, 0, [&](const u8*)
 		{
-			_interrupts_enabled = false;
+			_global_interrupt_flag = false;
 		});
 
 		add_instruction(opcode(0xFB), "EI", 4, 1, 0, [&](const u8*)
 		{
-			_interrupts_enabled = true;
+			_global_interrupt_flag = true;
 		});
 
 		add_instruction(opcode(0x2F), "CPL", 4, 1, 0, [&](const u8*)
@@ -1610,6 +1610,7 @@ namespace sleepy
 		add_instruction(opcode(0xD9), "RETI", 16, 0, 0, [&](const u8*)
 		{
 			_inst_impl->opcode_ret();
+			_global_interrupt_flag = true;
 		});
 	}
 
