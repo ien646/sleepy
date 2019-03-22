@@ -1,13 +1,20 @@
+#include "..\include\sleepy\vcpu.hpp"
 #include <sleepy/vcpu.hpp>
 
 #include <iostream>
 #include <iterator>
 
+#include <sleepy/memory.hpp>
+
 namespace sleepy
 {
-    vcpu::vcpu()
-        : _vfw(vcpu_impl(&_mem, &_regs))
-    { }
+    vcpu::vcpu(sleepy::memory& mem)
+        : _mem(mem)
+        , _vfw(vcpu_impl(this, &_mem, &_regs))
+    { 
+        _pre_exec_debug_fun  = [](vcpu&, const vcpu_instruction*) { return; };
+        _post_exec_debug_fun = [](vcpu&, const vcpu_instruction*) { return; };
+    }
 
     void vcpu::exec_op(opcode op, u8* args)
     {
@@ -22,6 +29,7 @@ namespace sleepy
         inst.call(args);
         _post_exec_debug_fun(*this, &inst);
         
+        _ticks_elapsed += inst.cycles;
         _last_executed_inst = &inst;
         _regs.pc += inst.pc_offset;
     }
@@ -41,33 +49,22 @@ namespace sleepy
         return _vfw.inst_map[op];
     }
 
-    void vcpu::start()
+    void vcpu::exec_next_tick()
     {
-        if(!_memory_set)
-        { 
-            throw std::logic_error("Unable to start vcpu without setting memory data!");
-        }
-        _regs.zero_registers(true);
-        _regs.pc = 0x0100;
-        init_state();
-        while(true)
+        u8 op = _mem.read_byte(_regs.pc);
+        if (op == 0xCBu)
         {
-            u8 op = _mem.read_byte(_regs.pc);
-            if(op == 0x00) { _regs.pc++; continue;}
-            if(op == 0xCBu)
-            {
-                ++(_regs.pc);
-                u8 opv = _mem.read_byte(_regs.pc);
-                opcode opc(op, opv);
-                u8* args = &_mem.data()[_regs.pc + 1];
-                exec_op(opc, args);
-            }
-            else
-            {
-                opcode opc(op);
-                u8* args = &_mem.data()[_regs.pc + 1];
-                exec_op(opc, args);
-            }
+            ++(_regs.pc);
+            u8 opv = _mem.read_byte(_regs.pc);
+            opcode opc(op, opv);
+            u8* args = &_mem.data()[_regs.pc + 1];
+            exec_op(opc, args);
+        }
+        else
+        {
+            opcode opc(op);
+            u8* args = &_mem.data()[_regs.pc + 1];
+            exec_op(opc, args);
         }
     }
 
@@ -97,6 +94,16 @@ namespace sleepy
     const vcpu_instruction* vcpu::last_executed_instruction() const noexcept
     {
         return _last_executed_inst;
+    }
+
+    void vcpu::delay_cycles(size_t count) noexcept
+    {
+        _ticks_elapsed += count;
+    }
+
+    uint64_t vcpu::elapsed_cycles() const noexcept
+    {
+        return _ticks_elapsed;
     }
 
     void vcpu::init_state()

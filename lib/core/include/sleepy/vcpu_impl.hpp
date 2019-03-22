@@ -12,25 +12,28 @@ namespace sleepy
 {
 	class memory;
 	class registers;
+    class vcpu;
 
 	class vcpu_impl
 	{
 	public:
 		vcpu_impl() = delete;
-		vcpu_impl(memory* mem_ptr, registers* regs_ptr);
+		vcpu_impl(vcpu* vcpu, memory* mem_ptr, registers* regs_ptr);
 
 		instruction_map inst_map;
 
-		void enable_interrupts() { _global_interrupt_flag = true; }
-		void disable_interrupts() { _global_interrupt_flag = false; }
-		bool interrupts_enabled() const noexcept { return _global_interrupt_flag; }
-        void delay_cycles([[maybe_unused]] size_t count) { return; }
+		void enable_interrupts() { _interrupt_master_enable = true; }
+		void disable_interrupts() { _interrupt_master_enable = false; }
+		bool interrupts_enabled() const noexcept { return _interrupt_master_enable; }
+        void delay_cycles(size_t count);
 
 	private:
 		registers* _regs;
 		memory* _mem;
+        vcpu* _vcpu;
+
 		std::unique_ptr<instruction_impl> _inst_impl;
-		bool _global_interrupt_flag = false;		
+		bool _interrupt_master_enable = false;		
 
 		void init_inst_map();
 

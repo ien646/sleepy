@@ -2,11 +2,13 @@
 
 #include <sleepy/memory.hpp>
 #include <sleepy/registers.hpp>
+#include <sleepy/vcpu.hpp>
 
 namespace sleepy
 {
-	vcpu_impl::vcpu_impl(memory* mem_ptr, registers* regs_ptr)
-		: _mem(mem_ptr)
+	vcpu_impl::vcpu_impl(vcpu* vcpu, memory* mem_ptr, registers* regs_ptr)
+		: _vcpu(vcpu)
+        , _mem(mem_ptr)
 		, _regs(regs_ptr)
 	{
 		_inst_impl = std::make_unique<instruction_impl>(mem_ptr, regs_ptr);
@@ -77,6 +79,7 @@ namespace sleepy
 	{
 		add_instruction(opcode(0x00), "NOP", 4, 1, 0, [&](const u8*)
 		{
+			return;
 		});
 
 		add_instruction(opcode(0x10), "STOP", 4, 2, 0, [&](const u8*)
@@ -89,12 +92,12 @@ namespace sleepy
 
 		add_instruction(opcode(0xF3), "DI", 4, 1, 0, [&](const u8*)
 		{
-			_global_interrupt_flag = false;
+			_interrupt_master_enable = false;
 		});
 
 		add_instruction(opcode(0xFB), "EI", 4, 1, 0, [&](const u8*)
 		{
-			_global_interrupt_flag = true;
+			_interrupt_master_enable = true;
 		});
 
 		add_instruction(opcode(0x2F), "CPL", 4, 1, 0, [&](const u8*)
@@ -1610,7 +1613,7 @@ namespace sleepy
 		add_instruction(opcode(0xD9), "RETI", 16, 0, 0, [&](const u8*)
 		{
 			_inst_impl->opcode_ret();
-			_global_interrupt_flag = true;
+			_interrupt_master_enable = true;
 		});
 	}
 
@@ -2134,6 +2137,11 @@ namespace sleepy
 			}
 		}
 	}
+
+    void vcpu_impl::delay_cycles(size_t count)
+    {
+        _vcpu->delay_cycles(count);
+    }
 
 	void vcpu_impl::add_instruction(
 		opcode opc, 

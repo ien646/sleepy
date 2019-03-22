@@ -1,5 +1,8 @@
 #include <sleepy/memory.hpp>
 
+#include <vector>
+#include <algorithm>
+
 namespace sleepy
 {
 	memory::memory()		
@@ -38,4 +41,12 @@ namespace sleepy
 	{
 		_memory->fill(0x00);
 	}
+
+    void memory::load_data(std::istream& data, u16 offset)
+    {        
+        std::istreambuf_iterator<char> begin(data);
+        std::istreambuf_iterator<char> end;
+        std::vector<u8> cdata(begin, end);
+        std::copy(cdata.begin(), cdata.end(), _memory->data() + offset);
+    }
 }

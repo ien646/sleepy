@@ -8,10 +8,10 @@
             "name": "Debug sleepy.console",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build_debug/output/bin/sleepy.console/sleepy.console.exe",
+            "program": "${workspaceFolder}/build_debug/output/bin/sleepy.console_win32/sleepy.console_win32.exe",
             "args": ["tt.gb"],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/build_debug/output/bin/sleepy.console/",
+            "cwd": "${workspaceFolder}/build_debug/output/bin/sleepy.console_win32/",
             "environment": [],
             "externalConsole": true
         },
