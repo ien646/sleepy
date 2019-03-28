@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <chrono>
+#include <sleepy/interrupt_addr.hpp>
 
 namespace sleepy
 {
@@ -36,6 +37,14 @@ namespace sleepy
 
             /*--------------------*/
             // VBLANK TRIGGER
+            _vcpu.write_if_flag(interrupt_flags::VBLANK);
+            if(_vcpu.read_interrupt_master_enable() && _vcpu.read_ie_flag(interrupt_flags::VBLANK))
+            {
+                _vcpu.write_interrupt_master_enable(false);
+                const u16 addr = U16(interrupt_addr::VBLANK);
+                const u8* args = reinterpret_cast<const u8*>(&addr);
+                _vcpu.get_vcpu_impl()->inst_map[opcode(0xCD)].call(args);
+            }           
             /*--------------------*/
         }
     }

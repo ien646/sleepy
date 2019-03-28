@@ -29,7 +29,7 @@ namespace sleepy
 
 	void memory::write_byte(u16 address, u8 value)
 	{
-		(*_memory)[address] = value;
+		((*_memory))[address] = value;
 	}
 
 	void memory::write_word(u16 address, u16 value)
@@ -48,6 +48,6 @@ namespace sleepy
         std::istreambuf_iterator<char> begin(data);
         std::istreambuf_iterator<char> end;
         std::vector<u8> cdata(begin, end);
-        std::copy(cdata.begin(), cdata.end(), _memory->data() + offset);
+        std::copy(cdata.begin(), cdata.end(), _memory->begin() + offset);
     }
 }

@@ -2,3 +2,4 @@ build/
 build_debug/
 .vscode/ipch/
 .vs/
+desktop.ini

@@ -8,7 +8,7 @@
 
 #define _CPUFW_SLEEPYTEST_INIT_VARS()	[[maybe_unused]] registers regs; \
 										[[maybe_unused]] memory mem; \
-                                        [[maybe_unused]] vcpu svcpu(mem); \
+                                        [[maybe_unused]] vcpu svcpu(&mem); \
 										[[maybe_unused]] vcpu_impl vfw(&svcpu, &mem, &regs); \
 										[[maybe_unused]] auto& inst_map = vfw.inst_map; \
 										mem.zero_memory(); \
