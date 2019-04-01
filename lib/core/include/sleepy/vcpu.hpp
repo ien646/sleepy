@@ -31,7 +31,6 @@ namespace sleepy
         vcpu(vcpu&& mv_src) = delete;
 
         vcpu(memory* mem);
-        ~vcpu();
 
         void exec_next_tick();
         void setup_memory(std::istream& data);
