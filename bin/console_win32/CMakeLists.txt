@@ -4,4 +4,4 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE 	${PROJECT_BINARY_DIR}/output/bin/sle
 
 file(GLOB SLEEPY_CONSOLE_SOURCES src/*.cpp)
 add_executable(sleepy.console_win32 ${SLEEPY_CONSOLE_SOURCES})
-target_link_libraries(sleepy.console_win32 sleepy.core)
+target_link_libraries(sleepy.console_win32 sleepy.core winconw.core)
