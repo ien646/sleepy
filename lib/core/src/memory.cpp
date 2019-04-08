@@ -26,6 +26,11 @@ namespace sleepy
 	{
 		return _memory->data();
 	}
+	
+	const u8* memory::cdata() const
+	{
+		return _memory->data();
+	}
 
 	void memory::write_byte(u16 address, u8 value)
 	{

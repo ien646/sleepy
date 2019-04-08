@@ -1,7 +1,6 @@
 #include "..\include\sleepy\vcpu.hpp"
 #include <sleepy/vcpu.hpp>
 
-#include <iostream>
 #include <iterator>
 
 #include <sleepy/memory.hpp>
@@ -156,7 +155,7 @@ namespace sleepy
         }        
     }
 
-    vcpu_impl* vcpu::get_vcpu_impl()
+    const vcpu_impl* vcpu::get_vcpu_impl() const
     {
         return &_vfw;
     }

@@ -24,5 +24,12 @@ namespace sleepy
         void load_cartridge(std::istream&);
         void start();
         double elapsed_seconds() const noexcept;
+
+        void setup_debug(debug_func_t pre_fun, debug_func_t post_fun);
+
+        const vcpu* vcpu() const noexcept
+        {
+            return &_vcpu;
+        }
     };
 }

@@ -9,6 +9,7 @@
 
 namespace sleepy
 {
+    typedef std::function<void(const vcpu*, const vcpu_instruction*)> debug_func_t;
     class vcpu
     {
     private:
@@ -18,8 +19,7 @@ namespace sleepy
 
         bool _memory_set = false;
         const vcpu_instruction* _last_executed_inst = nullptr;
-
-        typedef std::function<void(const vcpu*, const vcpu_instruction*)> debug_func_t;
+        
         debug_func_t _pre_exec_debug_fun;
         debug_func_t _post_exec_debug_fun;
         bool _debug_enabled = false;
@@ -51,7 +51,7 @@ namespace sleepy
         void write_interrupt_master_enable(bool enabled);
         bool read_interrupt_master_enable();
 
-        vcpu_impl* get_vcpu_impl();
+        const vcpu_impl* get_vcpu_impl() const;
 
         void write_if_flag(interrupt_flags flag);
         bool read_if_flag(interrupt_flags flag);

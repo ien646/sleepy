@@ -3,6 +3,7 @@
 #include <cinttypes>
 #include <memory>
 #include <utility>
+#include <sstream>
 
 namespace sleepy
 {
@@ -77,5 +78,31 @@ namespace sleepy
 	inline void reset_bit(u8& val, const u8 index) noexcept
 	{
 		val &= ~U8(1u << index);
+	}
+
+	inline std::string to_hex(u8 val)
+	{
+		std::stringstream sstr;
+		sstr << std::hex << static_cast<int>(val);
+		std::string result = sstr.str();
+		if(result.size() < 2)
+		{
+			result = "0" + result;
+		}
+		result = "0x" + result;
+		return result;
+	}
+
+	inline std::string to_hex(u16 val)
+	{
+		std::stringstream sstr;
+		sstr << std::hex << val;
+		std::string result = sstr.str();
+		if(result.size() < 4)
+		{
+			result = std::string(4 - result.size(), '0') + result;
+		}
+		result = "0x" + result;
+		return result;
 	}
 }

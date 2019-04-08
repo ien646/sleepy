@@ -1,6 +1,5 @@
 #include <sleepy/system.hpp>
 
-#include <iostream>
 #include <chrono>
 #include <sleepy/interrupt_addr.hpp>
 
@@ -24,7 +23,6 @@ namespace sleepy
                 _vcpu.exec_next_tick();
             }
             auto post_tick_time = clock::now();
-            std::cout << "[ESEC: " << elapsed_seconds() << "] VBLANK" << std::endl;
 
             auto spin_time = std::chrono::duration_cast<std::chrono::nanoseconds>(post_tick_time - pre_tick_time);
             
@@ -53,5 +51,10 @@ namespace sleepy
     {
         double cc = static_cast<double>(_vcpu.elapsed_cycles());
         return cc / static_cast<double>(CYCLES_PER_SECOND);
+    }
+
+    void system::setup_debug(debug_func_t pre_fun, debug_func_t post_fun)
+    {
+        _vcpu.setup_debug(pre_fun, post_fun);
     }
 }

@@ -21,6 +21,7 @@ namespace sleepy
 
 		/* Return raw pointer to memory address 0x0000 */
 		u8* data();
+		const u8* cdata() const;
 
 		void zero_memory();
 
