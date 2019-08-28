@@ -1,4 +1,5 @@
 #include <sleepy/system.hpp>
+#include <sleepy/constants.hpp>
 
 namespace sleepy
 {
@@ -28,7 +29,26 @@ namespace sleepy
     {
         while(true)
         {
-            /* ... */
+            // -- loop until vblank 
+                // Execute instructions until LCD line change
+                // Each instruction updates TMA register if TAC register is enabled (check docs)
+                // Update special registers
+                // Check for interrupts (input, LCDC, etc.)
+            // --
+
+            // Set IF(interrupt-flag)
+            // -- if(Check IME and IE flags)
+                // Reset IF register (allow nesting)
+                // Reset IME
+                // Push PC to stack
+                // Jump to interrupt address
+                // Run Vblank interrupt procedure (check flag)                
+            // --
         }
+    }
+
+    void system::interrupt_procedure()
+    {
+        
     }
 }
