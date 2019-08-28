@@ -104,6 +104,7 @@ namespace sleepy
         _regs.de(0x00D8);
         _regs.hl(0x014D);
         _regs.sp = 0xFFFE;
+        _regs.pc = 0x0100;
     }
 
     bool vcpu::read_interrupt_master_enable()
