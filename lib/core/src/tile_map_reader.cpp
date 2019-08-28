@@ -13,18 +13,18 @@ namespace sleepy
 
     tile_data_t tile_map_reader::read_tile_idx(int tile_idx, int map_idx)
     {
-        u16 tile_addr = (map_idx ? ADDR_TILE_DATA_1 : ADDR_TILE_DATA_0) 
-            + (tile_idx * TILE_STRIDE);
+        u16 tile_addr = U16((map_idx ? ADDR_TILE_DATA_1 : ADDR_TILE_DATA_0) 
+            + (tile_idx * TILE_STRIDE));
         
         tile_data_t result;
         for(int i = 0; i < TILE_STRIDE; i += 2)
         {
-            u8 line_a = _mem->read_byte(tile_addr + i);
-            u8 line_b = _mem->read_byte(tile_addr + i + 1);
+            u8 line_a = _mem->read_byte(U16(tile_addr + i));
+            u8 line_b = _mem->read_byte(U16(tile_addr + i + 1));
 
             for(int j = 0; j < 8; ++j)
             {
-                result[(i * 8) + j] = get_bit(line_a, j) + get_bit(line_b, j);
+                result[(i * 8) + j] = get_bit(line_a, U8(j)) + get_bit(line_b, U8(j));
             }
         }
         return result;
