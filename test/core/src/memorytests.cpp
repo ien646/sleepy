@@ -11,7 +11,7 @@ namespace sleepy
 		{
 			// Setup
 			memory memory;
-			u8* data = memory.data();
+			const u8* data = memory.cdata();
 
 			// Run
 			memory.write_word(U16(0x0000), U16(0xF0AE));
@@ -25,8 +25,8 @@ namespace sleepy
 		{
 			// Setup
 			memory memory;
-			u8* data = memory.data();
-			((u16*)memory.data())[0] = 0xF0AE;
+			const u8* data = memory.cdata();
+			((u16*)memory.cdata())[0] = 0xF0AE;
 
 			// Run
 			u16 res = memory.read_word(U16(0x0000));

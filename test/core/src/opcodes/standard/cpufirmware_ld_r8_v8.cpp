@@ -249,13 +249,13 @@ namespace sleepy
 			u16 addr_h = 0x5775;
 			u16 addr_l = 0x6886;
 
-			mem.data()[addr_a] = 0x0A;
-			mem.data()[addr_b] = 0x0B;
-			mem.data()[addr_c] = 0x0C;
-			mem.data()[addr_d] = 0x0D;
-			mem.data()[addr_e] = 0x0E;
-			mem.data()[addr_h] = 0x11;
-			mem.data()[addr_l] = 0x22;
+			mem.write_byte(addr_a, 0x0A);
+			mem.write_byte(addr_b, 0x0B);
+			mem.write_byte(addr_c, 0x0C);
+			mem.write_byte(addr_d, 0x0D);
+			mem.write_byte(addr_e, 0x0E);
+			mem.write_byte(addr_h, 0x11);
+			mem.write_byte(addr_l, 0x22);
 
 			const vcpu_instruction& ld_a_phl = inst_map[opcode(0x7E)];
 			const vcpu_instruction& ld_b_phl = inst_map[opcode(0x46)];

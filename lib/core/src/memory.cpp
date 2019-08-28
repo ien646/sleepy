@@ -21,11 +21,6 @@ namespace sleepy
 		u8* ptr = &(*_memory)[address];
 		return *reinterpret_cast<u16*>(ptr);
 	}
-
-	u8* memory::data()
-	{
-		return _memory->data();
-	}
 	
 	const u8* memory::cdata() const
 	{

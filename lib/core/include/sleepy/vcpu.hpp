@@ -60,7 +60,7 @@ namespace sleepy
         bool read_ie_flag(interrupt_flags flag);
 
     private:
-        void exec_op(opcode op, u8* args);
+        void exec_op(opcode op, const u8* args);
         void init_state();
     };
 }

@@ -19,8 +19,6 @@ namespace sleepy
 		u8 read_byte(u16 address) const;
 		u16 read_word(u16 address) const;
 
-		/* Return raw pointer to memory address 0x0000 */
-		u8* data();
 		const u8* cdata() const;
 
 		void zero_memory();

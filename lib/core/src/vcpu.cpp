@@ -19,7 +19,7 @@ namespace sleepy
         init_state();
     }    
 
-    void vcpu::exec_op(opcode op, u8* args)
+    void vcpu::exec_op(opcode op, const u8* args)
     {
         auto& inst = _vfw.inst_map[op];
 
@@ -60,13 +60,13 @@ namespace sleepy
             ++(_regs.pc);
             u8 opv = _mem->read_byte(_regs.pc);
             opcode opc(op, opv);
-            u8* args = &_mem->data()[_regs.pc + 1];
+            const u8* args = &_mem->cdata()[_regs.pc + 1];
             exec_op(opc, args);
         }
         else
         {
             opcode opc(op);
-            u8* args = &_mem->data()[_regs.pc + 1];
+            const u8* args = &_mem->cdata()[_regs.pc + 1];
             exec_op(opc, args);
         }
     }
