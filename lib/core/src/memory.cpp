@@ -8,12 +8,7 @@
 
 namespace sleepy
 {
-	const std::unordered_map<u16, std::function<void(memory*)>> _special_writes =
-	{
-		{ 0xFF44, [](memory* mem) { mem->write_byte(0xFF44, 0x00); }}
-	};
-
-	memory::memory()		
+	memory::memory()
 	{
 		_memory = std::make_unique<std::array<u8, TOTAL_MEM_SZ>>();
 	}
@@ -36,13 +31,15 @@ namespace sleepy
 
 	void memory::write_byte(u16 address, u8 value)
 	{
-		if(_special_writes.count(address))
+		switch(address)
 		{
-			_special_writes.at(address)(this);
-		}
-		else
-		{
-			((*_memory))[address] = value;
+			// LY register reset
+			case 0xFF44:
+				(*_memory)[0xFF44] = 0x00;
+				break;
+
+			default:
+				((*_memory))[address] = value;
 		}
 	}
 

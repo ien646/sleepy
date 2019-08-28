@@ -4,3 +4,4 @@ build_debug/
 .vs/
 desktop.ini
 build_debug_win64/
+build*/

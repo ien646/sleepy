@@ -1,5 +1,7 @@
 #include <catch2/catch.hpp>
+
 #include <sleepy/memory.hpp>
+#include <sleepy/special_registers.hpp>
 
 using namespace sleepy;
 
@@ -65,6 +67,13 @@ namespace sleepy
 			memory memory;
 			memory.write_byte(0x0000, 0x00);
 			memory.write_byte(0xFFFF, 0x00);
+		}
+
+		SECTION("Special write cases")
+		{
+			memory memory;
+			memory.write_byte(U16(special_registers::LY), 0x23);
+			REQUIRE(0x00 == memory.read_byte(U16(special_registers::LY)));
 		}
 	}
 }
