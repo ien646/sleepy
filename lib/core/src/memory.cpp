@@ -3,9 +3,16 @@
 #include <vector>
 #include <algorithm>
 #include <streambuf>
+#include <unordered_map>
+#include <functional>
 
 namespace sleepy
 {
+	const std::unordered_map<u16, std::function<void(memory*)>> _special_writes =
+	{
+		{ 0xFF44, [](memory* mem) { mem->write_byte(0xFF44, 0x00); }}
+	};
+
 	memory::memory()		
 	{
 		_memory = std::make_unique<std::array<u8, TOTAL_MEM_SZ>>();
@@ -29,7 +36,14 @@ namespace sleepy
 
 	void memory::write_byte(u16 address, u8 value)
 	{
-		((*_memory))[address] = value;
+		if(_special_writes.count(address))
+		{
+			_special_writes.at(address)(this);
+		}
+		else
+		{
+			((*_memory))[address] = value;
+		}
 	}
 
 	void memory::write_word(u16 address, u16 value)
@@ -44,7 +58,7 @@ namespace sleepy
 	}
 
     void memory::load_data(std::istream& data, u16 offset)
-    {        
+    {
         std::istreambuf_iterator<char> begin(data);
         std::istreambuf_iterator<char> end;
         std::vector<u8> cdata(begin, end);
