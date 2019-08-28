@@ -14,7 +14,7 @@ namespace sleepy
     {
         using clock = std::chrono::high_resolution_clock;
         while (true)
-        {            
+        {
             auto pre_tick_time = clock::now();
             uint64_t next_vblank_cycles = 
                 _vcpu.elapsed_cycles() + CYCLES_PER_VBLANK;
@@ -25,7 +25,7 @@ namespace sleepy
             auto post_tick_time = clock::now();
 
             auto spin_time = std::chrono::duration_cast<std::chrono::nanoseconds>(post_tick_time - pre_tick_time);
-            
+
             // SPINWAIT FOR VBLANK
             while(spin_time.count() < NANOS_PER_VBLANK) 
             {
@@ -42,7 +42,7 @@ namespace sleepy
                 const u16 addr = U16(interrupt_addr::VBLANK);
                 const u8* args = reinterpret_cast<const u8*>(&addr);
                 _vcpu.get_vcpu_impl()->inst_map[opcode(0xCD)].call(args);
-            }           
+            }
             /*--------------------*/
         }
     }
