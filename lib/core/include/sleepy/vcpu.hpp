@@ -9,7 +9,7 @@
 
 namespace sleepy
 {
-    typedef std::function<void(const vcpu*, const vcpu_instruction*)> debug_func_t;
+    typedef std::function<void(const vcpu*, const vcpu_instruction*)> debug_callback_t;
     class vcpu
     {
     private:
@@ -20,8 +20,8 @@ namespace sleepy
         bool _memory_set = false;
         const vcpu_instruction* _last_executed_inst = nullptr;
         
-        debug_func_t _pre_exec_debug_fun;
-        debug_func_t _post_exec_debug_fun;
+        debug_callback_t _pre_exec_debug_cbk;
+        debug_callback_t _post_exec_debug_cbk;
         bool _debug_enabled = false;
 
         uint64_t _ticks_elapsed = 0u;
@@ -35,7 +35,9 @@ namespace sleepy
         void exec_next_tick();
         void setup_memory(std::istream& data);
 
-        void setup_debug(debug_func_t pre_exec, debug_func_t post_exec);
+        void setup_debug_pre(debug_callback_t);
+        void setup_debug_post(debug_callback_t);
+
         void enable_debug(bool enabled);
 
         const vcpu_instruction& get_inst_data(opcode op) const;

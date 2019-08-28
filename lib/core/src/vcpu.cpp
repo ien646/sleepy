@@ -11,9 +11,9 @@ namespace sleepy
         : _mem(mem)
         , _vfw(vcpu_impl(this, mem, &_regs))
     { 
-        _pre_exec_debug_fun  = 
+        _pre_exec_debug_cbk  = 
             [&](const vcpu*, const vcpu_instruction*) { return; };
-        _post_exec_debug_fun = 
+        _post_exec_debug_cbk = 
             [&](const vcpu*, const vcpu_instruction*) { return; };
     }    
 
@@ -26,9 +26,9 @@ namespace sleepy
             throw std::logic_error("Unimplemented opcode (dec): " + inst.op.value);
         }
 
-        _pre_exec_debug_fun(this, &inst);
+        _pre_exec_debug_cbk(this, &inst);
         inst.call(args);
-        _post_exec_debug_fun(this, &inst);
+        _post_exec_debug_cbk(this, &inst);
         
         _ticks_elapsed += inst.cycles;
         _last_executed_inst = &inst;
@@ -69,10 +69,15 @@ namespace sleepy
         }
     }
 
-    void vcpu::setup_debug(debug_func_t pre_exec, debug_func_t post_exec)
+    void vcpu::setup_debug_pre(debug_callback_t cback)
     {
-        _pre_exec_debug_fun = pre_exec;
-        _post_exec_debug_fun = post_exec;
+        _pre_exec_debug_cbk = cback;
+        _debug_enabled = true;
+    }
+
+    void vcpu::setup_debug_post(debug_callback_t cback)
+    {
+        _post_exec_debug_cbk = cback;
         _debug_enabled = true;
     }
 

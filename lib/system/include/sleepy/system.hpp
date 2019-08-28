@@ -11,5 +11,13 @@ namespace sleepy
 
     public:
         system();
+
+        void set_preexec_debug_callback(debug_callback_t);
+        void set_postexec_debug_callback(debug_callback_t);
+
+        void start();
+
+    private:
+        void init_state();
     };
 }
