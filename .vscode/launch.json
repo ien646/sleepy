@@ -5,26 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug sleepy.console",
-            "type": "cppvsdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build_debug/output/bin/sleepy.console_win32/sleepy.console_win32.exe",
-            "args": ["tt.gb"],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/build_debug/output/bin/sleepy.console_win32/",
-            "environment": [],
-            "externalConsole": true
-        },
-        {
             "name": "Debug Tests-Core",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build_debug/test_output/bin/sleepy.test.core.exe",
+            "program": "${workspaceFolder}/build_debug_win64/test_output/bin/sleepy.test.core.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/build_debug/test_output/bin/",
+            "cwd": "${workspaceFolder}/build_debug_win64/test_output/bin/",
             "environment": [],
             "externalConsole": true
-        }
+        },
     ]
 }

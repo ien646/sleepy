@@ -15,6 +15,8 @@ namespace sleepy
             [&](const vcpu*, const vcpu_instruction*) { return; };
         _post_exec_debug_fun = 
             [&](const vcpu*, const vcpu_instruction*) { return; };
+
+        init_state();
     }    
 
     void vcpu::exec_op(opcode op, u8* args)

@@ -3,3 +3,4 @@ build_debug/
 .vscode/ipch/
 .vs/
 desktop.ini
+build_debug_win64/
