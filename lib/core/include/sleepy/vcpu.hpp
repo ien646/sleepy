@@ -59,8 +59,9 @@ namespace sleepy
         void write_ie_flag(interrupt_flags flag);
         bool read_ie_flag(interrupt_flags flag);
 
+        void init_state();
+
     private:
         void exec_op(opcode op, const u8* args);
-        void init_state();
     };
 }

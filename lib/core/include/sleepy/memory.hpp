@@ -24,6 +24,9 @@ namespace sleepy
 		void zero_memory();
 
         void load_data(std::istream&, u16 index = 0u);
+
+		void init_state();
+		
 	private:
 		static constexpr size_t TOTAL_MEM_SZ = 0x10000;
 		std::unique_ptr<std::array<u8, TOTAL_MEM_SZ>> _memory;
