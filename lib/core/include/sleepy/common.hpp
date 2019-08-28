@@ -55,7 +55,7 @@ namespace sleepy
 		return (hibyte << 8) | lobyte;
 	}
 
-	constexpr u16 read_word(const u8* ptr)
+	inline u16 read_word(const u8* ptr)
 	{
 		return *reinterpret_cast<const u16*>(ptr);
 	}

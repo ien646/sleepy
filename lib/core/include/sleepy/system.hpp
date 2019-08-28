@@ -14,7 +14,7 @@ namespace sleepy
 
         static const uint64_t CYCLES_PER_SECOND = 4194300;
         static const uint64_t CYCLES_PER_VBLANK = 69905;
-        static const uint64_t NANOS_PER_VBLANK = 16666667;        
+        static const uint64_t NANOS_PER_VBLANK = 16666667;
         
     public:
         system() 
